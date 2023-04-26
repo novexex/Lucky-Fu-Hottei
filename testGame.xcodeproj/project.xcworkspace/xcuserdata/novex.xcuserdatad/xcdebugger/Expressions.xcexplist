@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "LevelScene.setupTiles():LevelScene.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "lastRow[col-2]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "LevelScene.touchesBegan(_:with:):LevelScene.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "isHorizonalSelected">
+            </PersistentString>
+            <PersistentString
+               value = "isVerticaleSelected">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>
