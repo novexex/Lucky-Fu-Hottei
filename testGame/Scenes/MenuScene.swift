@@ -69,7 +69,7 @@ class MenuScene: SKScene {
         
         //cup label
         let cupLabel = SKSpriteNode(imageNamed: "cup")
-        cupLabel.position = CGPoint(x: buda.position.x - 50, y: buda.position.y + 175)
+        cupLabel.position = CGPoint(x: frame.midX - 50, y: frame.midY + 300)
         cupLabel.zPosition = 1
         addChild(cupLabel)
         
@@ -77,7 +77,7 @@ class MenuScene: SKScene {
         let score = SKLabelNode(text: String(score))
         score.fontName = "gangOfThree"
         score.fontSize = 50
-        score.position = CGPoint(x: cupLabel.position.x + 70, y: cupLabel.position.y - 15)
+        score.position = CGPoint(x: cupLabel.position.x + 80, y: cupLabel.position.y - 15)
         addChild(score)
     }
     
@@ -88,7 +88,8 @@ class MenuScene: SKScene {
                     if node.contains(touch.location(in: self)) {
                         // создаем экземпляр GameScene
                         guard let view = self.view else { return }
-                        let gameScene = LevelScene(size: view.bounds.size)
+                        let levelScene = LevelScene(size: view.bounds.size)
+                        let gameScene = GameScene(size: view.bounds.size)
                         
                         // создаем SKView и добавляем в нее сцену
                         let skView = view

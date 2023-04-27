@@ -21,5 +21,16 @@
             </PersistentString>
          </PersistentStrings>
       </ContextState>
+      <ContextState
+         contextName = "GameScene.swap(row:col:):GameScene.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "tiles[i][j].name">
+            </PersistentString>
+            <PersistentString
+               value = "resultTiles[i][j].name">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
    </ContextStates>
 </VariablesViewState>
