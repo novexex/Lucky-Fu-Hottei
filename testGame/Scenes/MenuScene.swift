@@ -8,8 +8,13 @@
 import SpriteKit
 
 class MenuScene: SKScene {
-
-    var score: Int = 0
+    private var musicButton = SKSpriteNode()
+    private var soundButton = SKSpriteNode()
+    
+    private var isSoundMuted = false
+    private var isMusicMuted = false
+    
+    private var score: Int = 0
     
     override func didMove(to view: SKView) {
         setupBackground()
@@ -45,13 +50,13 @@ class MenuScene: SKScene {
         addChild(treasuryButton)
         
         //music button
-        let musicButton = SKSpriteNode(imageNamed: "musicButton")
+        musicButton = SKSpriteNode(imageNamed: "musicButton")
         musicButton.name = "musicButton"
         musicButton.position = CGPoint(x: treasuryButton.position.x - 50, y: treasuryButton.position.y - 100)
         addChild(musicButton)
         
         //sound button
-        let soundButton = SKSpriteNode(imageNamed: "soundButton")
+        soundButton = SKSpriteNode(imageNamed: "soundButton")
         soundButton.name = "soundButton"
         soundButton.position = CGPoint(x: musicButton.position.x + 50, y: musicButton.position.y)
         addChild(soundButton)
@@ -99,15 +104,27 @@ class MenuScene: SKScene {
                     }
                 } else if node.name == "soundButton" {
                     if node.contains(touch.location(in: self)) {
-                        print("sound")
+                        if !self.isSoundMuted {
+                            self.soundButton.texture = SKTexture(imageNamed: "soundButtonUnmute")
+                            self.isSoundMuted.toggle()
+                        } else {
+                            self.soundButton.texture = SKTexture(imageNamed: "soundButton")
+                            self.isSoundMuted.toggle()
+                        }
                     }
                 } else if node.name == "musicButton" {
                     if node.contains(touch.location(in: self)) {
-                        print("music")
+                        if !self.isMusicMuted {
+                            self.musicButton.texture = SKTexture(imageNamed: "musicButtonUnmute")
+                            self.isMusicMuted.toggle()
+                        } else {
+                            self.musicButton.texture = SKTexture(imageNamed: "musicButton")
+                            self.isMusicMuted.toggle()
+                        }
                     }
                 } else if node.name == "infoButton" {
                     if node.contains(touch.location(in: self)) {
-                        print("info")
+                        
                     }
                 }
             }
