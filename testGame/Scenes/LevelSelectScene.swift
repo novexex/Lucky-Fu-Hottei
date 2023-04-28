@@ -25,41 +25,28 @@ class LevelSelectScene: SKScene, SKViewDelegate {
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        
         guard let gameController = self.view?.window?.rootViewController as? GameViewController else {
             fatalError("GameController not found")
         }
-        
-        for touch in touches {
-            enumerateChildNodes(withName: "//*") { (node, stop) in
-                if node.name == "level1" {
-                    if node.contains(touch.location(in: self)) {
+            for touch in touches {
+                let location = touch.location(in: self)
+                if let node = atPoint(location) as? SKSpriteNode {
+                    if node.name == "level1" {
                         gameController.startGame(level: 1)
-                    }
-                } else if node.name == "level2" {
-                    if node.contains(touch.location(in: self)) {
+                    } else if node.name == "level2" {
                         gameController.startGame(level: 2)
-                    }
-                } else if node.name == "level3" {
-                    if node.contains(touch.location(in: self)) {
+                    } else if node.name == "level3" {
                         gameController.startGame(level: 3)
-                    }
-                } else if node.name == "level4" {
-                    if node.contains(touch.location(in: self)) {
+                    } else if node.name == "level4" {
                         gameController.startGame(level: 4)
+                    } else if node.name == "homeButton" {
+                        gameController.home(from: self)
+                    } else if node.name == "infoButton" {
+                        gameController.showInfo(from: self)
                     }
-                } else if node.name == "level5" {
-                    
-                } else if node.name == "levelSoon" {
-                    
-                } else if node.name == "homeButton" {
-                    gameController.home()
-                } else if node.name == "infoButton" {
-                    gameController.showInfo()
                 }
             }
         }
-    }
     
     func setupUI() {
         //cup label
@@ -69,7 +56,7 @@ class LevelSelectScene: SKScene, SKViewDelegate {
         addChild(cupLabel)
         
         //score
-        let score = SKLabelNode(text: String(120))
+        let score = SKLabelNode(text: String(score))
         score.fontName = "gangOfThree"
         score.fontSize = 50
         score.position = CGPoint(x: cupLabel.frame.midX + 80, y: cupLabel.frame.midY - 15)

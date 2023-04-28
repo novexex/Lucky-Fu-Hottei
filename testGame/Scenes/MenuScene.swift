@@ -14,7 +14,13 @@ class MenuScene: SKScene {
     private var isSoundMuted = false
     private var isMusicMuted = false
     
-    private var score: Int = 0
+    private var scoreLabel = SKLabelNode()
+    
+    var score = 0 {
+        didSet {
+            scoreLabel.text = String(score)
+        }
+    }
     
     override func didMove(to view: SKView) {
         setupBackground()
@@ -74,11 +80,11 @@ class MenuScene: SKScene {
         addChild(cupLabel)
         
         //score label
-        let score = SKLabelNode(text: String(score))
-        score.fontName = "gangOfThree"
-        score.fontSize = 50
-        score.position = CGPoint(x: cupLabel.position.x + 80, y: cupLabel.position.y - 15)
-        addChild(score)
+        scoreLabel = SKLabelNode(text: String(score))
+        scoreLabel.fontName = "gangOfThree"
+        scoreLabel.fontSize = 50
+        scoreLabel.position = CGPoint(x: cupLabel.position.x + 80, y: cupLabel.position.y - 15)
+        addChild(scoreLabel)
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -88,14 +94,15 @@ class MenuScene: SKScene {
         }
         
         for touch in touches {
-            enumerateChildNodes(withName: "//*") { (node, stop) in
+            let location = touch.location(in: self)
+            if let node = atPoint(location) as? SKSpriteNode {
                 if node.name == "startButton" {
                     if node.contains(touch.location(in: self)) {
-                        gameController.selectLevel()
+                        gameController.selectLevel(from: self)
                     }
                 } else if node.name == "treasuryButton" {
                     if node.contains(touch.location(in: self)) {
-                        print("treasury")
+                        gameController.showTreasure(from: self)
                     }
                 } else if node.name == "soundButton" {
                     if node.contains(touch.location(in: self)) {
@@ -119,7 +126,7 @@ class MenuScene: SKScene {
                     }
                 } else if node.name == "infoButton" {
                     if node.contains(touch.location(in: self)) {
-                        gameController.showInfo()
+                        gameController.showInfo(from: self)
                     }
                 }
             }

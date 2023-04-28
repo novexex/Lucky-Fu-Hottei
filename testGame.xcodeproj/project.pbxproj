@@ -14,6 +14,7 @@
 		EB2D830129FABFCA008A86B6 /* LevelSelectScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB2D830029FABFCA008A86B6 /* LevelSelectScene.swift */; };
 		EB2D830329FBEA69008A86B6 /* WinScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB2D830229FBEA69008A86B6 /* WinScene.swift */; };
 		EB2D830529FBEA71008A86B6 /* LoseScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB2D830429FBEA71008A86B6 /* LoseScene.swift */; };
+		EB2D830729FBEF2F008A86B6 /* MontserratExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EB2D830629FBED5B008A86B6 /* MontserratExtraBold.ttf */; };
 		EB91804829F7E75800B8398D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB91804729F7E75800B8398D /* AppDelegate.swift */; };
 		EB91804A29F7E75800B8398D /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = EB91804929F7E75800B8398D /* GameScene.sks */; };
 		EB91804C29F7E75800B8398D /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = EB91804B29F7E75800B8398D /* Actions.sks */; };
@@ -34,6 +35,7 @@
 		EB2D830029FABFCA008A86B6 /* LevelSelectScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelSelectScene.swift; sourceTree = "<group>"; };
 		EB2D830229FBEA69008A86B6 /* WinScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WinScene.swift; sourceTree = "<group>"; };
 		EB2D830429FBEA71008A86B6 /* LoseScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoseScene.swift; sourceTree = "<group>"; };
+		EB2D830629FBED5B008A86B6 /* MontserratExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = MontserratExtraBold.ttf; sourceTree = "<group>"; };
 		EB91804429F7E75800B8398D /* testGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = testGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB91804729F7E75800B8398D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EB91804929F7E75800B8398D /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -143,6 +145,7 @@
 		EB91806329F93D0A00B8398D /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				EB2D830629FBED5B008A86B6 /* MontserratExtraBold.ttf */,
 				EB91806429F93D1F00B8398D /* gangOfThree.ttf */,
 			);
 			path = Fonts;
@@ -217,6 +220,7 @@
 				EB91805329F7E75800B8398D /* Main.storyboard in Resources */,
 				EB91806529F93D1F00B8398D /* gangOfThree.ttf in Resources */,
 				EB91804A29F7E75800B8398D /* GameScene.sks in Resources */,
+				EB2D830729FBEF2F008A86B6 /* MontserratExtraBold.ttf in Resources */,
 				EB91805529F7E75900B8398D /* Assets.xcassets in Resources */,
 				EB91805829F7E75900B8398D /* LaunchScreen.storyboard in Resources */,
 				EB91804C29F7E75800B8398D /* Actions.sks in Resources */,

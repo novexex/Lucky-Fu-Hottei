@@ -10,7 +10,7 @@ import SpriteKit
 class GameScene: SKScene {
     
     var level: Int!
-
+    
     private var backgroundTiles = [[SKSpriteNode]]()
     private var tiles = [[SKSpriteNode]]()
     
@@ -18,7 +18,7 @@ class GameScene: SKScene {
     var moves = 20 {
         didSet {
             if moves == 0 {
-//                print(scorePoints)
+                //                print(scorePoints)
                 gameController.gameOver(with: scorePoints)
             } else {
                 score.text = String(moves)
@@ -83,10 +83,12 @@ class GameScene: SKScene {
             }
         }
         
-        if isHorizonalSelected && isVerticalSelected {
-            for touch in touches {
-                enumerateChildNodes(withName: "//*") { (node, stop) in
-                    if node.name == "swapButton" {
+        
+        for touch in touches {
+            let location = touch.location(in: self)
+            if let node = atPoint(location) as? SKSpriteNode {
+                if node.name == "swapButton" {
+                    if self.isHorizonalSelected && self.isVerticalSelected {
                         if node.contains(touch.location(in: self)) {
                             guard let colSelected = self.colSelected, let rowSelected = self.rowSelected else { return }
                             
@@ -106,9 +108,16 @@ class GameScene: SKScene {
                             self.checkItems()
                         }
                     }
+                } else if node.name == "homeButton" {
+                    gameController.home(from: self)
+                } else if node.name == "refreshButton" {
+                    
+                } else if node.name == "infoButton" {
+                    gameController.showInfo(from: self)
                 }
             }
         }
+        
     }
     
     
@@ -124,14 +133,14 @@ class GameScene: SKScene {
                     case 5: scorePoints += 500
                     default: break
                     }
-//                    print("Three consecutive items of type \(tiles[i][j].name) found in row \(i) at indices \(j), \(j+1), \(j+2)")
+                    //                    print("Three consecutive items of type \(tiles[i][j].name) found in row \(i) at indices \(j), \(j+1), \(j+2)")
                     getNewTiles(row: i, col: j)
                     getNewTiles(row: i, col: j+1)
                     getNewTiles(row: i, col: j+2)
                 }
             }
         }
-
+        
         // Check for 3 consecutive items of the same type in columns
         for i in 0..<tiles.count {
             for j in 0..<tiles.count-2 {
@@ -144,7 +153,7 @@ class GameScene: SKScene {
                     case 5: scorePoints += 500
                     default: break
                     }
-//                    print("Three consecutive items of type \(tiles[j][i].name) found in column \(i) at indices \(j), \(j+1), \(j+2)")
+                    //                    print("Three consecutive items of type \(tiles[j][i].name) found in column \(i) at indices \(j), \(j+1), \(j+2)")
                     getNewTiles(row: j, col: i)
                     getNewTiles(row: j+1, col: i)
                     getNewTiles(row: j+2, col: i)
@@ -177,13 +186,13 @@ class GameScene: SKScene {
             tmpNode.name = tiles[i][col].name
             tempCol.append(tmpNode)
         }
-
+        
         for i in (0...tiles.count-1).reversed() {
             tiles[i][col].texture = tiles[row][i].texture
             tiles[i][col].name = tiles[row][i].name
         }
-
-
+        
+        
         for i in (0...tiles.count-1).reversed() {
             tiles[row][i].texture = tempCol[i].texture
             tiles[row][i].name = tempCol[i].name
@@ -292,6 +301,28 @@ class GameScene: SKScene {
         guard let lastXpos = backgroundTiles.last?.last?.position.x else { return }
         swapButton.position = CGPoint(x: lastXpos - 130, y: frame.midY - 200)
         addChild(swapButton)
+        
+        // home button
+        let homeButton = SKSpriteNode(imageNamed: "homeButton")
+        homeButton.name = "homeButton"
+        homeButton.position = CGPoint(x: frame.midX + 55, y: swapButton.frame.minY - 40)
+        homeButton.zPosition = 1
+        addChild(homeButton)
+        
+        // repeat button
+        let reapeatButton = SKSpriteNode(imageNamed: "refreshButton")
+        reapeatButton.name = "reapeatButton"
+        reapeatButton.position = CGPoint(x: frame.midX, y: swapButton.frame.minY - 40)
+        reapeatButton.zPosition = 1
+        addChild(reapeatButton)
+        
+        // info button
+        let infoButton = SKSpriteNode(imageNamed: "infoButton")
+        infoButton.name = "infoButton"
+        infoButton.position = CGPoint(x: frame.midX - 55, y: swapButton.frame.minY - 40)
+        infoButton.zPosition = 1
+        addChild(infoButton)
+        
     }
 }
 

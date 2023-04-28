@@ -20,14 +20,15 @@ class InfoScene: SKScene {
         }
         
         for touch in touches {
-            enumerateChildNodes(withName: "//*") { (node, stop) in
+            let location = touch.location(in: self)
+            if let node = atPoint(location) as? SKSpriteNode {
                 if node.name == "backButton" {
                     if node.contains(touch.location(in: self)) {
-                        gameController.back()
+                        gameController.back(from: self)
                     }
                 } else if node.name == "homeButton" {
                     if node.contains(touch.location(in: self)) {
-                        gameController.home()
+                        gameController.home(from: self)
                     }
                 }
             }
