@@ -8,11 +8,28 @@
 import SpriteKit
 
 class GameScene: SKScene {
+    
+    var level: Int!
+
     private var backgroundTiles = [[SKSpriteNode]]()
     private var tiles = [[SKSpriteNode]]()
     
-    private var images = ["coin", "crane", "lamp"]
-    private var moves = 10
+    var images = ["coin", "crane", "lamp"]
+    var moves = 20 {
+        didSet {
+            if moves == 0 {
+//                print(scorePoints)
+                gameController.gameOver(with: scorePoints)
+            } else {
+                score.text = String(moves)
+            }
+        }
+    }
+    
+    private var gameController: GameViewController!
+    
+    private var score = SKLabelNode()
+    private var scorePoints = 0
     
     private var isHorizonalSelected = false
     private var isVerticalSelected = false
@@ -26,6 +43,12 @@ class GameScene: SKScene {
     override func didMove(to view: SKView) {
         setupBackground()
         setupUI()
+        
+        guard let gameController = self.view?.window?.rootViewController as? GameViewController else {
+            fatalError("GameController not found")
+        }
+        
+        self.gameController = gameController
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -41,16 +64,18 @@ class GameScene: SKScene {
                         guard let first = row.element.first else { return }
                         rowSelected = row.offset
                         horizonalRectangle = SKShapeNode(rect: CGRect(x: first.frame.minX - 4.5, y: first.frame.minY, width: first.frame.width * 6.37, height: first.frame.height))
-                        horizonalRectangle.fillColor = UIColor(red: 255, green: 199, blue: 0, alpha: 0.5)
-                        horizonalRectangle.zPosition = 1
+                        horizonalRectangle.fillColor = UIColor(hex: "FFC700")
+                        horizonalRectangle.strokeColor = .clear
+                        horizonalRectangle.zPosition = 0
                         addChild(horizonalRectangle)
                         isHorizonalSelected = true
                     } else if !isVerticalSelected {
                         let column = backgroundTiles[0][node.offset]
                         colSelected = node.offset
                         verticalRectangle = SKShapeNode(rect: CGRect(x: column.frame.minX, y: column.frame.minY, width: column.frame.width, height: column.frame.height * 5))
-                        verticalRectangle.fillColor = UIColor(red: 255, green: 199, blue: 0, alpha: 0.5)
-                        verticalRectangle.zPosition = 1
+                        verticalRectangle.fillColor = UIColor(hex: "FFC700")
+                        verticalRectangle.strokeColor = .clear
+                        verticalRectangle.zPosition = 0
                         addChild(verticalRectangle)
                         isVerticalSelected = true
                     }
@@ -74,7 +99,11 @@ class GameScene: SKScene {
                             self.isHorizonalSelected = false
                             self.isVerticalSelected = false
                             
+                            self.moves -= 1
+                            
                             self.swap(row: rowSelected, col: colSelected)
+                            
+                            self.checkItems()
                         }
                     }
                 }
@@ -83,16 +112,64 @@ class GameScene: SKScene {
     }
     
     
-    private func swap(row: Int, col: Int) {
-        
-        print("tiles")
-        for i in (0...tiles.count-1).reversed() {
-            for j in (0..<tiles.count) {
-                print(tiles[i][j].name ?? "", terminator: " ")
+    private func checkItems() {
+        for i in 0..<tiles.count {
+            for j in 0..<tiles.count-2 {
+                if tiles[i][j].name == tiles[i][j+1].name && tiles[i][j+1].name == tiles[i][j+2].name {
+                    switch level {
+                    case 1: scorePoints += 10
+                    case 2: scorePoints += 50
+                    case 3: scorePoints += 100
+                    case 4: scorePoints += 250
+                    case 5: scorePoints += 500
+                    default: break
+                    }
+//                    print("Three consecutive items of type \(tiles[i][j].name) found in row \(i) at indices \(j), \(j+1), \(j+2)")
+                    getNewTiles(row: i, col: j)
+                    getNewTiles(row: i, col: j+1)
+                    getNewTiles(row: i, col: j+2)
+                }
             }
-            print("\n")
         }
+
+        // Check for 3 consecutive items of the same type in columns
+        for i in 0..<tiles.count {
+            for j in 0..<tiles.count-2 {
+                if tiles[j][i].name == tiles[j+1][i].name && tiles[j+1][i].name == tiles[j+2][i].name {
+                    switch level {
+                    case 1: scorePoints += 10
+                    case 2: scorePoints += 50
+                    case 3: scorePoints += 100
+                    case 4: scorePoints += 250
+                    case 5: scorePoints += 500
+                    default: break
+                    }
+//                    print("Three consecutive items of type \(tiles[j][i].name) found in column \(i) at indices \(j), \(j+1), \(j+2)")
+                    getNewTiles(row: j, col: i)
+                    getNewTiles(row: j+1, col: i)
+                    getNewTiles(row: j+2, col: i)
+                }
+            }
+        }
+    }
+    
+    private func getNewTiles(row: Int, col: Int) {
+        guard var randomImage = images.randomElement() else { return }
+        var sprite = SKSpriteNode(imageNamed: randomImage)
+        sprite.name = randomImage
+        tiles[row][col].texture = sprite.texture
+        tiles[row][col].name = sprite.name
         
+        while isSameImageRepeatedVertically(row: row, col: col) || isSameImageRepeatedHorizontally(row: row, col: col) {
+            randomImage = images.randomElement() ?? ""
+            sprite = SKSpriteNode(imageNamed: randomImage)
+            sprite.name = randomImage
+            tiles[row][col].texture = sprite.texture
+            tiles[row][col].name = sprite.name
+        }
+    }
+    
+    private func swap(row: Int, col: Int) {
         var tempCol = [SKSpriteNode]()
         for i in (0...tiles.count-1).reversed() {
             let tmpNode = SKSpriteNode()
@@ -100,24 +177,16 @@ class GameScene: SKScene {
             tmpNode.name = tiles[i][col].name
             tempCol.append(tmpNode)
         }
-        
+
         for i in (0...tiles.count-1).reversed() {
             tiles[i][col].texture = tiles[row][i].texture
             tiles[i][col].name = tiles[row][i].name
         }
-        
-        
+
+
         for i in (0...tiles.count-1).reversed() {
             tiles[row][i].texture = tempCol[i].texture
             tiles[row][i].name = tempCol[i].name
-        }
-
-        print("resultTiles")
-        for i in (0...tiles.count-1).reversed() {
-            for j in (0..<tiles.count) {
-                print(tiles[i][j].name ?? "", terminator: " ")
-            }
-            print("\n")
         }
     }
     
@@ -204,7 +273,7 @@ class GameScene: SKScene {
         addChild(scoreSection)
         
         //score
-        let score = SKLabelNode(text: String(120))
+        score = SKLabelNode(text: String(moves))
         score.fontName = "gangOfThree"
         score.fontSize = 50
         score.position = CGPoint(x: scoreSection.frame.midX, y: scoreSection.frame.midY - 15)

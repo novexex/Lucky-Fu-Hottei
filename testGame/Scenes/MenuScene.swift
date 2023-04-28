@@ -62,8 +62,8 @@ class MenuScene: SKScene {
         addChild(soundButton)
         
         //info button
-        let infoButton = SKSpriteNode(imageNamed: "infoButton")
-        infoButton.name = "soundButton"
+        let infoButton = SKSpriteNode(imageNamed: "infoShieldButton")
+        infoButton.name = "infoButton"
         infoButton.position = CGPoint(x: soundButton.position.x + 50, y: soundButton.position.y)
         addChild(infoButton)
         
@@ -82,22 +82,16 @@ class MenuScene: SKScene {
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        
+        guard let gameController = self.view?.window?.rootViewController as? GameViewController else {
+            fatalError("GameController not found")
+        }
+        
         for touch in touches {
             enumerateChildNodes(withName: "//*") { (node, stop) in
                 if node.name == "startButton" {
                     if node.contains(touch.location(in: self)) {
-                        // создаем экземпляр GameScene
-                        guard let view = self.view else { return }
-                        let levelScene = LevelScene(size: view.bounds.size)
-                        let gameScene = GameScene(size: view.bounds.size)
-                        
-                        // создаем SKView и добавляем в нее сцену
-                        let skView = view
-                        skView.showsFPS = true // показываем FPS
-                        skView.showsNodeCount = true // показываем количество узлов
-                        skView.ignoresSiblingOrder = true
-                        gameScene.scaleMode = .resizeFill
-                        skView.presentScene(gameScene)
+                        gameController.selectLevel()
                     }
                 } else if node.name == "treasuryButton" {
                     if node.contains(touch.location(in: self)) {
@@ -125,7 +119,7 @@ class MenuScene: SKScene {
                     }
                 } else if node.name == "infoButton" {
                     if node.contains(touch.location(in: self)) {
-                        
+                        gameController.showInfo()
                     }
                 }
             }
