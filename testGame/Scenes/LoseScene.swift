@@ -36,7 +36,6 @@ class LoseScene: SKScene {
     }
     
     func setupBackground() {
-        // Создайте фоновую картинку и добавьте ее на сцену
         let background = SKSpriteNode(imageNamed: "loseScreen")
         background.position = CGPoint(x: frame.midX, y: frame.midY)
         background.scale(to: size.width)

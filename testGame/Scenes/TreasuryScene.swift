@@ -26,20 +26,16 @@ class TreasuryScene: SKScene {
             let location = touch.location(in: self)
             if let node = atPoint(location) as? SKSpriteNode {
                 if node.name == "infoButton" {
-                    if node.contains(touch.location(in: self)) {
                         gameController.showInfo(from: self)
-                    }
                 } else if node.name == "homeButton" {
-                    if node.contains(touch.location(in: self)) {
+
                         gameController.home(from: self)
-                    }
                 }
             }
         }
     }
     
     func setupBackground() {
-        // Создайте фоновую картинку и добавьте ее на сцену
         let background = SKSpriteNode(imageNamed: "treasuryBackGround")
         background.position = CGPoint(x: frame.midX, y: frame.midY)
         background.scale(to: size.width)

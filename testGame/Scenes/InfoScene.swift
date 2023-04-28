@@ -36,7 +36,6 @@ class InfoScene: SKScene {
     }
     
     func setupBackground() {
-        // Создайте фоновую картинку и добавьте ее на сцену
         let background = SKSpriteNode(imageNamed: "howToPlay")
         background.position = CGPoint(x: frame.midX, y: frame.midY)
         background.scale(to: size.width)

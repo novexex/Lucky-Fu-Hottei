@@ -9,7 +9,7 @@ import SpriteKit
 
 class GameScene: SKScene {
     
-    var level: Int!
+    var level: Int?
     
     private var backgroundTiles = [[SKSpriteNode]]()
     private var tiles = [[SKSpriteNode]]()
@@ -18,7 +18,6 @@ class GameScene: SKScene {
     var moves = 20 {
         didSet {
             if moves == 0 {
-                //                print(scorePoints)
                 gameController.gameOver(with: scorePoints)
             } else {
                 score.text = String(moves)
@@ -55,12 +54,13 @@ class GameScene: SKScene {
         guard let touch = touches.first else { return }
         let location = touch.location(in: self)
         
-        // Ищем узел, по которому было произведено нажатие
+        // here is handling of matrix tiles
+        // Looking for the node that was clicked on
         for row in tiles.enumerated() {
             for node in row.element.enumerated() {
                 if node.element.contains(location) {
                     if !isHorizonalSelected {
-                        // Выполняем действие для найденного узла
+                        // Perform the action for the found node
                         guard let first = row.element.first else { return }
                         rowSelected = row.offset
                         horizonalRectangle = SKShapeNode(rect: CGRect(x: first.frame.minX - 4.5, y: first.frame.minY, width: first.frame.width * 6.37, height: first.frame.height))
@@ -83,13 +83,12 @@ class GameScene: SKScene {
             }
         }
         
-        
+        // here is handling other ui elemnents except of matrix tiles
         for touch in touches {
             let location = touch.location(in: self)
             if let node = atPoint(location) as? SKSpriteNode {
                 if node.name == "swapButton" {
                     if self.isHorizonalSelected && self.isVerticalSelected {
-                        if node.contains(touch.location(in: self)) {
                             guard let colSelected = self.colSelected, let rowSelected = self.rowSelected else { return }
                             
                             self.horizonalRectangle.removeFromParent()
@@ -106,12 +105,11 @@ class GameScene: SKScene {
                             self.swap(row: rowSelected, col: colSelected)
                             
                             self.checkItems()
-                        }
                     }
                 } else if node.name == "homeButton" {
                     gameController.home(from: self)
-                } else if node.name == "refreshButton" {
-                    
+                } else if node.name == "reapeatButton" {
+                    gameController.startGame(level: level ?? 1)
                 } else if node.name == "infoButton" {
                     gameController.showInfo(from: self)
                 }
@@ -122,6 +120,7 @@ class GameScene: SKScene {
     
     
     private func checkItems() {
+        // Check for 3 consecutive items of the same type in rows
         for i in 0..<tiles.count {
             for j in 0..<tiles.count-2 {
                 if tiles[i][j].name == tiles[i][j+1].name && tiles[i][j+1].name == tiles[i][j+2].name {
@@ -133,7 +132,6 @@ class GameScene: SKScene {
                     case 5: scorePoints += 500
                     default: break
                     }
-                    //                    print("Three consecutive items of type \(tiles[i][j].name) found in row \(i) at indices \(j), \(j+1), \(j+2)")
                     getNewTiles(row: i, col: j)
                     getNewTiles(row: i, col: j+1)
                     getNewTiles(row: i, col: j+2)
@@ -153,7 +151,6 @@ class GameScene: SKScene {
                     case 5: scorePoints += 500
                     default: break
                     }
-                    //                    print("Three consecutive items of type \(tiles[j][i].name) found in column \(i) at indices \(j), \(j+1), \(j+2)")
                     getNewTiles(row: j, col: i)
                     getNewTiles(row: j+1, col: i)
                     getNewTiles(row: j+2, col: i)
@@ -220,7 +217,6 @@ class GameScene: SKScene {
         }
         
         // setup for tiles
-        
         tiles = Array(repeating: Array(repeating: SKSpriteNode(), count: 5), count: 5)
         
         for row in 0..<tiles.count {
@@ -266,7 +262,6 @@ class GameScene: SKScene {
     }
     
     func setupBackground() {
-        // Создайте фоновую картинку и добавьте ее на сцену
         let background = SKSpriteNode(imageNamed: "background")
         background.position = CGPoint(x: size.width/2, y: size.height/2)
         background.scale(to: size.width)
@@ -294,8 +289,10 @@ class GameScene: SKScene {
         arch.zPosition = -1
         addChild(arch)
         
+        //matrix of tiles
         setupTiles()
         
+        //swap button
         let swapButton = SKSpriteNode(imageNamed: "swapButton")
         swapButton.name = "swapButton"
         guard let lastXpos = backgroundTiles.last?.last?.position.x else { return }

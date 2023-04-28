@@ -39,7 +39,6 @@ class WinScene: SKScene {
     }
     
     func setupBackground() {
-        // Создайте фоновую картинку и добавьте ее на сцену
         let background = SKSpriteNode(imageNamed: "winScreen")
         background.position = CGPoint(x: frame.midX, y: frame.midY)
         background.scale(to: size.width)
@@ -48,21 +47,21 @@ class WinScene: SKScene {
     }
     
     func setupUI() {
-        
-        var otstup = 10
-        otstup *= String(score).count
+        // dynamic offset
+        var offset = 10
+        offset *= String(score).count
         
         // plus label
         let plusLabel = SKLabelNode(text: "+")
         plusLabel.fontSize = 50
-        plusLabel.position = CGPoint(x: frame.midX - CGFloat(otstup), y: frame.minY + 313)
+        plusLabel.position = CGPoint(x: frame.midX - CGFloat(offset), y: frame.minY + 313)
         addChild(plusLabel)
         
         // scoreLabel
         let scoreLabel = SKLabelNode(text: String(score))
         scoreLabel.fontName = "gangOfThree"
         scoreLabel.fontSize = 50
-        scoreLabel.position = CGPoint(x: frame.midX + CGFloat(otstup), y: frame.minY + 310)
+        scoreLabel.position = CGPoint(x: frame.midX + CGFloat(offset), y: frame.minY + 310)
         addChild(scoreLabel)
         
         // nextLevel button

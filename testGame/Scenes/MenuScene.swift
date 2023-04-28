@@ -28,7 +28,6 @@ class MenuScene: SKScene {
     }
     
     func setupBackground() {
-        // Создайте фоновую картинку и добавьте ее на сцену
         let background = SKSpriteNode(imageNamed: "menu")
         background.position = CGPoint(x: frame.midX, y: frame.midY)
         background.scale(to: size.width)
@@ -97,15 +96,10 @@ class MenuScene: SKScene {
             let location = touch.location(in: self)
             if let node = atPoint(location) as? SKSpriteNode {
                 if node.name == "startButton" {
-                    if node.contains(touch.location(in: self)) {
                         gameController.selectLevel(from: self)
-                    }
                 } else if node.name == "treasuryButton" {
-                    if node.contains(touch.location(in: self)) {
                         gameController.showTreasure(from: self)
-                    }
                 } else if node.name == "soundButton" {
-                    if node.contains(touch.location(in: self)) {
                         if !self.isSoundMuted {
                             self.soundButton.texture = SKTexture(imageNamed: "soundButtonUnmute")
                             self.isSoundMuted.toggle()
@@ -113,9 +107,8 @@ class MenuScene: SKScene {
                             self.soundButton.texture = SKTexture(imageNamed: "soundButton")
                             self.isSoundMuted.toggle()
                         }
-                    }
                 } else if node.name == "musicButton" {
-                    if node.contains(touch.location(in: self)) {
+
                         if !self.isMusicMuted {
                             self.musicButton.texture = SKTexture(imageNamed: "musicButtonUnmute")
                             self.isMusicMuted.toggle()
@@ -123,11 +116,9 @@ class MenuScene: SKScene {
                             self.musicButton.texture = SKTexture(imageNamed: "musicButton")
                             self.isMusicMuted.toggle()
                         }
-                    }
+
                 } else if node.name == "infoButton" {
-                    if node.contains(touch.location(in: self)) {
                         gameController.showInfo(from: self)
-                    }
                 }
             }
         }

@@ -7,8 +7,4 @@
 
 import SpriteKit
 
-class WelcomeBonusScene: SKScene {
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        
-    }
-}
+class WelcomeBonusScene: SKScene {}

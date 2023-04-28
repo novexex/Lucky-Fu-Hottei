@@ -62,21 +62,27 @@ class LevelSelectScene: SKScene, SKViewDelegate {
         score.position = CGPoint(x: cupLabel.frame.midX + 80, y: cupLabel.frame.midY - 15)
         addChild(score)
         
+        //all levels should be included in uiview
+        
+        //level1
         let levelNode1 = SKSpriteNode(imageNamed: "level1")
         levelNode1.name = "level1"
         levelNode1.position = CGPoint(x: frame.midX, y: score.frame.midY - 120)
         addChild(levelNode1)
         
+        //level2
         let levelNode2 = SKSpriteNode(imageNamed: "level2")
         levelNode2.name = "level2"
         levelNode2.position = CGPoint(x: frame.midX, y: levelNode1.frame.midY - 135)
         addChild(levelNode2)
         
+        //level3
         let levelNode3 = SKSpriteNode(imageNamed: "level3")
         levelNode3.name = "level3"
         levelNode3.position = CGPoint(x: frame.midX, y: levelNode2.frame.midY - 135)
         addChild(levelNode3)
         
+        //level4
         let levelNode4 = SKSpriteNode(imageNamed: "level4")
         levelNode4.name = "level4"
         levelNode4.position = CGPoint(x: frame.midX, y: levelNode3.frame.midY - 135)
