@@ -9,25 +9,21 @@ import SpriteKit
 
 class GameScene: Scene {
     
-    var level: Int?
-    
-    private var backgroundTiles = [[SKSpriteNode]]()
-    private var tiles = [[SKSpriteNode]]()
-    
-    var images = ["coin", "crane", "lamp"]
-    var moves = 20 {
+    let level: Int
+    private var tiles = Array(repeating: Array(repeating: SKSpriteNode(), count: 5), count: 5)
+    private var images = ["coinTile", "craneTile", "lampTile"]
+    private var moves = 20 {
         didSet {
             if moves == 0 {
+                let gameController = getGameController()
                 gameController.gameOver(with: scorePoints)
             } else {
-                score.text = String(moves)
+                scoreLabel.text = String(moves)
             }
         }
     }
     
-    private var gameController: GameViewController!
-    
-    private var score = SKLabelNode()
+    private var scoreLabel = SKLabelNode()
     private var scorePoints = 0
     
     private var isHorizonalSelected = false
@@ -39,20 +35,24 @@ class GameScene: Scene {
     private var horizonalRectangle = SKShapeNode()
     private var verticalRectangle = SKShapeNode()
     
+    init(size: CGSize, level: Int) {
+        self.level = level
+        super.init(size: size)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func didMove(to view: SKView) {
-        setupBackground()
+        setupLevel()
         setupUI()
-        
-        guard let gameController = self.view?.window?.rootViewController as? GameViewController else {
-            fatalError("GameController not found")
-        }
-        
-        self.gameController = gameController
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let touch = touches.first else { return }
         let location = touch.location(in: self)
+        let gameController = getGameController()
         
         // here is handling of matrix tiles
         // Looking for the node that was clicked on
@@ -69,8 +69,9 @@ class GameScene: Scene {
                         horizonalRectangle.zPosition = 0
                         addChild(horizonalRectangle)
                         isHorizonalSelected = true
+                        horizonalRectangle.isHidden = false
                     } else if !isVerticalSelected {
-                        let column = backgroundTiles[0][node.offset]
+                        let column = tiles[0][node.offset]
                         colSelected = node.offset
                         verticalRectangle = SKShapeNode(rect: CGRect(x: column.frame.minX, y: column.frame.minY, width: column.frame.width, height: column.frame.height * 5))
                         verticalRectangle.fillColor = UIColor(hex: "FFC700")
@@ -78,6 +79,7 @@ class GameScene: Scene {
                         verticalRectangle.zPosition = 0
                         addChild(verticalRectangle)
                         isVerticalSelected = true
+                        horizonalRectangle.isHidden = false
                     }
                 }
             }
@@ -91,11 +93,8 @@ class GameScene: Scene {
                     if self.isHorizonalSelected && self.isVerticalSelected {
                         guard let colSelected = self.colSelected, let rowSelected = self.rowSelected else { return }
                         
-                        self.horizonalRectangle.removeFromParent()
-                        self.verticalRectangle.removeFromParent()
-                        
-                        self.horizonalRectangle = SKShapeNode()
-                        self.verticalRectangle = SKShapeNode()
+                        self.horizonalRectangle.isHidden = true
+                        self.verticalRectangle.isHidden = true
                         
                         self.isHorizonalSelected = false
                         self.isVerticalSelected = false
@@ -107,34 +106,42 @@ class GameScene: Scene {
                         self.checkMatches()
                     }
                 } else if node.name == "homeButton" {
-                    gameController.home(from: self)
+                    gameController.home()
                 } else if node.name == "reapeatButton" {
-                    gameController.startGame(level: level ?? 1)
+                    gameController.startGame(level: level+1)
                 } else if node.name == "infoButton" {
-                    gameController.showInfo(from: self)
+                    gameController.showInfo()
                 }
             }
         }
         
     }
     
+    private func setupLevel() {
+        switch level {
+            case 2:
+                images += ["redPandaTile"]
+            case 3:
+                images += ["redPandaTile", "pandaTile"]
+            case 4:
+                images += ["redPandaTile", "pandaTile"]
+                moves = 15
+            case 5:
+                images += ["redPandaTile", "pandaTile"]
+                moves = 10
+            default: break
+        }
+    }
     
     private func checkMatches() {
         // Check for 3 consecutive items of the same type in rows
         for i in 0..<tiles.count {
             for j in 0..<tiles.count-2 {
                 if tiles[i][j].name == tiles[i][j+1].name && tiles[i][j+1].name == tiles[i][j+2].name {
-                    switch level {
-                        case 1: scorePoints += 10
-                        case 2: scorePoints += 50
-                        case 3: scorePoints += 100
-                        case 4: scorePoints += 250
-                        case 5: scorePoints += 500
-                        default: break
-                    }
-                    getNewTiles(row: i, col: j)
-                    getNewTiles(row: i, col: j+1)
-                    getNewTiles(row: i, col: j+2)
+                    appendPoints()
+                    getNewTile(row: i, col: j)
+                    getNewTile(row: i, col: j+1)
+                    getNewTile(row: i, col: j+2)
                 }
             }
         }
@@ -143,23 +150,27 @@ class GameScene: Scene {
         for i in 0..<tiles.count {
             for j in 0..<tiles.count-2 {
                 if tiles[j][i].name == tiles[j+1][i].name && tiles[j+1][i].name == tiles[j+2][i].name {
-                    switch level {
-                    case 1: scorePoints += 10
-                    case 2: scorePoints += 50
-                    case 3: scorePoints += 100
-                    case 4: scorePoints += 250
-                    case 5: scorePoints += 500
-                    default: break
-                    }
-                    getNewTiles(row: j, col: i)
-                    getNewTiles(row: j+1, col: i)
-                    getNewTiles(row: j+2, col: i)
+                    appendPoints()
+                    getNewTile(row: j, col: i)
+                    getNewTile(row: j+1, col: i)
+                    getNewTile(row: j+2, col: i)
                 }
             }
         }
     }
     
-    private func getNewTiles(row: Int, col: Int) {
+    private func appendPoints() {
+        switch level {
+            case 1: scorePoints += 10
+            case 2: scorePoints += 50
+            case 3: scorePoints += 100
+            case 4: scorePoints += 250
+            case 5: scorePoints += 500
+            default: break
+        }
+    }
+    
+    private func getNewTile(row: Int, col: Int) {
         guard var randomImage = images.randomElement() else { return }
         var sprite = SKSpriteNode(imageNamed: randomImage)
         sprite.name = randomImage
@@ -177,71 +188,55 @@ class GameScene: Scene {
     
     private func swap(row: Int, col: Int) {
         var tempCol = [SKSpriteNode]()
-        for i in (0...tiles.count-1).reversed() {
+        
+        for i in (0..<tiles.count).reversed() {
             let tmpNode = SKSpriteNode()
             tmpNode.texture = tiles[i][col].texture
             tmpNode.name = tiles[i][col].name
             tempCol.append(tmpNode)
         }
         
-        for i in (0...tiles.count-1).reversed() {
+        for i in (0..<tiles.count).reversed() {
             tiles[i][col].texture = tiles[row][i].texture
             tiles[i][col].name = tiles[row][i].name
         }
         
-        
-        for i in (0...tiles.count-1).reversed() {
+        for i in (0..<tiles.count).reversed() {
             tiles[row][i].texture = tempCol[i].texture
             tiles[row][i].name = tempCol[i].name
         }
     }
     
     private func setupTiles() {
-        // setup backgrounds for tiles
         let tileSize = CGSize(width: 66, height: 52)
         let totalTilesWidth = tileSize.width * 5
         let middle = CGPoint(x: frame.midX + 32, y: frame.midY + 100)
         let offset = CGPoint(x: middle.x - (totalTilesWidth / 2), y: middle.y - (totalTilesWidth / 2))
-        
-        for row in 0..<5 {
-            var tileBackgroundRow = [SKSpriteNode]()
-            for col in 0..<5 {
-                let tileBackground = SKSpriteNode(imageNamed: "backgroundTiles")
-                tileBackground.size = tileSize
-                tileBackground.position = CGPoint(x: tileSize.width * CGFloat(col) + offset.x, y: tileSize.height * CGFloat(row) + offset.y)
-                tileBackground.zPosition = -1
-                addChild(tileBackground)
-                tileBackgroundRow.append(tileBackground)
-            }
-            backgroundTiles.append(tileBackgroundRow)
-        }
-        
-        // setup for tiles
-        tiles = Array(repeating: Array(repeating: SKSpriteNode(), count: 5), count: 5)
-        
+                
         for row in 0..<tiles.count {
-            for col in 0..<tiles.count {
+            var rowTiles = [SKSpriteNode]()
+            for col in 0..<tiles[row].count {
                 guard var randomImage = images.randomElement() else { return }
-                var sprite = SKSpriteNode(imageNamed: randomImage)
-                sprite.name = randomImage
-                tiles[row][col] = sprite
+                var tile = SKSpriteNode(imageNamed: randomImage)
+                tile.name = randomImage
+                tiles[row][col] = tile
                 
                 while isSameImageRepeatedVertically(row: row, col: col) || isSameImageRepeatedHorizontally(row: row, col: col) {
                     randomImage = images.randomElement() ?? ""
-                    sprite = SKSpriteNode(imageNamed: randomImage)
-                    sprite.name = randomImage
-                    tiles[row][col] = sprite
+                    tile = SKSpriteNode(imageNamed: randomImage)
+                    tile.name = randomImage
+                    tiles[row][col] = tile
                 }
                 
-                sprite.position = CGPoint(x: backgroundTiles[row][col].frame.midX, y: backgroundTiles[row][col].frame.midY)
-                
-                addChild(sprite)
-                
+                tile.position = CGPoint(x: tileSize.width * CGFloat(col) + offset.x, y: tileSize.height * CGFloat(row) + offset.y)
+                addChild(tile)
+                rowTiles.append(tile)
             }
+            tiles.append(rowTiles)
         }
     }
     
-    func isSameImageRepeatedHorizontally(row: Int, col: Int) -> Bool {
+    private func isSameImageRepeatedHorizontally(row: Int, col: Int) -> Bool {
         if row >= 2 {
             if tiles[row][col].name == tiles[row-1][col].name &&
                 tiles[row][col].name == tiles[row-2][col].name {
@@ -251,7 +246,7 @@ class GameScene: Scene {
         return false
     }
     
-    func isSameImageRepeatedVertically(row: Int, col: Int) -> Bool {
+    private func isSameImageRepeatedVertically(row: Int, col: Int) -> Bool {
         if col >= 2 {
             if tiles[row][col].name == tiles[row][col-1].name &&
                 tiles[row][col].name == tiles[row][col-2].name {
@@ -261,24 +256,15 @@ class GameScene: Scene {
         return false
     }
     
-    func setupBackground() {
-        let background = SKSpriteNode(imageNamed: "background")
-        background.position = CGPoint(x: size.width/2, y: size.height/2)
-        background.scale(to: size.width)
-        background.zPosition = -2
-        addChild(background)
-    }
-    
-    func setupUI() {
+    private func setupUI() {
         // dynamic background depending on the level
-        guard let level else { return }
         switch level {
-        case 1: setBackground(with: "level1Background")
-        case 2: setBackground(with: "level2Background")
-        case 3: setBackground(with: "level3Background")
-        case 4: setBackground(with: "level4Background")
-        case 5: setBackground(with: "level5Background")
-        default: break
+            case 1: setBackground(with: "level1Background")
+            case 2: setBackground(with: "level2Background")
+            case 3: setBackground(with: "level3Background")
+            case 4: setBackground(with: "level4Background")
+            case 5: setBackground(with: "level5Background")
+            default: break
         }
         
         //score section
@@ -288,11 +274,11 @@ class GameScene: Scene {
         addChild(scoreSection)
         
         //score
-        score = SKLabelNode(text: String(moves))
-        score.fontName = "gangOfThree"
-        score.fontSize = 50
-        score.position = CGPoint(x: scoreSection.frame.midX, y: scoreSection.frame.midY - 15)
-        addChild(score)
+        scoreLabel = SKLabelNode(text: String(moves))
+        scoreLabel.fontName = "gangOfThree"
+        scoreLabel.fontSize = 50
+        scoreLabel.position = CGPoint(x: scoreSection.frame.midX, y: scoreSection.frame.midY - 15)
+        addChild(scoreLabel)
         
         //arch
         let arch = SKSpriteNode(imageNamed: "arch")
@@ -306,7 +292,7 @@ class GameScene: Scene {
         //swap button
         let swapButton = SKSpriteNode(imageNamed: "swapButton")
         swapButton.name = "swapButton"
-        guard let lastXpos = backgroundTiles.last?.last?.position.x else { return }
+        guard let lastXpos = tiles.last?.last?.position.x else { return }
         swapButton.position = CGPoint(x: lastXpos - 130, y: frame.midY - 200)
         addChild(swapButton)
         
@@ -314,23 +300,19 @@ class GameScene: Scene {
         let homeButton = SKSpriteNode(imageNamed: "homeButton")
         homeButton.name = "homeButton"
         homeButton.position = CGPoint(x: frame.midX + 55, y: swapButton.frame.minY - 40)
-        homeButton.zPosition = 1
         addChild(homeButton)
         
         // repeat button
         let reapeatButton = SKSpriteNode(imageNamed: "refreshButton")
         reapeatButton.name = "reapeatButton"
         reapeatButton.position = CGPoint(x: frame.midX, y: swapButton.frame.minY - 40)
-        reapeatButton.zPosition = 1
         addChild(reapeatButton)
         
         // info button
         let infoButton = SKSpriteNode(imageNamed: "infoButton")
         infoButton.name = "infoButton"
         infoButton.position = CGPoint(x: frame.midX - 55, y: swapButton.frame.minY - 40)
-        infoButton.zPosition = 1
         addChild(infoButton)
-        
     }
 }
 

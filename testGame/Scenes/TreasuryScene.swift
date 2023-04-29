@@ -16,30 +16,25 @@ class TreasuryScene: Scene {
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        
-        guard let gameController = self.view?.window?.rootViewController as? GameViewController else {
-            fatalError("GameController not found")
-        }
-        
+        let gameController = getGameController()
         for touch in touches {
             let location = touch.location(in: self)
             if let node = atPoint(location) as? SKSpriteNode {
                 switch node.name {
-                    case "infoButton": gameController.showInfo(from: self)
-                    case "homeButton": gameController.home(from: self)
+                    case "infoButton": gameController.showInfo()
+                    case "homeButton": gameController.home()
                     default: break
                 }
             }
         }
     }
     
-    func setupUI() {
+    private func setupUI() {
         setBackground(with: "treasuryBackground")
         
         //cup label
-        let cupLabel = SKSpriteNode(imageNamed: "cup")
+        let cupLabel = SKSpriteNode(imageNamed: "cupLabel")
         cupLabel.position = CGPoint(x: frame.midX - 50, y: frame.midY + 300)
-        cupLabel.zPosition = 1
         addChild(cupLabel)
         
         //score label

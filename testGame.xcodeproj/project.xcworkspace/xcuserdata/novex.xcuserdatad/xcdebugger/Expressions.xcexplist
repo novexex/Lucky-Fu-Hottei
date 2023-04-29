@@ -3,32 +3,13 @@
    version = "1.0">
    <ContextStates>
       <ContextState
-         contextName = "GameViewController.showInfo():GameViewController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "currentScene.name">
-            </PersistentString>
-            <PersistentString
-               value = "prevScene?.name">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
          contextName = "GameViewController.selectLevel():GameViewController.swift">
          <PersistentStrings>
             <PersistentString
-               value = "prevScene?.name">
-            </PersistentString>
-            <PersistentString
                value = "currentScene?.name">
             </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "LevelScene.setupTiles():LevelScene.swift">
-         <PersistentStrings>
             <PersistentString
-               value = "lastRow[col-2]">
+               value = "prevScene?.name">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -47,10 +28,10 @@
          contextName = "GameViewController.back():GameViewController.swift">
          <PersistentStrings>
             <PersistentString
-               value = "currentScene?.name">
+               value = "prevScene?.name">
             </PersistentString>
             <PersistentString
-               value = "prevScene?.name">
+               value = "currentScene?.name">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -62,6 +43,33 @@
             </PersistentString>
             <PersistentString
                value = "resultTiles[i][j].name">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "GameViewController.showInfo():GameViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "currentScene.name">
+            </PersistentString>
+            <PersistentString
+               value = "prevScene?.name">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "GameScene.setupTiles():GameScene.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "tiles[row][col]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "LevelScene.setupTiles():LevelScene.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "lastRow[col-2]">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

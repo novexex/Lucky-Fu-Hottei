@@ -25,6 +25,7 @@
 		EB91806529F93D1F00B8398D /* gangOfThree.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EB91806429F93D1F00B8398D /* gangOfThree.ttf */; };
 		EB91806829F93FDF00B8398D /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB91806729F93FDF00B8398D /* Extension.swift */; };
 		EBB1E8F629FCAF6900B341AA /* BaseClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBB1E8F529FCAF6900B341AA /* BaseClass.swift */; };
+		EBB1E8F829FCD22700B341AA /* ASAttributedLabelNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBB1E8F729FCD22700B341AA /* ASAttributedLabelNode.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +49,7 @@
 		EB91806729F93FDF00B8398D /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		EB91806929F944F100B8398D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EBB1E8F529FCAF6900B341AA /* BaseClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseClass.swift; sourceTree = "<group>"; };
+		EBB1E8F729FCD22700B341AA /* ASAttributedLabelNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ASAttributedLabelNode.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -155,6 +157,7 @@
 			children = (
 				EB91806729F93FDF00B8398D /* Extension.swift */,
 				EBB1E8F529FCAF6900B341AA /* BaseClass.swift */,
+				EBB1E8F729FCD22700B341AA /* ASAttributedLabelNode.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -241,6 +244,7 @@
 				EB91805029F7E75800B8398D /* GameViewController.swift in Sources */,
 				EB2D82F829F94BD1008A86B6 /* MenuScene.swift in Sources */,
 				EBB1E8F629FCAF6900B341AA /* BaseClass.swift in Sources */,
+				EBB1E8F829FCD22700B341AA /* ASAttributedLabelNode.swift in Sources */,
 				EB2D830129FABFCA008A86B6 /* LevelSelectScene.swift in Sources */,
 				EB2D830529FBEA71008A86B6 /* LoseScene.swift in Sources */,
 				EB2D82FF29FABF8B008A86B6 /* TreasuryScene.swift in Sources */,

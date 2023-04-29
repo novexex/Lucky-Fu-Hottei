@@ -16,24 +16,21 @@ class WinScene: Scene {
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        
-        guard let gameController = self.view?.window?.rootViewController as? GameViewController else {
-            fatalError("GameController not found")
-        }
+        let gameController = getGameController()
         
         for touch in touches {
             let location = touch.location(in: self)
             if let node = atPoint(location) as? SKSpriteNode {
                 switch node.name {
-                    case "backButton": gameController.back(from: self)
-                    case "homeButton": gameController.home(from: self)
+                    case "backButton": gameController.back()
+                    case "homeButton": gameController.home()
                     default: break
                 }
             }
         }
     }
     
-    func setupUI() {
+    private func setupUI() {
         setBackground(with: "winBackground")
         
         // dynamic offset
@@ -57,28 +54,24 @@ class WinScene: Scene {
         let nextLevelButton = SKSpriteNode(imageNamed: "nextLevelButton")
         nextLevelButton.name = "nextLevelButton"
         nextLevelButton.position = CGPoint(x: frame.midX, y: scoreLabel.frame.minY - 60)
-        nextLevelButton.zPosition = 1
         addChild(nextLevelButton)
         
         // home button
         let homeButton = SKSpriteNode(imageNamed: "homeButton")
         homeButton.name = "homeButton"
         homeButton.position = CGPoint(x: frame.midX + 55, y: nextLevelButton.frame.minY - 40)
-        homeButton.zPosition = 1
         addChild(homeButton)
         
         // repeat button
         let reapeatButton = SKSpriteNode(imageNamed: "refreshButton")
-        reapeatButton.name = "reapeatButton"
+        reapeatButton.name = "refreshButton"
         reapeatButton.position = CGPoint(x: frame.midX, y: nextLevelButton.frame.minY - 40)
-        reapeatButton.zPosition = 1
         addChild(reapeatButton)
         
         // info button
         let infoButton = SKSpriteNode(imageNamed: "infoButton")
         infoButton.name = "infoButton"
         infoButton.position = CGPoint(x: frame.midX - 55, y: nextLevelButton.frame.minY - 40)
-        infoButton.zPosition = 1
         addChild(infoButton)
     }
 }

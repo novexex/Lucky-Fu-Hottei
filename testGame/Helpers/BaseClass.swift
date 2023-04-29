@@ -8,11 +8,19 @@
 import SpriteKit
 
 class Scene: SKScene {
+    
     func setBackground(with imageNamed: String) {
         let background = SKSpriteNode(imageNamed: imageNamed)
         background.position = CGPoint(x: frame.midX, y: frame.midY)
         background.scale(to: size.width)
-        background.zPosition = -1
+        background.zPosition = -2
         addChild(background)
+    }
+    
+    func getGameController() -> GameViewController {
+        guard let gameController = self.view?.window?.rootViewController as? GameViewController else {
+            fatalError("GameController not found")
+        }
+        return gameController
     }
 }

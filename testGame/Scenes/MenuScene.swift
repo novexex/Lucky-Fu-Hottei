@@ -14,11 +14,11 @@ class MenuScene: Scene {
     private var isSoundMuted = false
     private var isMusicMuted = false
     
-    private var scoreLabel = SKLabelNode()
+    private var scoreLabel = ASAttributedLabelNode(size: CGSize())
     
     var score = 0 {
         didSet {
-            scoreLabel.text = String(score)
+            scoreLabel.attributedString = getAttrubutedString(with: String(score))
         }
     }
     
@@ -26,11 +26,43 @@ class MenuScene: Scene {
         setupUI()
     }
     
-    func setupUI() {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        let gameController = getGameController()
+        for touch in touches {
+            let location = touch.location(in: self)
+            if let node = atPoint(location) as? SKSpriteNode {
+                print(node.name)
+                switch node.name {
+                    case "startButton": gameController.selectLevel()
+                    case "treasuryButton": gameController.showTreasure()
+                    case "soundButton":
+                        if !self.isSoundMuted {
+                            self.soundButton.texture = SKTexture(imageNamed: "soundUnmuteButton")
+                            self.isSoundMuted = true
+                        } else {
+                            self.soundButton.texture = SKTexture(imageNamed: "soundButton")
+                            self.isSoundMuted = false
+                        }
+                    case "musicButton":
+                        if !self.isMusicMuted {
+                            self.musicButton.texture = SKTexture(imageNamed: "musicUnmuteButton")
+                            self.isMusicMuted = true
+                        } else {
+                            self.musicButton.texture = SKTexture(imageNamed: "musicButton")
+                            self.isMusicMuted = false
+                        }
+                    case "infoButton": gameController.showInfo()
+                    default: break
+                }
+            }
+        }
+    }
+    
+    private func setupUI() {
         setBackground(with: "menuBackground")
         
-        //buda
-        let buda = SKSpriteNode(imageNamed: "buda")
+        //hottei
+        let buda = SKSpriteNode(imageNamed: "hottei")
         buda.position = CGPoint(x: frame.midX, y: frame.midY + 120)
         buda.zPosition = -1
         addChild(buda)
@@ -66,53 +98,30 @@ class MenuScene: Scene {
         addChild(infoButton)
         
         //cup label
-        let cupLabel = SKSpriteNode(imageNamed: "cup")
+        let cupLabel = SKSpriteNode(imageNamed: "cupLabel")
         cupLabel.position = CGPoint(x: frame.midX - 50, y: frame.midY + 300)
-        cupLabel.zPosition = 1
         addChild(cupLabel)
         
         //score label
-        scoreLabel = SKLabelNode(text: String(score))
-        scoreLabel.fontName = "gangOfThree"
-        scoreLabel.fontSize = 50
-        scoreLabel.position = CGPoint(x: cupLabel.position.x + 80, y: cupLabel.position.y - 15)
+        scoreLabel = ASAttributedLabelNode(size: cupLabel.size)
+        scoreLabel.attributedString = getAttrubutedString(with: String(score))
+        scoreLabel.position = CGPoint(x: cupLabel.position.x + 130, y: cupLabel.position.y + 2)
         addChild(scoreLabel)
     }
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+    private func getAttrubutedString(with text: String) -> NSMutableAttributedString {
+        let shadow = NSShadow()
+        shadow.shadowOffset = CGSize(width: 0, height: 3.9520199298858643)
+        shadow.shadowColor = UIColor.black.withAlphaComponent(0.65)
+        shadow.shadowBlurRadius = 12.927276611328125
         
-        guard let gameController = self.view?.window?.rootViewController as? GameViewController else {
-            fatalError("GameController not found")
-        }
-        
-        for touch in touches {
-            let location = touch.location(in: self)
-            if let node = atPoint(location) as? SKSpriteNode {
-                switch node.name {
-                    case "startButton": gameController.selectLevel(from: self)
-                    case "treasuryButton": gameController.showTreasure(from: self)
-                    case "soundButton":
-                        if !self.isSoundMuted {
-                            self.soundButton.texture = SKTexture(imageNamed: "soundButtonUnmute")
-                        } else {
-                            self.soundButton.texture = SKTexture(imageNamed: "soundButton")
-                        }
-                        self.isSoundMuted.toggle()
-                    case "musicButton":
-                        if !self.isMusicMuted {
-                            self.musicButton.texture = SKTexture(imageNamed: "musicButtonUnmute")
-                        } else {
-                            self.musicButton.texture = SKTexture(imageNamed: "musicButton")
-                        }
-                        self.isMusicMuted.toggle()
-                    case "infoButton": gameController.showInfo(from: self)
-                    default: break
-                }
-            }
-        }
-    }
-    
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        self.run(SKAction.scale(by: 0.95, duration: 0.05))
+        let attributes: [NSAttributedString.Key: Any] = [
+            .font: UIFont(name: "gangOfThree", size: 50) ?? UIFont(),
+            .foregroundColor: UIColor.white,
+            .strokeWidth: -1.29,
+            .strokeColor: UIColor(hex: "ECB43C"),
+            .shadow: shadow
+        ]
+        return NSMutableAttributedString(string: text, attributes: attributes)
     }
 }

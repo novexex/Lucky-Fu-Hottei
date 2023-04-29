@@ -24,9 +24,7 @@ class LevelSelectScene: Scene {
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        guard let gameController = self.view?.window?.rootViewController as? GameViewController else {
-            fatalError("GameController not found")
-        }
+        let gameController = getGameController()
             for touch in touches {
                 let location = touch.location(in: self)
                 if let node = atPoint(location) as? SKSpriteNode {
@@ -35,21 +33,20 @@ class LevelSelectScene: Scene {
                         case "level2Button": gameController.startGame(level: 2)
                         case "level3Button": gameController.startGame(level: 3)
                         case "level4Button": gameController.startGame(level: 4)
-                        case "homeButton": gameController.home(from: self)
-                        case "infoButton": gameController.showInfo(from: self)
+                        case "homeButton": gameController.home()
+                        case "infoButton": gameController.showInfo()
                         default: break
                     }
                 }
             }
         }
     
-    func setupUI() {
+    private func setupUI() {
         setBackground(with: "levelSelectBackground")
         
         //cup label
-        let cupLabel = SKSpriteNode(imageNamed: "cup")
+        let cupLabel = SKSpriteNode(imageNamed: "cupLabel")
         cupLabel.position = CGPoint(x: frame.midX - 50, y: frame.maxY - 110)
-        cupLabel.zPosition = 1
         addChild(cupLabel)
         
         //score
