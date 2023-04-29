@@ -31,7 +31,6 @@ class MenuScene: Scene {
         for touch in touches {
             let location = touch.location(in: self)
             if let node = atPoint(location) as? SKSpriteNode {
-                print(node.name)
                 switch node.name {
                     case "startButton": gameController.selectLevel()
                     case "treasuryButton": gameController.showTreasure()
@@ -105,23 +104,7 @@ class MenuScene: Scene {
         //score label
         scoreLabel = ASAttributedLabelNode(size: cupLabel.size)
         scoreLabel.attributedString = getAttrubutedString(with: String(score))
-        scoreLabel.position = CGPoint(x: cupLabel.position.x + 130, y: cupLabel.position.y + 2)
+        scoreLabel.position = CGPoint(x: cupLabel.position.x + 120, y: cupLabel.position.y + 2)
         addChild(scoreLabel)
-    }
-    
-    private func getAttrubutedString(with text: String) -> NSMutableAttributedString {
-        let shadow = NSShadow()
-        shadow.shadowOffset = CGSize(width: 0, height: 3.9520199298858643)
-        shadow.shadowColor = UIColor.black.withAlphaComponent(0.65)
-        shadow.shadowBlurRadius = 12.927276611328125
-        
-        let attributes: [NSAttributedString.Key: Any] = [
-            .font: UIFont(name: "gangOfThree", size: 50) ?? UIFont(),
-            .foregroundColor: UIColor.white,
-            .strokeWidth: -1.29,
-            .strokeColor: UIColor(hex: "ECB43C"),
-            .shadow: shadow
-        ]
-        return NSMutableAttributedString(string: text, attributes: attributes)
     }
 }

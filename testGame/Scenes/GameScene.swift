@@ -11,19 +11,25 @@ class GameScene: Scene {
     
     let level: Int
     private var tiles = Array(repeating: Array(repeating: SKSpriteNode(), count: 5), count: 5)
-    private var images = ["coinTile", "craneTile", "lampTile"]
-    private var moves = 20 {
+    private var images = [String]()
+    
+    private var movesSection = SKSpriteNode()
+    private var movesLabel = ASAttributedLabelNode(size: CGSize())
+    private var moves = 9 {
         didSet {
             if moves == 0 {
                 let gameController = getGameController()
                 gameController.gameOver(with: scorePoints)
             } else {
-                scoreLabel.text = String(moves)
+                movesLabel.attributedString = getAttrubutedString(with: String(moves))
+                if String(moves).count == 1 {
+                    movesLabel.position = CGPoint(x: movesSection.frame.midX + 84, y: movesSection.frame.midY + 3)
+                }
             }
         }
     }
     
-    private var scoreLabel = SKLabelNode()
+    
     private var scorePoints = 0
     
     private var isHorizonalSelected = false
@@ -60,23 +66,26 @@ class GameScene: Scene {
             for node in row.element.enumerated() {
                 if node.element.contains(location) {
                     if !isHorizonalSelected {
-                        // Perform the action for the found node
                         guard let first = row.element.first else { return }
                         rowSelected = row.offset
-                        horizonalRectangle = SKShapeNode(rect: CGRect(x: first.frame.minX - 4.5, y: first.frame.minY, width: first.frame.width * 6.37, height: first.frame.height))
-                        horizonalRectangle.fillColor = UIColor(hex: "FFC700")
+                        
+                        horizonalRectangle = SKShapeNode(rect: CGRect(x: first.frame.minX, y: first.frame.minY, width: first.size.width * 5, height: first.size.height))
+                        horizonalRectangle.fillColor = UIColor(red: 255, green: 199, blue: 0, alpha: 0.9)
                         horizonalRectangle.strokeColor = .clear
-                        horizonalRectangle.zPosition = 0
+                        horizonalRectangle.blendMode = .screen
+                        horizonalRectangle.zPosition = 1
                         addChild(horizonalRectangle)
                         isHorizonalSelected = true
                         horizonalRectangle.isHidden = false
                     } else if !isVerticalSelected {
                         let column = tiles[0][node.offset]
                         colSelected = node.offset
-                        verticalRectangle = SKShapeNode(rect: CGRect(x: column.frame.minX, y: column.frame.minY, width: column.frame.width, height: column.frame.height * 5))
-                        verticalRectangle.fillColor = UIColor(hex: "FFC700")
+                        
+                        verticalRectangle = SKShapeNode(rect: CGRect(x: column.frame.minX, y: column.frame.minY, width: column.size.width, height: column.size.height * 5))
+                        verticalRectangle.fillColor = UIColor(red: 255, green: 199, blue: 0, alpha: 0.9)
                         verticalRectangle.strokeColor = .clear
-                        verticalRectangle.zPosition = 0
+                        verticalRectangle.blendMode = .screen
+                        verticalRectangle.zPosition = 1
                         addChild(verticalRectangle)
                         isVerticalSelected = true
                         horizonalRectangle.isHidden = false
@@ -114,10 +123,10 @@ class GameScene: Scene {
                 }
             }
         }
-        
     }
     
     private func setupLevel() {
+            images = ["coinTile", "craneTile", "lampTile"]
         switch level {
             case 2:
                 images += ["redPandaTile"]
@@ -229,10 +238,11 @@ class GameScene: Scene {
                 }
                 
                 tile.position = CGPoint(x: tileSize.width * CGFloat(col) + offset.x, y: tileSize.height * CGFloat(row) + offset.y)
+                tile.size = tileSize
                 addChild(tile)
                 rowTiles.append(tile)
             }
-            tiles.append(rowTiles)
+            tiles[row] = rowTiles
         }
     }
     
@@ -267,22 +277,21 @@ class GameScene: Scene {
             default: break
         }
         
-        //score section
-        let scoreSection = SKSpriteNode(imageNamed: "scoreSection")
-        scoreSection.position = CGPoint(x: size.width/2, y: size.height/2 + 270)
-        scoreSection.zPosition = -1
-        addChild(scoreSection)
+        //moves section
+        movesSection = SKSpriteNode(imageNamed: "scoreSection")
+        movesSection.position = CGPoint(x: size.width/2, y: size.height/2 + 270)
+        movesSection.zPosition = -1
+        addChild(movesSection)
         
-        //score
-        scoreLabel = SKLabelNode(text: String(moves))
-        scoreLabel.fontName = "gangOfThree"
-        scoreLabel.fontSize = 50
-        scoreLabel.position = CGPoint(x: scoreSection.frame.midX, y: scoreSection.frame.midY - 15)
-        addChild(scoreLabel)
+        //moves
+        movesLabel = ASAttributedLabelNode(size: movesSection.size)
+        movesLabel.attributedString = getAttrubutedString(with: String(moves))
+        movesLabel.position = CGPoint(x: movesSection.frame.midX + 68, y: movesSection.frame.midY + 3)
+        addChild(movesLabel)
         
         //arch
         let arch = SKSpriteNode(imageNamed: "arch")
-        arch.position = CGPoint(x: scoreSection.position.x, y: scoreSection.position.y - 50)
+        arch.position = CGPoint(x: movesSection.position.x, y: movesSection.position.y - 50)
         arch.zPosition = -1
         addChild(arch)
         

@@ -26,6 +26,7 @@
 		EB91806829F93FDF00B8398D /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB91806729F93FDF00B8398D /* Extension.swift */; };
 		EBB1E8F629FCAF6900B341AA /* BaseClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBB1E8F529FCAF6900B341AA /* BaseClass.swift */; };
 		EBB1E8F829FCD22700B341AA /* ASAttributedLabelNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBB1E8F729FCD22700B341AA /* ASAttributedLabelNode.swift */; };
+		EBB1E8FA29FD470800B341AA /* Montserrat-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EBB1E8F929FD46FD00B341AA /* Montserrat-ExtraBold.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +51,7 @@
 		EB91806929F944F100B8398D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EBB1E8F529FCAF6900B341AA /* BaseClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseClass.swift; sourceTree = "<group>"; };
 		EBB1E8F729FCD22700B341AA /* ASAttributedLabelNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ASAttributedLabelNode.swift; sourceTree = "<group>"; };
+		EBB1E8F929FD46FD00B341AA /* Montserrat-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-ExtraBold.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -148,6 +150,7 @@
 			isa = PBXGroup;
 			children = (
 				EB91806429F93D1F00B8398D /* gangOfThree.ttf */,
+				EBB1E8F929FD46FD00B341AA /* Montserrat-ExtraBold.ttf */,
 			);
 			path = Fonts;
 			sourceTree = "<group>";
@@ -225,6 +228,7 @@
 				EB91804A29F7E75800B8398D /* GameScene.sks in Resources */,
 				EB91805529F7E75900B8398D /* Assets.xcassets in Resources */,
 				EB91805829F7E75900B8398D /* LaunchScreen.storyboard in Resources */,
+				EBB1E8FA29FD470800B341AA /* Montserrat-ExtraBold.ttf in Resources */,
 				EB91804C29F7E75800B8398D /* Actions.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

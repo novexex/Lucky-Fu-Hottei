@@ -3,6 +3,17 @@
    version = "1.0">
    <ContextStates>
       <ContextState
+         contextName = "GameScene.touchesBegan(_:with:):GameScene.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "tiles.count">
+            </PersistentString>
+            <PersistentString
+               value = "tiles[1].count">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "GameViewController.selectLevel():GameViewController.swift">
          <PersistentStrings>
             <PersistentString
@@ -44,6 +55,9 @@
             <PersistentString
                value = "resultTiles[i][j].name">
             </PersistentString>
+            <PersistentString
+               value = "tiles.count">
+            </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
@@ -61,7 +75,7 @@
          contextName = "GameScene.setupTiles():GameScene.swift">
          <PersistentStrings>
             <PersistentString
-               value = "tiles[row][col]">
+               value = "tiles.count">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -70,6 +84,14 @@
          <PersistentStrings>
             <PersistentString
                value = "lastRow[col-2]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "GameScene.didMove(to:):GameScene.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "tiles.count">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

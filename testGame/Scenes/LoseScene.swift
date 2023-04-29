@@ -8,7 +8,18 @@
 import SpriteKit
 
 class LoseScene: Scene {
-        
+    
+    let level: Int
+    
+    init(size: CGSize, level: Int) {
+        self.level = level
+        super.init(size: size)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func didMove(to view: SKView) {
         setupUI()
     }
@@ -20,8 +31,9 @@ class LoseScene: Scene {
             let location = touch.location(in: self)
             if let node = atPoint(location) as? SKSpriteNode {
                 switch node.name {
-                    case "backButton": gameController.back()
                     case "homeButton": gameController.home()
+                    case "refreshButton": gameController.startGame(level: level)
+                    case "infoButton": gameController.showInfo()
                     default: break
                 }
             }

@@ -15,6 +15,7 @@ class GameViewController: UIViewController, SKViewDelegate {
             saveScore()
             menuScene.score = score
             levelSelectScene.score = score
+            treasuryScene.score = score
         }
     }
     
@@ -22,8 +23,8 @@ class GameViewController: UIViewController, SKViewDelegate {
     private var levelSelectScene = LevelSelectScene(size: UIScreen.main.bounds.size)
     private var gameScene = GameScene(size: UIScreen.main.bounds.size, level: 1)
     private var infoScene = InfoScene(size: UIScreen.main.bounds.size)
-    private var winScene = WinScene(size: UIScreen.main.bounds.size)
-    private var loseScene = LoseScene(size: UIScreen.main.bounds.size)
+    private var winScene = WinScene(size: UIScreen.main.bounds.size, score: 100, level: 1)
+    private var loseScene = LoseScene(size: UIScreen.main.bounds.size, level: 1)
     private var treasuryScene = TreasuryScene(size: UIScreen.main.bounds.size)
     private var skView: SKView!
     
@@ -35,7 +36,7 @@ class GameViewController: UIViewController, SKViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        getScoreFromLastGames()
+//        getScoreFromLastGames()
         
         // создаем SKView и добавляем в нее сцену
         let skView = view as! SKView
@@ -87,7 +88,7 @@ class GameViewController: UIViewController, SKViewDelegate {
         if score == 0 {
             skView.presentScene(loseScene, transition: SKTransition.doorway(withDuration: 0.3))
         } else {
-            winScene.score = score
+//            winScene.score = score
             skView.presentScene(winScene, transition: SKTransition.doorway(withDuration: 0.3))
         }
     }

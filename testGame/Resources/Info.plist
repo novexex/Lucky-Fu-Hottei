@@ -5,6 +5,7 @@
 	<key>UIAppFonts</key>
 	<array>
 		<string>gangOfThree.ttf</string>
+		<string>Montserrat-ExtraBold.ttf</string>
 	</array>
 	<key>UILaunchScreen</key>
 	<dict>

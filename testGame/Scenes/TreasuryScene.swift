@@ -9,7 +9,12 @@ import SpriteKit
 
 class TreasuryScene: Scene {
     
-    var score = 0
+    private var scoreLabel = ASAttributedLabelNode(size: CGSize())
+    var score = 0 {
+        didSet {
+            scoreLabel.attributedString = getAttrubutedString(with: String(score))
+        }
+    }
     
     override func didMove(to view: SKView) {
         setupUI()
@@ -38,11 +43,11 @@ class TreasuryScene: Scene {
         addChild(cupLabel)
         
         //score label
-        let scoreLabel = SKLabelNode(text: String(score))
-        scoreLabel.fontName = "gangOfThree"
-        scoreLabel.fontSize = 50
-        scoreLabel.position = CGPoint(x: cupLabel.position.x + 80, y: cupLabel.position.y - 15)
+        scoreLabel = ASAttributedLabelNode(size: cupLabel.size)
+        scoreLabel.attributedString = getAttrubutedString(with: String(score))
+        scoreLabel.position = CGPoint(x: cupLabel.position.x + 120, y: cupLabel.position.y + 2)
         addChild(scoreLabel)
+        
         
         //home button
         let homeButton = SKSpriteNode(imageNamed: "homeButton")

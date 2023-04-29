@@ -8,8 +8,13 @@
 import SpriteKit
 
 class LevelSelectScene: Scene {
-    
-    var score: Int!
+
+    private var scoreLabel = ASAttributedLabelNode(size: CGSize())
+    var score = 0 {
+        didSet {
+            scoreLabel.attributedString = getAttrubutedString(with: String(score))
+        }
+    }
     
     override func didMove(to view: SKView) {
         setupUI()
@@ -49,19 +54,18 @@ class LevelSelectScene: Scene {
         cupLabel.position = CGPoint(x: frame.midX - 50, y: frame.maxY - 110)
         addChild(cupLabel)
         
-        //score
-        let score = SKLabelNode(text: String(score))
-        score.fontName = "gangOfThree"
-        score.fontSize = 50
-        score.position = CGPoint(x: cupLabel.frame.midX + 80, y: cupLabel.frame.midY - 15)
-        addChild(score)
+        //score label
+        scoreLabel = ASAttributedLabelNode(size: cupLabel.size)
+        scoreLabel.attributedString = getAttrubutedString(with: String(score))
+        scoreLabel.position = CGPoint(x: cupLabel.position.x + 120, y: cupLabel.position.y + 2)
+        addChild(scoreLabel)
         
         //all levels should be included in uiview
         
         //level1
         let levelNode1 = SKSpriteNode(imageNamed: "level1Button")
         levelNode1.name = "level1Button"
-        levelNode1.position = CGPoint(x: frame.midX, y: score.frame.midY - 120)
+        levelNode1.position = CGPoint(x: frame.midX, y: scoreLabel.frame.midY - 120)
         addChild(levelNode1)
         
         //level2

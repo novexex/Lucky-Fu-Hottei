@@ -23,4 +23,20 @@ class Scene: SKScene {
         }
         return gameController
     }
+    
+    func getAttrubutedString(with text: String) -> NSMutableAttributedString {
+        let shadow = NSShadow()
+        shadow.shadowOffset = CGSize(width: 0, height: 3.9520199298858643)
+        shadow.shadowColor = UIColor.black.withAlphaComponent(0.65)
+        shadow.shadowBlurRadius = 12.927276611328125
+        
+        let attributes: [NSAttributedString.Key: Any] = [
+            .font: UIFont(name: "gangOfThree", size: 58) ?? UIFont(),
+            .foregroundColor: UIColor.white,
+            .strokeWidth: -1.29,
+            .strokeColor: UIColor(hex: "ECB43C"),
+            .shadow: shadow
+        ]
+        return NSMutableAttributedString(string: text, attributes: attributes)
+    }
 }
