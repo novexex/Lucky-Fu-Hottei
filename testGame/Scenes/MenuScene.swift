@@ -7,7 +7,7 @@
 
 import SpriteKit
 
-class MenuScene: SKScene {
+class MenuScene: Scene {
     private var musicButton = SKSpriteNode()
     private var soundButton = SKSpriteNode()
     
@@ -23,19 +23,12 @@ class MenuScene: SKScene {
     }
     
     override func didMove(to view: SKView) {
-        setupBackground()
         setupUI()
     }
     
-    func setupBackground() {
-        let background = SKSpriteNode(imageNamed: "menu")
-        background.position = CGPoint(x: frame.midX, y: frame.midY)
-        background.scale(to: size.width)
-        background.zPosition = -2
-        addChild(background)
-    }
-    
     func setupUI() {
+        setBackground(with: "menuBackground")
+        
         //buda
         let buda = SKSpriteNode(imageNamed: "buda")
         buda.position = CGPoint(x: frame.midX, y: frame.midY + 120)
@@ -95,30 +88,25 @@ class MenuScene: SKScene {
         for touch in touches {
             let location = touch.location(in: self)
             if let node = atPoint(location) as? SKSpriteNode {
-                if node.name == "startButton" {
-                        gameController.selectLevel(from: self)
-                } else if node.name == "treasuryButton" {
-                        gameController.showTreasure(from: self)
-                } else if node.name == "soundButton" {
+                switch node.name {
+                    case "startButton": gameController.selectLevel(from: self)
+                    case "treasuryButton": gameController.showTreasure(from: self)
+                    case "soundButton":
                         if !self.isSoundMuted {
                             self.soundButton.texture = SKTexture(imageNamed: "soundButtonUnmute")
-                            self.isSoundMuted.toggle()
                         } else {
                             self.soundButton.texture = SKTexture(imageNamed: "soundButton")
-                            self.isSoundMuted.toggle()
                         }
-                } else if node.name == "musicButton" {
-
+                        self.isSoundMuted.toggle()
+                    case "musicButton":
                         if !self.isMusicMuted {
                             self.musicButton.texture = SKTexture(imageNamed: "musicButtonUnmute")
-                            self.isMusicMuted.toggle()
                         } else {
                             self.musicButton.texture = SKTexture(imageNamed: "musicButton")
-                            self.isMusicMuted.toggle()
                         }
-
-                } else if node.name == "infoButton" {
-                        gameController.showInfo(from: self)
+                        self.isMusicMuted.toggle()
+                    case "infoButton": gameController.showInfo(from: self)
+                    default: break
                 }
             }
         }

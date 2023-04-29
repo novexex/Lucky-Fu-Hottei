@@ -7,12 +7,11 @@
 
 import SpriteKit
 
-class LevelSelectScene: SKScene, SKViewDelegate {
+class LevelSelectScene: Scene {
     
     var score: Int!
     
     override func didMove(to view: SKView) {
-        setupBackground()
         setupUI()
     }
     
@@ -31,24 +30,22 @@ class LevelSelectScene: SKScene, SKViewDelegate {
             for touch in touches {
                 let location = touch.location(in: self)
                 if let node = atPoint(location) as? SKSpriteNode {
-                    if node.name == "level1" {
-                        gameController.startGame(level: 1)
-                    } else if node.name == "level2" {
-                        gameController.startGame(level: 2)
-                    } else if node.name == "level3" {
-                        gameController.startGame(level: 3)
-                    } else if node.name == "level4" {
-                        gameController.startGame(level: 4)
-                    } else if node.name == "homeButton" {
-                        gameController.home(from: self)
-                    } else if node.name == "infoButton" {
-                        gameController.showInfo(from: self)
+                    switch node.name {
+                        case "level1Button": gameController.startGame(level: 1)
+                        case "level2Button": gameController.startGame(level: 2)
+                        case "level3Button": gameController.startGame(level: 3)
+                        case "level4Button": gameController.startGame(level: 4)
+                        case "homeButton": gameController.home(from: self)
+                        case "infoButton": gameController.showInfo(from: self)
+                        default: break
                     }
                 }
             }
         }
     
     func setupUI() {
+        setBackground(with: "levelSelectBackground")
+        
         //cup label
         let cupLabel = SKSpriteNode(imageNamed: "cup")
         cupLabel.position = CGPoint(x: frame.midX - 50, y: frame.maxY - 110)
@@ -65,26 +62,26 @@ class LevelSelectScene: SKScene, SKViewDelegate {
         //all levels should be included in uiview
         
         //level1
-        let levelNode1 = SKSpriteNode(imageNamed: "level1")
-        levelNode1.name = "level1"
+        let levelNode1 = SKSpriteNode(imageNamed: "level1Button")
+        levelNode1.name = "level1Button"
         levelNode1.position = CGPoint(x: frame.midX, y: score.frame.midY - 120)
         addChild(levelNode1)
         
         //level2
-        let levelNode2 = SKSpriteNode(imageNamed: "level2")
-        levelNode2.name = "level2"
+        let levelNode2 = SKSpriteNode(imageNamed: "level2Button")
+        levelNode2.name = "level2Button"
         levelNode2.position = CGPoint(x: frame.midX, y: levelNode1.frame.midY - 135)
         addChild(levelNode2)
         
         //level3
-        let levelNode3 = SKSpriteNode(imageNamed: "level3")
-        levelNode3.name = "level3"
+        let levelNode3 = SKSpriteNode(imageNamed: "level3Button")
+        levelNode3.name = "level3Button"
         levelNode3.position = CGPoint(x: frame.midX, y: levelNode2.frame.midY - 135)
         addChild(levelNode3)
         
         //level4
-        let levelNode4 = SKSpriteNode(imageNamed: "level4")
-        levelNode4.name = "level4"
+        let levelNode4 = SKSpriteNode(imageNamed: "level4Button")
+        levelNode4.name = "level4Button"
         levelNode4.position = CGPoint(x: frame.midX, y: levelNode3.frame.midY - 135)
         addChild(levelNode4)
         

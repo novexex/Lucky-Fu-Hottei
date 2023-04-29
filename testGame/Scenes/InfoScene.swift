@@ -7,9 +7,8 @@
 
 import SpriteKit
 
-class InfoScene: SKScene {
+class InfoScene: Scene {
     override func didMove(to view: SKView) {
-        setupBackground()
         setupUI()
     }
     
@@ -22,28 +21,18 @@ class InfoScene: SKScene {
         for touch in touches {
             let location = touch.location(in: self)
             if let node = atPoint(location) as? SKSpriteNode {
-                if node.name == "backButton" {
-                    if node.contains(touch.location(in: self)) {
-                        gameController.back(from: self)
-                    }
-                } else if node.name == "homeButton" {
-                    if node.contains(touch.location(in: self)) {
-                        gameController.home(from: self)
-                    }
+                switch node.name {
+                    case "backButton": gameController.back(from: self)
+                    case "homeButton": gameController.home(from: self)
+                    default: break
                 }
             }
         }
     }
     
-    func setupBackground() {
-        let background = SKSpriteNode(imageNamed: "howToPlay")
-        background.position = CGPoint(x: frame.midX, y: frame.midY)
-        background.scale(to: size.width)
-        background.zPosition = -2
-        addChild(background)
-    }
-    
     func setupUI() {
+        setBackground(with: "infoBackground")
+        
         // back button
         let backButton = SKSpriteNode(imageNamed: "backButton")
         backButton.name = "backButton"

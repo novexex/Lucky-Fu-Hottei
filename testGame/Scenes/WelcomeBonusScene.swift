@@ -7,4 +7,4 @@
 
 import SpriteKit
 
-class WelcomeBonusScene: SKScene {}
+class WelcomeBonusScene: Scene {}

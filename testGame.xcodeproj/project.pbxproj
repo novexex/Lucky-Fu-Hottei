@@ -24,6 +24,7 @@
 		EB91805829F7E75900B8398D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EB91805629F7E75900B8398D /* LaunchScreen.storyboard */; };
 		EB91806529F93D1F00B8398D /* gangOfThree.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EB91806429F93D1F00B8398D /* gangOfThree.ttf */; };
 		EB91806829F93FDF00B8398D /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB91806729F93FDF00B8398D /* Extension.swift */; };
+		EBB1E8F629FCAF6900B341AA /* BaseClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBB1E8F529FCAF6900B341AA /* BaseClass.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +47,7 @@
 		EB91806429F93D1F00B8398D /* gangOfThree.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = gangOfThree.ttf; sourceTree = "<group>"; };
 		EB91806729F93FDF00B8398D /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		EB91806929F944F100B8398D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EBB1E8F529FCAF6900B341AA /* BaseClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseClass.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,8 +117,8 @@
 		EB91805E29F9399A00B8398D /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				EB91806929F944F100B8398D /* Info.plist */,
 				EB91806329F93D0A00B8398D /* Fonts */,
+				EB91806929F944F100B8398D /* Info.plist */,
 				EB91805429F7E75900B8398D /* Assets.xcassets */,
 			);
 			path = Resources;
@@ -152,6 +154,7 @@
 			isa = PBXGroup;
 			children = (
 				EB91806729F93FDF00B8398D /* Extension.swift */,
+				EBB1E8F529FCAF6900B341AA /* BaseClass.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -237,6 +240,7 @@
 				EB2D82FD29FABF7A008A86B6 /* WelcomeBonusScene.swift in Sources */,
 				EB91805029F7E75800B8398D /* GameViewController.swift in Sources */,
 				EB2D82F829F94BD1008A86B6 /* MenuScene.swift in Sources */,
+				EBB1E8F629FCAF6900B341AA /* BaseClass.swift in Sources */,
 				EB2D830129FABFCA008A86B6 /* LevelSelectScene.swift in Sources */,
 				EB2D830529FBEA71008A86B6 /* LoseScene.swift in Sources */,
 				EB2D82FF29FABF8B008A86B6 /* TreasuryScene.swift in Sources */,

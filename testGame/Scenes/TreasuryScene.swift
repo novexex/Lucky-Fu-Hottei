@@ -7,12 +7,11 @@
 
 import SpriteKit
 
-class TreasuryScene: SKScene {
+class TreasuryScene: Scene {
     
     var score = 0
     
     override func didMove(to view: SKView) {
-        setupBackground()
         setupUI()
     }
     
@@ -25,25 +24,17 @@ class TreasuryScene: SKScene {
         for touch in touches {
             let location = touch.location(in: self)
             if let node = atPoint(location) as? SKSpriteNode {
-                if node.name == "infoButton" {
-                        gameController.showInfo(from: self)
-                } else if node.name == "homeButton" {
-
-                        gameController.home(from: self)
+                switch node.name {
+                    case "infoButton": gameController.showInfo(from: self)
+                    case "homeButton": gameController.home(from: self)
+                    default: break
                 }
             }
         }
     }
     
-    func setupBackground() {
-        let background = SKSpriteNode(imageNamed: "treasuryBackGround")
-        background.position = CGPoint(x: frame.midX, y: frame.midY)
-        background.scale(to: size.width)
-        background.zPosition = -2
-        addChild(background)
-    }
-    
     func setupUI() {
+        setBackground(with: "treasuryBackground")
         
         //cup label
         let cupLabel = SKSpriteNode(imageNamed: "cup")
@@ -69,6 +60,6 @@ class TreasuryScene: SKScene {
         infoButton.name = "infoButton"
         infoButton.position = CGPoint(x: frame.midX + 27, y: frame.minY + 120)
         addChild(infoButton)
-
+        
     }
 }

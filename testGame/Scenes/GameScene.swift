@@ -7,7 +7,7 @@
 
 import SpriteKit
 
-class GameScene: SKScene {
+class GameScene: Scene {
     
     var level: Int?
     
@@ -89,22 +89,22 @@ class GameScene: SKScene {
             if let node = atPoint(location) as? SKSpriteNode {
                 if node.name == "swapButton" {
                     if self.isHorizonalSelected && self.isVerticalSelected {
-                            guard let colSelected = self.colSelected, let rowSelected = self.rowSelected else { return }
-                            
-                            self.horizonalRectangle.removeFromParent()
-                            self.verticalRectangle.removeFromParent()
-                            
-                            self.horizonalRectangle = SKShapeNode()
-                            self.verticalRectangle = SKShapeNode()
-                            
-                            self.isHorizonalSelected = false
-                            self.isVerticalSelected = false
-                            
-                            self.moves -= 1
-                            
-                            self.swap(row: rowSelected, col: colSelected)
-                            
-                            self.checkItems()
+                        guard let colSelected = self.colSelected, let rowSelected = self.rowSelected else { return }
+                        
+                        self.horizonalRectangle.removeFromParent()
+                        self.verticalRectangle.removeFromParent()
+                        
+                        self.horizonalRectangle = SKShapeNode()
+                        self.verticalRectangle = SKShapeNode()
+                        
+                        self.isHorizonalSelected = false
+                        self.isVerticalSelected = false
+                        
+                        self.moves -= 1
+                        
+                        self.swap(row: rowSelected, col: colSelected)
+                        
+                        self.checkMatches()
                     }
                 } else if node.name == "homeButton" {
                     gameController.home(from: self)
@@ -119,18 +119,18 @@ class GameScene: SKScene {
     }
     
     
-    private func checkItems() {
+    private func checkMatches() {
         // Check for 3 consecutive items of the same type in rows
         for i in 0..<tiles.count {
             for j in 0..<tiles.count-2 {
                 if tiles[i][j].name == tiles[i][j+1].name && tiles[i][j+1].name == tiles[i][j+2].name {
                     switch level {
-                    case 1: scorePoints += 10
-                    case 2: scorePoints += 50
-                    case 3: scorePoints += 100
-                    case 4: scorePoints += 250
-                    case 5: scorePoints += 500
-                    default: break
+                        case 1: scorePoints += 10
+                        case 2: scorePoints += 50
+                        case 3: scorePoints += 100
+                        case 4: scorePoints += 250
+                        case 5: scorePoints += 500
+                        default: break
                     }
                     getNewTiles(row: i, col: j)
                     getNewTiles(row: i, col: j+1)
@@ -206,7 +206,7 @@ class GameScene: SKScene {
         for row in 0..<5 {
             var tileBackgroundRow = [SKSpriteNode]()
             for col in 0..<5 {
-                let tileBackground = SKSpriteNode(imageNamed: "backgroundTile")
+                let tileBackground = SKSpriteNode(imageNamed: "backgroundTiles")
                 tileBackground.size = tileSize
                 tileBackground.position = CGPoint(x: tileSize.width * CGFloat(col) + offset.x, y: tileSize.height * CGFloat(row) + offset.y)
                 tileBackground.zPosition = -1
@@ -270,6 +270,17 @@ class GameScene: SKScene {
     }
     
     func setupUI() {
+        // dynamic background depending on the level
+        guard let level else { return }
+        switch level {
+        case 1: setBackground(with: "level1Background")
+        case 2: setBackground(with: "level2Background")
+        case 3: setBackground(with: "level3Background")
+        case 4: setBackground(with: "level4Background")
+        case 5: setBackground(with: "level5Background")
+        default: break
+        }
+        
         //score section
         let scoreSection = SKSpriteNode(imageNamed: "scoreSection")
         scoreSection.position = CGPoint(x: size.width/2, y: size.height/2 + 270)

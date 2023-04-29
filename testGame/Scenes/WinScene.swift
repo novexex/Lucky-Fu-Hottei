@@ -7,12 +7,11 @@
 
 import SpriteKit
 
-class WinScene: SKScene {
+class WinScene: Scene {
     
     var score = 1
     
     override func didMove(to view: SKView) {
-        setupBackground()
         setupUI()
     }
     
@@ -25,28 +24,18 @@ class WinScene: SKScene {
         for touch in touches {
             let location = touch.location(in: self)
             if let node = atPoint(location) as? SKSpriteNode {
-                if node.name == "backButton" {
-                    if node.contains(touch.location(in: self)) {
-                        gameController.back(from: self)
-                    }
-                } else if node.name == "homeButton" {
-                    if node.contains(touch.location(in: self)) {
-                        gameController.home(from: self)
-                    }
+                switch node.name {
+                    case "backButton": gameController.back(from: self)
+                    case "homeButton": gameController.home(from: self)
+                    default: break
                 }
             }
         }
     }
     
-    func setupBackground() {
-        let background = SKSpriteNode(imageNamed: "winScreen")
-        background.position = CGPoint(x: frame.midX, y: frame.midY)
-        background.scale(to: size.width)
-        background.zPosition = -2
-        addChild(background)
-    }
-    
     func setupUI() {
+        setBackground(with: "winBackground")
+        
         // dynamic offset
         var offset = 10
         offset *= String(score).count
@@ -65,8 +54,8 @@ class WinScene: SKScene {
         addChild(scoreLabel)
         
         // nextLevel button
-        let nextLevelButton = SKSpriteNode(imageNamed: "nextLevel")
-        nextLevelButton.name = "nextLevel"
+        let nextLevelButton = SKSpriteNode(imageNamed: "nextLevelButton")
+        nextLevelButton.name = "nextLevelButton"
         nextLevelButton.position = CGPoint(x: frame.midX, y: scoreLabel.frame.minY - 60)
         nextLevelButton.zPosition = 1
         addChild(nextLevelButton)
