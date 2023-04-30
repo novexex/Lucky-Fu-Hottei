@@ -80,6 +80,7 @@ class WelcomeBonusScene: Scene {
                 if node.name == "takeOutButton" {
                     score += addingPoints
                     let gameController = getGameController()
+                    gameController.score = score
                     gameController.presentMenu()
                 }
             }

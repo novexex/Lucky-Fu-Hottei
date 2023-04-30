@@ -15,9 +15,10 @@ class GameViewController: UIViewController, SKViewDelegate {
         didSet {
             saveLevel()
             levelSelectScene = LevelSelectScene(size: UIScreen.main.bounds.size, availableLevel: availableLevel)
+            levelSelectScene.score = score
         }
     }
-    private var score = 0 {
+    var score = 0 {
         didSet {
             saveScore()
             menuScene.score = score
