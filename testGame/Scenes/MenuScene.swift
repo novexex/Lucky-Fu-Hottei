@@ -18,7 +18,7 @@ class MenuScene: Scene {
     
     var score = 0 {
         didSet {
-            scoreLabel.attributedString = getAttrubutedString(with: String(score))
+            scoreLabel.attributedString = getAttrubutedString(with: String(score), size: 58)
         }
     }
     
@@ -33,7 +33,7 @@ class MenuScene: Scene {
             if let node = atPoint(location) as? SKSpriteNode {
                 switch node.name {
                     case "startButton": gameController.selectLevel()
-                    case "treasuryButton": gameController.showTreasure()
+                    case "treasuryButton": gameController.showTreasury()
                     case "soundButton":
                         if !self.isSoundMuted {
                             self.soundButton.texture = SKTexture(imageNamed: "soundUnmuteButton")
@@ -103,7 +103,7 @@ class MenuScene: Scene {
         
         //score label
         scoreLabel = ASAttributedLabelNode(size: cupLabel.size)
-        scoreLabel.attributedString = getAttrubutedString(with: String(score))
+        scoreLabel.attributedString = getAttrubutedString(with: String(score), size: 58)
         scoreLabel.position = CGPoint(x: cupLabel.position.x + 120, y: cupLabel.position.y + 2)
         addChild(scoreLabel)
     }

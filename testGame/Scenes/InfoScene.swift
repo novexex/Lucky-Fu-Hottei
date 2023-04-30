@@ -26,6 +26,13 @@ class InfoScene: Scene {
         }
     }
     
+    override func getGameController() -> GameViewController {
+        guard let gameController = self.view?.window?.rootViewController as? GameViewController else {
+            fatalError("GameController not found")
+        }
+        return gameController
+    }
+    
     private func setupUI() {
         setBackground(with: "infoBackground")
         

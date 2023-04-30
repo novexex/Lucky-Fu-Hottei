@@ -15,13 +15,13 @@ class GameScene: Scene {
     
     private var movesSection = SKSpriteNode()
     private var movesLabel = ASAttributedLabelNode(size: CGSize())
-    private var moves = 9 {
+    private var moves = 20 {
         didSet {
             if moves == 0 {
                 let gameController = getGameController()
-                gameController.gameOver(with: scorePoints)
+                gameController.gameOver(with: scorePoints, level: level)
             } else {
-                movesLabel.attributedString = getAttrubutedString(with: String(moves))
+                movesLabel.attributedString = getAttrubutedString(with: String(moves), size: 58)
                 if String(moves).count == 1 {
                     movesLabel.position = CGPoint(x: movesSection.frame.midX + 84, y: movesSection.frame.midY + 3)
                 }
@@ -113,11 +113,12 @@ class GameScene: Scene {
                         self.swap(row: rowSelected, col: colSelected)
                         
                         self.checkMatches()
+                        self.checkMatches()
                     }
                 } else if node.name == "homeButton" {
                     gameController.home()
-                } else if node.name == "reapeatButton" {
-                    gameController.startGame(level: level+1)
+                } else if node.name == "refreshButton" {
+                    gameController.startGame(level: level)
                 } else if node.name == "infoButton" {
                     gameController.showInfo()
                 }
@@ -285,7 +286,7 @@ class GameScene: Scene {
         
         //moves
         movesLabel = ASAttributedLabelNode(size: movesSection.size)
-        movesLabel.attributedString = getAttrubutedString(with: String(moves))
+        movesLabel.attributedString = getAttrubutedString(with: String(moves), size: 58)
         movesLabel.position = CGPoint(x: movesSection.frame.midX + 68, y: movesSection.frame.midY + 3)
         addChild(movesLabel)
         
@@ -311,9 +312,9 @@ class GameScene: Scene {
         homeButton.position = CGPoint(x: frame.midX + 55, y: swapButton.frame.minY - 40)
         addChild(homeButton)
         
-        // repeat button
+        // refresh button
         let reapeatButton = SKSpriteNode(imageNamed: "refreshButton")
-        reapeatButton.name = "reapeatButton"
+        reapeatButton.name = "refreshButton"
         reapeatButton.position = CGPoint(x: frame.midX, y: swapButton.frame.minY - 40)
         addChild(reapeatButton)
         

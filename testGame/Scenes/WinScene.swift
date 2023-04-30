@@ -70,7 +70,7 @@ class WinScene: Scene {
 
         // scoreLabel
         let scoreLabel = ASAttributedLabelNode(size: CGSize(width: 200, height: 100))
-        scoreLabel.attributedString = getAttrubutedString(with: String(score))
+        scoreLabel.attributedString = getAttrubutedString(with: String(score), size: 58)
         scoreLabel.position = CGPoint(x: plusLabel.frame.midX + 110, y: plusLabel.frame.midY)
         addChild(scoreLabel)
         

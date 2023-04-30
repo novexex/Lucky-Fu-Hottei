@@ -95,5 +95,13 @@
             </PersistentString>
          </PersistentStrings>
       </ContextState>
+      <ContextState
+         contextName = "GameViewController.checkDailyBonus():GameViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "didReceiveDailyBonus">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
    </ContextStates>
 </VariablesViewState>
