@@ -43,40 +43,40 @@ class LevelSelectScene: Scene, UIScrollViewDelegate {
             let location = touch.location(in: self)
             if let node = atPoint(location) as? SKSpriteNode {
                 switch node.name {
-                case "level1Button":
-                    let sequence = SKAction.sequence([gameController.clickButtonSoundAction, SKAction.run { self.gameController.startGame(level: 1) }])
-                    self.run(sequence)
-                case "level2Button":
-                    let action = SKAction.run {
-                        if self.availableLevel >= 2 {
-                            self.gameController.startGame(level: 2)
+                    case "level1Button":
+                        let sequence = SKAction.sequence([gameController.clickButtonSoundAction, SKAction.run { self.gameController.startGame(level: 1) }])
+                        self.run(sequence)
+                    case "level2Button":
+                        let action = SKAction.run {
+                            if self.availableLevel >= 2 {
+                                self.gameController.startGame(level: 2)
+                            }
                         }
-                    }
-                    let sequence = SKAction.sequence([gameController.clickButtonSoundAction, action])
-                    self.run(sequence)
-                case "level3Button":
-                    let action = SKAction.run {
-                        if self.availableLevel >= 3 {
-                            self.gameController.startGame(level: 3)
+                        let sequence = SKAction.sequence([gameController.clickButtonSoundAction, action])
+                        self.run(sequence)
+                    case "level3Button":
+                        let action = SKAction.run {
+                            if self.availableLevel >= 3 {
+                                self.gameController.startGame(level: 3)
+                            }
                         }
-                    }
-                    let sequence = SKAction.sequence([gameController.clickButtonSoundAction, action])
-                    self.run(sequence)
-                case "level4Button":
-                    let action = SKAction.run {
-                        if self.availableLevel >= 4 {
-                            self.gameController.startGame(level: 4)
+                        let sequence = SKAction.sequence([gameController.clickButtonSoundAction, action])
+                        self.run(sequence)
+                    case "level4Button":
+                        let action = SKAction.run {
+                            if self.availableLevel >= 4 {
+                                self.gameController.startGame(level: 4)
+                            }
                         }
-                    }
-                    let sequence = SKAction.sequence([gameController.clickButtonSoundAction, action])
-                    self.run(sequence)
-                case "homeButton":
-                    let sequence = SKAction.sequence([gameController.clickButtonSoundAction, SKAction.run { self.gameController.home() }])
-                    self.run(sequence)
-                case "infoButton":
-                    let sequence = SKAction.sequence([gameController.clickButtonSoundAction, SKAction.run { self.gameController.showInfo() }])
-                    self.run(sequence)
-                default: break
+                        let sequence = SKAction.sequence([gameController.clickButtonSoundAction, action])
+                        self.run(sequence)
+                    case "homeButton":
+                        let sequence = SKAction.sequence([gameController.clickButtonSoundAction, SKAction.run { self.gameController.home() }])
+                        self.run(sequence)
+                    case "infoButton":
+                        let sequence = SKAction.sequence([gameController.clickButtonSoundAction, SKAction.run { self.gameController.showInfo() }])
+                        self.run(sequence)
+                    default: break
                 }
             }
         }

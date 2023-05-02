@@ -198,6 +198,7 @@ class GameViewController: UIViewController, SKViewDelegate {
     private func setupScenes() {
         menuScene.gameController = self
         infoScene.gameController = self
+        welcomeBonusScene.gameController = self
     }
     
     private func checkDailyBonus() {
