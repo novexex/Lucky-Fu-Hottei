@@ -32,18 +32,14 @@ class GameViewController: UIViewController, SKViewDelegate {
         }
     }
     private var skView: SKView!
-    private var welcomeBonusScene = WelcomeBonusScene(size: UIScreen.main.bounds.size) {
-        didSet {
-            welcomeBonusScene.gameController = self
-        }
-    }
+    private var welcomeBonusScene = WelcomeBonusScene(size: UIScreen.main.bounds.size)
     private var menuScene = MenuScene(size: UIScreen.main.bounds.size)
     private var levelSelectScene = LevelSelectScene(size: UIScreen.main.bounds.size, availableLevel: 1) {
         didSet {
             levelSelectScene.gameController = self
         }
     }
-    private var treasuryScene = TreasuryScene(size: CGSize(), score: 0) {
+    private var treasuryScene = TreasuryScene(size: UIScreen.main.bounds.size, score: 0) {
         didSet {
             treasuryScene.gameController = self
         }

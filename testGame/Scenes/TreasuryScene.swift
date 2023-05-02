@@ -33,9 +33,9 @@ class TreasuryScene: Scene {
     
     // MARK: Overrided methods
     override func didMove(to view: SKView) {
+        checkUnlockTreasurys()
         setupUI()
         setupMusic()
-        checkUnlockTreasurys()
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -62,7 +62,6 @@ class TreasuryScene: Scene {
                 }
             }
         }
-        
     }
     
     // MARK: Private methods
