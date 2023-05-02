@@ -103,8 +103,8 @@ class GameScene: Scene {
                             
                             self.swap(row: rowSelected, col: colSelected)
                             
-                            //                            self.checkMatches()
-                            //                            self.checkMatches()
+                                                        self.checkMatches()
+                                                        self.checkMatches()
                         }
                     }
                     let sequence = SKAction.sequence([gameController.clickButtonSoundAction, action])
