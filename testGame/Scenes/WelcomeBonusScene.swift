@@ -8,42 +8,24 @@
 import SpriteKit
 
 class WelcomeBonusScene: Scene {
+    // MARK: Public propertys
+    var score = 0 {
+        didSet {
+            scoreLabel.attributedString = getAttrubutedString(with: String(score))
+        }
+    }
+    
+    // MARK: Private propertys
     private var tiles = Array(repeating: Array(repeating: SKSpriteNode(), count: 3), count: 3)
     private var pointAmounts = ["100", "0", "0", "0", "500", "1000", "5000", "2000", "0"]
     private var isBonusGet = false
     private var addingPoints = 0
-    
     private var scoreLabel = ASAttributedLabelNode(size: CGSize())
-    var score = 0 {
-        didSet {
-            scoreLabel.attributedString = getAttrubutedString(with: String(score), font: "gangOfThree", size: 58)
-        }
-    }
     
+    // MARK: Overrided methods
     override func didMove(to view: SKView) {
         setupUI()
         setupMusic()
-    }
-    
-    func getAttrubutedString(with text: String, size: CGFloat, alignment: NSTextAlignment) -> NSMutableAttributedString {
-        let shadow = NSShadow()
-        shadow.shadowOffset = CGSize(width: 0, height: 3.9520199298858643)
-        shadow.shadowColor = UIColor.black.withAlphaComponent(0.65)
-        shadow.shadowBlurRadius = 12.927276611328125
-        
-        let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.alignment = alignment
-        
-        let attributes: [NSAttributedString.Key: Any] = [
-            .font: UIFont(name: "gangOfThree", size: size) ?? UIFont(),
-            .foregroundColor: UIColor.white,
-            .strokeWidth: -1.29,
-            .strokeColor: UIColor(hex: "ECB43C"),
-            .shadow: shadow,
-            .paragraphStyle: paragraphStyle
-            
-        ]
-        return NSMutableAttributedString(string: text, attributes: attributes)
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -91,6 +73,7 @@ class WelcomeBonusScene: Scene {
         }
     }
     
+    // MARK: Private methods
     private func showAllTilesExcept(i: Int, j: Int) {
         for row in tiles {
             for node in row {
@@ -141,7 +124,7 @@ class WelcomeBonusScene: Scene {
         
         //score label
         scoreLabel = ASAttributedLabelNode(size: cupLabel.size)
-        scoreLabel.attributedString = getAttrubutedString(with: String(score), size: 58, alignment: .left)
+        scoreLabel.attributedString = getAttrubutedString(with: String(score), alignment: .left)
         scoreLabel.position = CGPoint(x: cupLabel.position.x + 120, y: cupLabel.position.y + 2)
         addChild(scoreLabel)
         

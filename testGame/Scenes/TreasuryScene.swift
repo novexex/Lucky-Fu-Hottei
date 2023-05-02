@@ -8,15 +8,19 @@
 import SpriteKit
 
 class TreasuryScene: Scene {
-    private var isTreasureUnlock = Array(repeating: false, count: 9)
-    private var treasuryItems = [SKSpriteNode]()
-    private var scoreLabel = ASAttributedLabelNode(size: CGSize())
+    // MARK: Public propertys
     var score: Int {
         didSet {
-            scoreLabel.attributedString = getAttrubutedString(with: String(score), font: "gangOfThree", size: 58)
+            scoreLabel.attributedString = getAttrubutedString(with: String(score))
         }
     }
     
+    // MARK: Private propertys
+    private var isTreasureUnlock = Array(repeating: false, count: 9)
+    private var treasuryItems = [SKSpriteNode]()
+    private var scoreLabel = ASAttributedLabelNode(size: CGSize())
+    
+    // MARK: Initializators
     init(size: CGSize, score: Int) {
         self.score = score
         super.init(size: size)
@@ -26,6 +30,8 @@ class TreasuryScene: Scene {
         fatalError("init(coder:) has not been implemented")
     }
     
+    
+    // MARK: Overrided methods
     override func didMove(to view: SKView) {
         setupUI()
         setupMusic()
@@ -58,6 +64,7 @@ class TreasuryScene: Scene {
         
     }
     
+    // MARK: Private methods
     private func unlockTreasure(numberOfTreaure: Int) {
         var requiredScore = 0
         switch numberOfTreaure {
@@ -99,7 +106,7 @@ class TreasuryScene: Scene {
         
         //score label
         scoreLabel = ASAttributedLabelNode(size: cupLabel.size)
-        scoreLabel.attributedString = getAttrubutedString(with: String(score), font: "gangOfThree", size: 58)
+        scoreLabel.attributedString = getAttrubutedString(with: String(score))
         scoreLabel.position = CGPoint(x: cupLabel.position.x + 120, y: cupLabel.position.y + 2)
         addChild(scoreLabel)
         

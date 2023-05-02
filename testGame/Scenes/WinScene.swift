@@ -8,9 +8,11 @@
 import SpriteKit
 
 class WinScene: Scene {
+    // MARK: Initializing propertys
     let score: Int
     let level: Int
     
+    // MARK: Initializators
     init(size: CGSize, score: Int, level: Int) {
         self.score = score
         self.level = level
@@ -21,6 +23,7 @@ class WinScene: Scene {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: Overrided methods
     override func didMove(to view: SKView) {
         setupUI()
         setupMusic()
@@ -52,9 +55,11 @@ class WinScene: Scene {
         }
     }
     
+    // MARK: Private methods
     private func setupUI() {
         setBackground(with: "winBackground")
         
+        // plusLabel
         let plusLabel = ASAttributedLabelNode(size: CGSize(width: 50, height: 50))
         plusLabel.attributedString = getAttrubutedString(with: "+", font: "Montserrat-ExtraBold", size: 50)
         plusLabel.position = CGPoint(x: frame.midX - 40, y: frame.midY - 100)
@@ -62,7 +67,7 @@ class WinScene: Scene {
 
         // scoreLabel
         let scoreLabel = ASAttributedLabelNode(size: CGSize(width: 200, height: 100))
-        scoreLabel.attributedString = getAttrubutedString(with: String(score), font: "gangOfThree", size: 58)
+        scoreLabel.attributedString = getAttrubutedString(with: String(score))
         scoreLabel.position = CGPoint(x: plusLabel.frame.midX + 110, y: plusLabel.frame.midY)
         addChild(scoreLabel)
         

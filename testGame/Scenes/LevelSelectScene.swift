@@ -8,15 +8,21 @@
 import SpriteKit
 
 class LevelSelectScene: Scene, UIScrollViewDelegate {
+    // MARK: Initializing propertys
     let availableLevel: Int
-    private var scrollView: UIScrollView!
-    private var scoreLabel = ASAttributedLabelNode(size: CGSize())
+    
+    // MARK: Public propertys
     var score = 0 {
         didSet {
-            scoreLabel.attributedString = getAttrubutedString(with: String(score), font: "gangOfThree", size: 58)
+            scoreLabel.attributedString = getAttrubutedString(with: String(score))
         }
     }
     
+    // MARK: Private propertys
+    private var scrollView: UIScrollView!
+    private var scoreLabel = ASAttributedLabelNode(size: CGSize())
+    
+    // MARK: Initializators
     init(size: CGSize, availableLevel: Int) {
         self.availableLevel = availableLevel
         super.init(size: size)
@@ -26,17 +32,10 @@ class LevelSelectScene: Scene, UIScrollViewDelegate {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: Overrided methods
     override func didMove(to view: SKView) {
         setupUI()
         setupMusic()
-    }
-    
-    func setupBackground() {
-        let background = SKSpriteNode(imageNamed: "levelBackground")
-        background.position = CGPoint(x: size.width/2, y: size.height/2)
-        background.scale(to: size.width)
-        background.zPosition = -2
-        addChild(background)
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -83,6 +82,7 @@ class LevelSelectScene: Scene, UIScrollViewDelegate {
         }
     }
     
+    // MARK: Private methods
     private func setupUI() {
         setBackground(with: "levelSelectBackground")
         
@@ -93,7 +93,7 @@ class LevelSelectScene: Scene, UIScrollViewDelegate {
         
         //score label
         scoreLabel = ASAttributedLabelNode(size: cupLabel.size)
-        scoreLabel.attributedString = getAttrubutedString(with: String(score), font: "gangOfThree", size: 58)
+        scoreLabel.attributedString = getAttrubutedString(with: String(score))
         scoreLabel.position = CGPoint(x: cupLabel.position.x + 120, y: cupLabel.position.y + 2)
         addChild(scoreLabel)
         
@@ -140,8 +140,6 @@ class LevelSelectScene: Scene, UIScrollViewDelegate {
 //        levelNodeSoon.position = CGPoint(x: frame.midX, y: levelNode5.frame.midY - 135)
 //        container.addChild(levelNodeSoon)
                     
-
-        
         //home button
         let homeButton = SKSpriteNode(imageNamed: "homeButton")
         homeButton.name = "homeButton"

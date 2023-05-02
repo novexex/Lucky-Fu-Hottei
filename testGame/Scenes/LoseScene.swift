@@ -8,8 +8,10 @@
 import SpriteKit
 
 class LoseScene: Scene {
+    // MARK: Initializing propertys
     let level: Int
     
+    // MARK: Initializators
     init(size: CGSize, level: Int) {
         self.level = level
         super.init(size: size)
@@ -19,6 +21,7 @@ class LoseScene: Scene {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: Overrided methods
     override func didMove(to view: SKView) {
         setupUI()
         setupMusic()
@@ -43,7 +46,8 @@ class LoseScene: Scene {
             }
         }
     }
-        
+    
+    // MARK: Private methods
     private func setupUI() {
         setBackground(with: "loseBackground")
         

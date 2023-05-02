@@ -7,14 +7,14 @@
 
 import SpriteKit
 
-class GameScene: Scene {    
+class GameScene: Scene {
+    // MARK: Initializing propertys
     let level: Int
+    
+    // MARK: Private propertys
     private var tiles = Array(repeating: Array(repeating: SKSpriteNode(), count: 5), count: 5)
     private var images = [String]()
-    
     private var arch = SKSpriteNode()
-    
-    
     private var movesSection = SKSpriteNode()
     private var movesLabel = ASAttributedLabelNode(size: CGSize())
     private var moves = 20 {
@@ -22,26 +22,22 @@ class GameScene: Scene {
             if moves == 0 {
                 gameController.gameOver(with: scorePoints, level: level)
             } else {
-                movesLabel.attributedString = getAttrubutedString(with: String(moves), font: "gangOfThree", size: 58)
+                movesLabel.attributedString = getAttrubutedString(with: String(moves))
                 if String(moves).count == 1 {
                     movesLabel.position = CGPoint(x: movesSection.frame.midX + 84, y: movesSection.frame.midY + 3)
                 }
             }
         }
     }
-    
-    
     private var scorePoints = 0
-    
     private var isHorizonalSelected = false
     private var isVerticalSelected = false
-    
     private var rowSelected: Int?
     private var colSelected: Int?
-    
     private var horizonalRectangle = SKShapeNode()
     private var verticalRectangle = SKShapeNode()
     
+    // MARK: Initializators
     init(size: CGSize, level: Int) {
         self.level = level
         super.init(size: size)
@@ -51,6 +47,7 @@ class GameScene: Scene {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: Overrided methods
     override func didMove(to view: SKView) {
         setupLevel()
         setupUI()
@@ -123,6 +120,7 @@ class GameScene: Scene {
         }
     }
     
+    // MARK: Private methods
     private func setupLine(line: SKShapeNode) {
         line.fillColor = UIColor(red: 255, green: 199, blue: 0, alpha: 0.9)
         line.strokeColor = .clear
@@ -295,7 +293,7 @@ class GameScene: Scene {
         
         //moves
         movesLabel = ASAttributedLabelNode(size: movesSection.size)
-        movesLabel.attributedString = getAttrubutedString(with: String(moves), font: "gangOfThree", size: 58)
+        movesLabel.attributedString = getAttrubutedString(with: String(moves))
         movesLabel.position = CGPoint(x: movesSection.frame.midX + 68, y: movesSection.frame.midY + 3)
         addChild(movesLabel)
         

@@ -8,6 +8,7 @@
 import SpriteKit
 
 class InfoScene: Scene {
+    // MARK: Overrided methods
     override func didMove(to view: SKView) {
         setupUI()
         setupMusic()
@@ -30,6 +31,7 @@ class InfoScene: Scene {
         }
     }
     
+    // MARK: Private methods
     private func setupUI() {
         setBackground(with: "infoBackground")
         

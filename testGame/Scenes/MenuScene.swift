@@ -8,16 +8,20 @@
 import SpriteKit
 
 class MenuScene: Scene {
+    // MARK: Public propertys
+    var score = 0 {
+        didSet {
+            scoreLabel.attributedString = getAttrubutedString(with: String(score))
+        }
+    }
+    
+    // MARK: Private propertys
     private var musicButton = SKSpriteNode()
     private var soundButton = SKSpriteNode()
     private var scoreLabel = ASAttributedLabelNode(size: CGSize())
     
-    var score = 0 {
-        didSet {
-            scoreLabel.attributedString = getAttrubutedString(with: String(score), font: "gangOfThree", size: 58)
-        }
-    }
     
+    // MARK: Overrided methods
     override func didMove(to view: SKView) {
         setupUI()
         setupMusic()
@@ -73,6 +77,7 @@ class MenuScene: Scene {
         }
     }
     
+    // MARK: Private methods
     private func setupUI() {
         setBackground(with: "menuBackground")
         
@@ -121,7 +126,7 @@ class MenuScene: Scene {
         
         //score label
         scoreLabel = ASAttributedLabelNode(size: cupLabel.size)
-        scoreLabel.attributedString = getAttrubutedString(with: String(score), font: "gangOfThree", size: 58)
+        scoreLabel.attributedString = getAttrubutedString(with: String(score))
         scoreLabel.position = CGPoint(x: cupLabel.position.x + 120, y: cupLabel.position.y + 2)
         addChild(scoreLabel)
     }
