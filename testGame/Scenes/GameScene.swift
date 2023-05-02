@@ -69,13 +69,13 @@ class GameScene: Scene {
                     if !isHorizonalSelected {
                         guard let first = tiles[row.offset].first else { return }
                         rowSelected = row.offset
-                        horizonalRectangle = SKShapeNode(rect: CGRect(x: first.frame.minX, y: first.frame.minY, width: first.size.width * 5, height: first.size.height))
+                        horizonalRectangle = SKShapeNode(rect: CGRect(x: first.frame.minX, y: first.frame.minY, width: first.size.width * 5 + 4, height: first.size.height))
                         setupLine(line: horizonalRectangle)
                         isHorizonalSelected = true
                     } else if !isVerticalSelected {
                         let column = tiles[0][node.offset]
                         colSelected = node.offset
-                        verticalRectangle = SKShapeNode(rect: CGRect(x: column.frame.minX, y: column.frame.maxY, width: column.size.width, height: -column.size.height * 5))
+                        verticalRectangle = SKShapeNode(rect: CGRect(x: column.frame.minX, y: column.frame.maxY, width: column.size.width, height: -column.size.height * 5 + 4))
                         setupLine(line: verticalRectangle)
                         isVerticalSelected = true
                     }
@@ -103,8 +103,8 @@ class GameScene: Scene {
                             
                             self.swap(row: rowSelected, col: colSelected)
                             
-                                                        self.checkMatches()
-                                                        self.checkMatches()
+                            self.checkMatches()
+                            self.checkMatches()
                         }
                     }
                     let sequence = SKAction.sequence([gameController.clickButtonSoundAction, action])
@@ -204,7 +204,7 @@ class GameScene: Scene {
     
     private func swap(row: Int, col: Int) {
         var tempRow = Array(repeating: SKSpriteNode(), count: 5)
-
+        
         for i in tiles.enumerated() {
             for j in i.element.enumerated() {
                 if i.offset == row {
@@ -279,12 +279,12 @@ class GameScene: Scene {
     private func setupUI() {
         // dynamic background depending on the level
         switch level {
-        case 1: setBackground(with: "level1Background")
-        case 2: setBackground(with: "level2Background")
-        case 3: setBackground(with: "level3Background")
-        case 4: setBackground(with: "level4Background")
-        case 5: setBackground(with: "level5Background")
-        default: break
+            case 1: setBackground(with: "level1Background")
+            case 2: setBackground(with: "level2Background")
+            case 3: setBackground(with: "level3Background")
+            case 4: setBackground(with: "level4Background")
+            case 5: setBackground(with: "level5Background")
+            default: break
         }
         
         //moves section
