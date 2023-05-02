@@ -154,7 +154,7 @@ class GameScene: Scene {
         for i in 0..<tiles.count {
             for j in 0..<tiles.count-2 {
                 if tiles[i][j].name == tiles[i][j+1].name && tiles[i][j+1].name == tiles[i][j+2].name {
-                    appendPoints()
+                    appendScorePoints()
                     getNewTile(row: i, col: j)
                     getNewTile(row: i, col: j+1)
                     getNewTile(row: i, col: j+2)
@@ -166,7 +166,7 @@ class GameScene: Scene {
         for i in 0..<tiles.count {
             for j in 0..<tiles.count-2 {
                 if tiles[j][i].name == tiles[j+1][i].name && tiles[j+1][i].name == tiles[j+2][i].name {
-                    appendPoints()
+                    appendScorePoints()
                     getNewTile(row: j, col: i)
                     getNewTile(row: j+1, col: i)
                     getNewTile(row: j+2, col: i)
@@ -175,7 +175,7 @@ class GameScene: Scene {
         }
     }
     
-    private func appendPoints() {
+    private func appendScorePoints() {
         switch level {
             case 1: scorePoints += 10
             case 2: scorePoints += 50

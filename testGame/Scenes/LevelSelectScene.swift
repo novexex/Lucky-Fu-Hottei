@@ -101,32 +101,32 @@ class LevelSelectScene: Scene, UIScrollViewDelegate {
         
         addChild(container)
         
-        //level1
-        let levelNode1 = SKSpriteNode(imageNamed: "level1Button")
-        levelNode1.name = "level1Button"
-        levelNode1.position = CGPoint(x: frame.midX, y: scoreLabel.frame.midY - 120)
-        container.addChild(levelNode1)
+        // level 1 button
+        let level1Button = SKSpriteNode(imageNamed: "level1Button")
+        level1Button.name = "level1Button"
+        level1Button.position = CGPoint(x: frame.midX, y: scoreLabel.frame.midY - 120)
+        container.addChild(level1Button)
         
-        //level2
+        // level 2 button
         let level2Image = availableLevel >= 2 ? "level2Button" : "level2BWButton"
-        let levelNode2 = SKSpriteNode(imageNamed: level2Image)
-        levelNode2.name = "level2Button"
-        levelNode2.position = CGPoint(x: frame.midX, y: levelNode1.frame.midY - 135)
-        container.addChild(levelNode2)
+        let level2Button = SKSpriteNode(imageNamed: level2Image)
+        level2Button.name = "level2Button"
+        level2Button.position = CGPoint(x: frame.midX, y: level1Button.frame.midY - 135)
+        container.addChild(level2Button)
         
-        //level3
+        // level 3 button
         let level3Image = availableLevel >= 3 ? "level3Button" : "level3BWButton"
-        let levelNode3 = SKSpriteNode(imageNamed: level3Image)
-        levelNode3.name = "level3Button"
-        levelNode3.position = CGPoint(x: frame.midX, y: levelNode2.frame.midY - 135)
-        container.addChild(levelNode3)
+        let level3Button = SKSpriteNode(imageNamed: level3Image)
+        level3Button.name = "level3Button"
+        level3Button.position = CGPoint(x: frame.midX, y: level2Button.frame.midY - 135)
+        container.addChild(level3Button)
         
-        //level4
+        // level 4 button
         let level4Image = availableLevel >= 4 ? "level4Button" : "level4BWButton"
-        let levelNode4 = SKSpriteNode(imageNamed: level4Image)
-        levelNode4.name = "level4Button"
-        levelNode4.position = CGPoint(x: frame.midX, y: levelNode3.frame.midY - 135)
-        container.addChild(levelNode4)
+        let level4Button = SKSpriteNode(imageNamed: level4Image)
+        level4Button.name = "level4Button"
+        level4Button.position = CGPoint(x: frame.midX, y: level3Button.frame.midY - 135)
+        container.addChild(level4Button)
         
 //        //level5
 //        let levelNode5 = SKSpriteNode(imageNamed: "level5Button")
@@ -140,13 +140,13 @@ class LevelSelectScene: Scene, UIScrollViewDelegate {
 //        levelNodeSoon.position = CGPoint(x: frame.midX, y: levelNode5.frame.midY - 135)
 //        container.addChild(levelNodeSoon)
                     
-        //home button
+        // home button
         let homeButton = SKSpriteNode(imageNamed: "homeButton")
         homeButton.name = "homeButton"
         homeButton.position = CGPoint(x: frame.midX - 27, y: frame.minY + 120)
         addChild(homeButton)
         
-        //info button
+        // info button
         let infoButton = SKSpriteNode(imageNamed: "infoButton")
         infoButton.name = "infoButton"
         infoButton.position = CGPoint(x: frame.midX + 27, y: frame.minY + 120)

@@ -31,7 +31,6 @@ class MenuScene: Scene {
         for touch in touches {
             let location = touch.location(in: self)
             if let node = atPoint(location) as? SKSpriteNode {
-                
                 switch node.name {
                     case "startButton":
                         let sequence = SKAction.sequence([gameController.clickButtonSoundAction, SKAction.run { self.gameController.selectLevel() }])
@@ -124,7 +123,7 @@ class MenuScene: Scene {
         cupLabel.position = CGPoint(x: frame.midX - 50, y: frame.midY + 300)
         addChild(cupLabel)
         
-        //score label
+        // score label
         scoreLabel = ASAttributedLabelNode(size: cupLabel.size)
         scoreLabel.attributedString = getAttrubutedString(with: String(score))
         scoreLabel.position = CGPoint(x: cupLabel.position.x + 120, y: cupLabel.position.y + 2)

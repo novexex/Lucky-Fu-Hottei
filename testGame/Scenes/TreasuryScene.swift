@@ -35,6 +35,7 @@ class TreasuryScene: Scene {
     override func didMove(to view: SKView) {
         setupUI()
         setupMusic()
+        checkUnlockTreasurys()
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -92,24 +93,27 @@ class TreasuryScene: Scene {
         UserDefaults.standard.set(isTreasureUnlock, forKey: "isTreasureUnlock")
     }
     
-    private func setupUI() {
-        setBackground(with: "treasuryBackground")
-        
+    private func checkUnlockTreasurys() {
         if let boolArray = UserDefaults.standard.array(forKey: "isTreasureUnlock") as? [Bool] {
             isTreasureUnlock = boolArray
         }
+    }
+    
+    private func setupUI() {
+        setBackground(with: "treasuryBackground")
         
-        //cup label
+        // cup label
         let cupLabel = SKSpriteNode(imageNamed: "cupLabel")
         cupLabel.position = CGPoint(x: frame.midX - 50, y: frame.midY + 300)
         addChild(cupLabel)
         
-        //score label
+        // score label
         scoreLabel = ASAttributedLabelNode(size: cupLabel.size)
         scoreLabel.attributedString = getAttrubutedString(with: String(score))
         scoreLabel.position = CGPoint(x: cupLabel.position.x + 120, y: cupLabel.position.y + 2)
         addChild(scoreLabel)
         
+        // treasury item 1 button
         let treasuryImage1 = isTreasureUnlock[0] ? "treasuryItem1" : "treasuryItem1BW"
         let treasuryItem1 = SKSpriteNode(imageNamed: treasuryImage1)
         treasuryItem1.name = "treasuryItem1"
@@ -117,6 +121,7 @@ class TreasuryScene: Scene {
         addChild(treasuryItem1)
         treasuryItems.append(treasuryItem1)
         
+        // treasury item 2 button
         let treasuryImage2 = isTreasureUnlock[1] ? "treasuryItem2" : "treasuryItem2BW"
         let treasuryItem2 = SKSpriteNode(imageNamed: treasuryImage2)
         treasuryItem2.name = "treasuryItem2"
@@ -124,6 +129,7 @@ class TreasuryScene: Scene {
         addChild(treasuryItem2)
         treasuryItems.append(treasuryItem2)
         
+        // treasury item 3 button
         let treasuryImage3 = isTreasureUnlock[2] ? "treasuryItem3" : "treasuryItem3BW"
         let treasuryItem3 = SKSpriteNode(imageNamed: treasuryImage3)
         treasuryItem3.name = "treasuryItem3"
@@ -131,6 +137,7 @@ class TreasuryScene: Scene {
         addChild(treasuryItem3)
         treasuryItems.append(treasuryItem3)
         
+        // treasury item 4 button
         let treasuryImage4 = isTreasureUnlock[3] ? "treasuryItem4" : "treasuryItem4BW"
         let treasuryItem4 = SKSpriteNode(imageNamed: treasuryImage4)
         treasuryItem4.name = "treasuryItem4"
@@ -138,6 +145,7 @@ class TreasuryScene: Scene {
         addChild(treasuryItem4)
         treasuryItems.append(treasuryItem4)
         
+        // treasury item 5 button
         let treasuryImage5 = isTreasureUnlock[4] ? "treasuryItem5" : "treasuryItem5BW"
         let treasuryItem5 = SKSpriteNode(imageNamed: treasuryImage5)
         treasuryItem5.name = "treasuryItem5"
@@ -145,6 +153,7 @@ class TreasuryScene: Scene {
         addChild(treasuryItem5)
         treasuryItems.append(treasuryItem5)
         
+        // treasury item 6 button
         let treasuryImage6 = isTreasureUnlock[5] ? "treasuryItem6" : "treasuryItem6BW"
         let treasuryItem6 = SKSpriteNode(imageNamed: treasuryImage6)
         treasuryItem6.name = "treasuryItem6"
@@ -152,6 +161,7 @@ class TreasuryScene: Scene {
         addChild(treasuryItem6)
         treasuryItems.append(treasuryItem6)
         
+        // treasury item 7 button
         let treasuryImage7 = isTreasureUnlock[6] ? "treasuryItem7" : "treasuryItem7BW"
         let treasuryItem7 = SKSpriteNode(imageNamed: treasuryImage7)
         treasuryItem7.name = "treasuryItem7"
@@ -159,6 +169,7 @@ class TreasuryScene: Scene {
         addChild(treasuryItem7)
         treasuryItems.append(treasuryItem7)
         
+        // treasury item 8 button
         let treasuryImage8 = isTreasureUnlock[7] ? "treasuryItem8" : "treasuryItem8BW"
         let treasuryItem8 = SKSpriteNode(imageNamed: treasuryImage8)
         treasuryItem8.name = "treasuryItem8"
@@ -166,6 +177,7 @@ class TreasuryScene: Scene {
         addChild(treasuryItem8)
         treasuryItems.append(treasuryItem8)
         
+        // treasury item 9 button
         let treasuryImage9 = isTreasureUnlock[8] ? "treasuryItem9" : "treasuryItem9BW"
         let treasuryItem9 = SKSpriteNode(imageNamed: treasuryImage9)
         treasuryItem9.name = "treasuryItem9"
@@ -173,18 +185,16 @@ class TreasuryScene: Scene {
         addChild(treasuryItem9)
         treasuryItems.append(treasuryItem9)
         
-        
-        //home button
+        // home button
         let homeButton = SKSpriteNode(imageNamed: "homeButton")
         homeButton.name = "homeButton"
         homeButton.position = CGPoint(x: frame.midX - 27, y: frame.minY + 120)
         addChild(homeButton)
         
-        //info button
+        // info button
         let infoButton = SKSpriteNode(imageNamed: "infoButton")
         infoButton.name = "infoButton"
         infoButton.position = CGPoint(x: frame.midX + 27, y: frame.minY + 120)
         addChild(infoButton)
-        
     }
 }
