@@ -52,34 +52,17 @@ class WinScene: Scene {
         }
     }
     
-    func getAttrubutedPlus() -> NSMutableAttributedString {
-        let shadow = NSShadow()
-        shadow.shadowOffset = CGSize(width: 0, height: 3.9520199298858643)
-        shadow.shadowColor = UIColor.black.withAlphaComponent(0.65)
-        shadow.shadowBlurRadius = 12.927276611328125
-        
-        let attributes: [NSAttributedString.Key: Any] = [
-            .font: UIFont(name: "Montserrat-ExtraBold", size: 50) ?? UIFont(),
-            .foregroundColor: UIColor.white,
-            .strokeWidth: -1.29,
-            .strokeColor: UIColor(hex: "ECB43C"),
-            .shadow: shadow
-        ]
-        return NSMutableAttributedString(string: "+", attributes: attributes)
-    }
-    
     private func setupUI() {
         setBackground(with: "winBackground")
         
-        
         let plusLabel = ASAttributedLabelNode(size: CGSize(width: 50, height: 50))
-        plusLabel.attributedString = getAttrubutedPlus()
+        plusLabel.attributedString = getAttrubutedString(with: "+", font: "Montserrat-ExtraBold", size: 50)
         plusLabel.position = CGPoint(x: frame.midX - 40, y: frame.midY - 100)
         addChild(plusLabel)
 
         // scoreLabel
         let scoreLabel = ASAttributedLabelNode(size: CGSize(width: 200, height: 100))
-        scoreLabel.attributedString = getAttrubutedString(with: String(score), size: 58)
+        scoreLabel.attributedString = getAttrubutedString(with: String(score), font: "gangOfThree", size: 58)
         scoreLabel.position = CGPoint(x: plusLabel.frame.midX + 110, y: plusLabel.frame.midY)
         addChild(scoreLabel)
         

@@ -16,7 +16,7 @@ class WelcomeBonusScene: Scene {
     private var scoreLabel = ASAttributedLabelNode(size: CGSize())
     var score = 0 {
         didSet {
-            scoreLabel.attributedString = getAttrubutedString(with: String(score), size: 58)
+            scoreLabel.attributedString = getAttrubutedString(with: String(score), font: "gangOfThree", size: 58)
         }
     }
     

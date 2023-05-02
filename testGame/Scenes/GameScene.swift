@@ -22,7 +22,7 @@ class GameScene: Scene {
             if moves == 0 {
                 gameController.gameOver(with: scorePoints, level: level)
             } else {
-                movesLabel.attributedString = getAttrubutedString(with: String(moves), size: 58)
+                movesLabel.attributedString = getAttrubutedString(with: String(moves), font: "gangOfThree", size: 58)
                 if String(moves).count == 1 {
                     movesLabel.position = CGPoint(x: movesSection.frame.midX + 84, y: movesSection.frame.midY + 3)
                 }
@@ -295,7 +295,7 @@ class GameScene: Scene {
         
         //moves
         movesLabel = ASAttributedLabelNode(size: movesSection.size)
-        movesLabel.attributedString = getAttrubutedString(with: String(moves), size: 58)
+        movesLabel.attributedString = getAttrubutedString(with: String(moves), font: "gangOfThree", size: 58)
         movesLabel.position = CGPoint(x: movesSection.frame.midX + 68, y: movesSection.frame.midY + 3)
         addChild(movesLabel)
         

@@ -24,14 +24,14 @@ class Scene: SKScene {
         gameController.backgroundMusic.run(SKAction.play())
     }
     
-    func getAttrubutedString(with text: String, size: CGFloat) -> NSMutableAttributedString {
+    func getAttrubutedString(with text: String, font: String, size: CGFloat) -> NSMutableAttributedString {
         let shadow = NSShadow()
         shadow.shadowOffset = CGSize(width: 0, height: 3.9520199298858643)
         shadow.shadowColor = UIColor.black.withAlphaComponent(0.65)
         shadow.shadowBlurRadius = 12.927276611328125
         
         let attributes: [NSAttributedString.Key: Any] = [
-            .font: UIFont(name: "gangOfThree", size: size) ?? UIFont(),
+            .font: UIFont(name: font, size: size) ?? UIFont(),
             .foregroundColor: UIColor.white,
             .strokeWidth: -1.29,
             .strokeColor: UIColor(hex: "ECB43C"),

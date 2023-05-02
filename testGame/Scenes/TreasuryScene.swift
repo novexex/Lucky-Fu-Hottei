@@ -13,7 +13,7 @@ class TreasuryScene: Scene {
     private var scoreLabel = ASAttributedLabelNode(size: CGSize())
     var score: Int {
         didSet {
-            scoreLabel.attributedString = getAttrubutedString(with: String(score), size: 58)
+            scoreLabel.attributedString = getAttrubutedString(with: String(score), font: "gangOfThree", size: 58)
         }
     }
     
@@ -99,7 +99,7 @@ class TreasuryScene: Scene {
         
         //score label
         scoreLabel = ASAttributedLabelNode(size: cupLabel.size)
-        scoreLabel.attributedString = getAttrubutedString(with: String(score), size: 58)
+        scoreLabel.attributedString = getAttrubutedString(with: String(score), font: "gangOfThree", size: 58)
         scoreLabel.position = CGPoint(x: cupLabel.position.x + 120, y: cupLabel.position.y + 2)
         addChild(scoreLabel)
         
