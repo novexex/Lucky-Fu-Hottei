@@ -12,6 +12,9 @@ class GameScene: Scene {
     private var tiles = Array(repeating: Array(repeating: SKSpriteNode(), count: 5), count: 5)
     private var images = [String]()
     
+    private var arch = SKSpriteNode()
+    
+    
     private var movesSection = SKSpriteNode()
     private var movesLabel = ASAttributedLabelNode(size: CGSize())
     private var moves = 20 {
@@ -64,7 +67,7 @@ class GameScene: Scene {
             for node in row.element.enumerated() {
                 if node.element.contains(location) {
                     if !isHorizonalSelected {
-                        guard let first = row.element.first else { return }
+                        guard let first = tiles[row.offset].first else { return }
                         rowSelected = row.offset
                         horizonalRectangle = SKShapeNode(rect: CGRect(x: first.frame.minX, y: first.frame.minY, width: first.size.width * 5, height: first.size.height))
                         setupLine(line: horizonalRectangle)
@@ -72,7 +75,7 @@ class GameScene: Scene {
                     } else if !isVerticalSelected {
                         let column = tiles[0][node.offset]
                         colSelected = node.offset
-                        verticalRectangle = SKShapeNode(rect: CGRect(x: column.frame.minX, y: column.frame.minY, width: column.size.width, height: column.size.height * 5))
+                        verticalRectangle = SKShapeNode(rect: CGRect(x: column.frame.minX, y: column.frame.maxY, width: column.size.width, height: -column.size.height * 5))
                         setupLine(line: verticalRectangle)
                         isVerticalSelected = true
                     }
@@ -98,26 +101,10 @@ class GameScene: Scene {
                             
                             self.moves -= 1
                             
-                            for i in self.tiles {
-                                for j in i {
-                                    print(j.name!, terminator: "\t")
-                                }
-                                print("\n")
-                            }
-                            
-                            print("\n")
                             self.swap(row: rowSelected, col: colSelected)
                             
-                            
-                            for i in self.tiles {
-                                for j in i {
-                                    print(j.name!, terminator: "\t")
-                                }
-                                print("\n")
-                            }
-                            
-                            self.checkMatches()
-                            self.checkMatches()
+                            //                            self.checkMatches()
+                            //                            self.checkMatches()
                         }
                     }
                     let sequence = SKAction.sequence([gameController.clickButtonSoundAction, action])
@@ -146,19 +133,19 @@ class GameScene: Scene {
     }
     
     private func setupLevel() {
-            images = ["coinTile", "craneTile", "lampTile"]
+        images = ["coinTile", "craneTile", "lampTile"]
         switch level {
-            case 2:
-                images += ["redPandaTile"]
-            case 3:
-                images += ["redPandaTile", "pandaTile"]
-            case 4:
-                images += ["redPandaTile", "pandaTile"]
-                moves = 15
-            case 5:
-                images += ["redPandaTile", "pandaTile"]
-                moves = 10
-            default: break
+        case 2:
+            images += ["redPandaTile"]
+        case 3:
+            images += ["redPandaTile", "pandaTile"]
+        case 4:
+            images += ["redPandaTile", "pandaTile"]
+            moves = 15
+        case 5:
+            images += ["redPandaTile", "pandaTile"]
+            moves = 10
+        default: break
         }
     }
     
@@ -190,12 +177,12 @@ class GameScene: Scene {
     
     private func appendPoints() {
         switch level {
-            case 1: scorePoints += 10
-            case 2: scorePoints += 50
-            case 3: scorePoints += 100
-            case 4: scorePoints += 250
-            case 5: scorePoints += 500
-            default: break
+        case 1: scorePoints += 10
+        case 2: scorePoints += 50
+        case 3: scorePoints += 100
+        case 4: scorePoints += 250
+        case 5: scorePoints += 500
+        default: break
         }
     }
     
@@ -216,34 +203,39 @@ class GameScene: Scene {
     }
     
     private func swap(row: Int, col: Int) {
-        var tempCol = [SKSpriteNode]()
-        
-        for i in (0..<tiles.count).reversed() {
-            let tmpNode = SKSpriteNode()
-            tmpNode.texture = tiles[i][col].texture
-            tmpNode.name = tiles[i][col].name
-            tempCol.append(tmpNode)
+        var tempRow = Array(repeating: SKSpriteNode(), count: 5)
+
+        for i in tiles.enumerated() {
+            for j in i.element.enumerated() {
+                if i.offset == row {
+                    let tempSprite = SKSpriteNode()
+                    tempSprite.name = tiles[i.offset][j.offset].name
+                    tempSprite.texture = tiles[i.offset][j.offset].texture
+                    tempRow[j.offset] = tempSprite
+                }
+            }
         }
         
-        for i in (0..<tiles.count).reversed() {
-            tiles[i][col].texture = tiles[row][i].texture
-            tiles[i][col].name = tiles[row][i].name
+        for i in tiles.indices {
+            let tempSprite = SKSpriteNode()
+            tempSprite.name = tiles[i][col].name
+            tempSprite.texture = tiles[i][col].texture
+            tiles[row][i].name = tempSprite.name
+            tiles[row][i].texture = tempSprite.texture
         }
         
-        for i in (0..<tiles.count).reversed() {
-            tiles[row][i].texture = tempCol[i].texture
-            tiles[row][i].name = tempCol[i].name
+        for i in tiles.indices {
+            tiles[i][col].name = tempRow[i].name
+            tiles[i][col].texture = tempRow[i].texture
         }
     }
     
     private func setupTiles() {
         let tileSize = CGSize(width: 66, height: 52)
-        let totalTilesWidth = tileSize.width * 5
-        let middle = CGPoint(x: frame.midX + 32, y: frame.midY + 100)
-        let offset = CGPoint(x: middle.x - (totalTilesWidth / 2), y: middle.y - (totalTilesWidth / 2))
-                
+        let startPoint = CGPoint(x: arch.frame.minX + 50, y: arch.frame.minY - 25)
+        
+        
         for row in 0..<tiles.count {
-            var rowTiles = [SKSpriteNode]()
             for col in 0..<tiles[row].count {
                 guard var randomImage = images.randomElement() else { return }
                 var tile = SKSpriteNode(imageNamed: randomImage)
@@ -257,12 +249,10 @@ class GameScene: Scene {
                     tiles[row][col] = tile
                 }
                 
-                tile.position = CGPoint(x: tileSize.width * CGFloat(col) + offset.x, y: tileSize.height * CGFloat(row) + offset.y)
+                tile.position = CGPoint(x: startPoint.x + CGFloat(67 * col+1), y: startPoint.y - CGFloat(51 * row+1))
                 tile.size = tileSize
                 addChild(tile)
-                rowTiles.append(tile)
             }
-            tiles[row] = rowTiles
         }
     }
     
@@ -289,12 +279,12 @@ class GameScene: Scene {
     private func setupUI() {
         // dynamic background depending on the level
         switch level {
-            case 1: setBackground(with: "level1Background")
-            case 2: setBackground(with: "level2Background")
-            case 3: setBackground(with: "level3Background")
-            case 4: setBackground(with: "level4Background")
-            case 5: setBackground(with: "level5Background")
-            default: break
+        case 1: setBackground(with: "level1Background")
+        case 2: setBackground(with: "level2Background")
+        case 3: setBackground(with: "level3Background")
+        case 4: setBackground(with: "level4Background")
+        case 5: setBackground(with: "level5Background")
+        default: break
         }
         
         //moves section
@@ -310,7 +300,7 @@ class GameScene: Scene {
         addChild(movesLabel)
         
         //arch
-        let arch = SKSpriteNode(imageNamed: "arch")
+        arch = SKSpriteNode(imageNamed: "arch")
         arch.position = CGPoint(x: movesSection.position.x, y: movesSection.position.y - 50)
         arch.zPosition = -1
         addChild(arch)

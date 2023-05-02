@@ -22,10 +22,18 @@
          contextName = "GameScene.touchesBegan(_:with:):GameScene.swift">
          <PersistentStrings>
             <PersistentString
-               value = "tiles.count">
+               value = "isHorizonalSelected">
             </PersistentString>
             <PersistentString
-               value = "tiles[1].count">
+               value = "isVerticalSelected">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "GameScene.isSameImageRepeatedVertically(row:col:):GameScene.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "tiles[row][col-1].name">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
