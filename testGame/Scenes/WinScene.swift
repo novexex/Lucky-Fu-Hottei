@@ -8,7 +8,6 @@
 import SpriteKit
 
 class WinScene: Scene {
-    
     let score: Int
     let level: Int
     
@@ -24,19 +23,29 @@ class WinScene: Scene {
     
     override func didMove(to view: SKView) {
         setupUI()
+        setupMusic()
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        let gameController = getGameController()
-        
         for touch in touches {
             let location = touch.location(in: self)
             if let node = atPoint(location) as? SKSpriteNode {
                 switch node.name {
-                    case "nextLevelButton": level <= 4 ? gameController.startGame(level: level+1) : gameController.startGame(level: level)
-                    case "infoButton": gameController.showInfo()
-                    case "refreshButton": gameController.startGame(level: level)
-                    case "homeButton": gameController.home()
+                    case "nextLevelButton":
+                        let action = SKAction.run {
+                            self.level <= 4 ? self.gameController.startGame(level: self.level+1) : self.gameController.startGame(level: self.level)
+                        }
+                        let sequence = SKAction.sequence([gameController.clickButtonSoundAction, action])
+                        self.run(sequence)
+                    case "infoButton":
+                        let sequence = SKAction.sequence([gameController.clickButtonSoundAction, SKAction.run { self.gameController.showInfo() }])
+                        self.run(sequence)
+                    case "refreshButton":
+                        let sequence = SKAction.sequence([gameController.clickButtonSoundAction, SKAction.run { self.gameController.startGame(level: self.level) }])
+                        self.run(sequence)
+                    case "homeButton":
+                    	let sequence = SKAction.sequence([gameController.clickButtonSoundAction, SKAction.run { self.gameController.home() }])
+                    	self.run(sequence)
                     default: break
                 }
             }

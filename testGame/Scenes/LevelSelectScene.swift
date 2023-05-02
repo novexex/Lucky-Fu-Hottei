@@ -28,6 +28,7 @@ class LevelSelectScene: Scene, UIScrollViewDelegate {
     
     override func didMove(to view: SKView) {
         setupUI()
+        setupMusic()
     }
     
     func setupBackground() {
@@ -39,32 +40,43 @@ class LevelSelectScene: Scene, UIScrollViewDelegate {
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        let gameController = getGameController()
         for touch in touches {
             let location = touch.location(in: self)
             if let node = atPoint(location) as? SKSpriteNode {
                 switch node.name {
-                case "level1Button": gameController.startGame(level: 1)
+                case "level1Button":
+                    let sequence = SKAction.sequence([gameController.clickButtonSoundAction, SKAction.run { self.gameController.startGame(level: 1) }])
+                    self.run(sequence)
                 case "level2Button":
-                    if availableLevel >= 2 {
-                        gameController.startGame(level: 2)
-                    } else {
-                        break
+                    let action = SKAction.run {
+                        if self.availableLevel >= 2 {
+                            self.gameController.startGame(level: 2)
+                        }
                     }
+                    let sequence = SKAction.sequence([gameController.clickButtonSoundAction, action])
+                    self.run(sequence)
                 case "level3Button":
-                    if availableLevel >= 3 {
-                        gameController.startGame(level: 3)
-                    } else {
-                        break
+                    let action = SKAction.run {
+                        if self.availableLevel >= 3 {
+                            self.gameController.startGame(level: 3)
+                        }
                     }
+                    let sequence = SKAction.sequence([gameController.clickButtonSoundAction, action])
+                    self.run(sequence)
                 case "level4Button":
-                    if availableLevel >= 4 {
-                        gameController.startGame(level: 4)
-                    } else {
-                        break
+                    let action = SKAction.run {
+                        if self.availableLevel >= 4 {
+                            self.gameController.startGame(level: 4)
+                        }
                     }
-                case "homeButton": gameController.home()
-                case "infoButton": gameController.showInfo()
+                    let sequence = SKAction.sequence([gameController.clickButtonSoundAction, action])
+                    self.run(sequence)
+                case "homeButton":
+                    let sequence = SKAction.sequence([gameController.clickButtonSoundAction, SKAction.run { self.gameController.home() }])
+                    self.run(sequence)
+                case "infoButton":
+                    let sequence = SKAction.sequence([gameController.clickButtonSoundAction, SKAction.run { self.gameController.showInfo() }])
+                    self.run(sequence)
                 default: break
                 }
             }

@@ -103,8 +103,8 @@
             filePath = "testGame/Scenes/InfoScene.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "15"
-            endingLineNumber = "15"
+            startingLineNumber = "16"
+            endingLineNumber = "16"
             landmarkName = "touchesBegan(_:with:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -119,8 +119,8 @@
             filePath = "testGame/Application/GameViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "159"
-            endingLineNumber = "159"
+            startingLineNumber = "153"
+            endingLineNumber = "153"
             landmarkName = "showInfo()"
             landmarkType = "7">
          </BreakpointContent>
@@ -135,8 +135,8 @@
             filePath = "testGame/Application/GameViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "173"
-            endingLineNumber = "173"
+            startingLineNumber = "167"
+            endingLineNumber = "167"
             landmarkName = "back()"
             landmarkType = "7">
          </BreakpointContent>
@@ -151,25 +151,9 @@
             filePath = "testGame/Application/GameViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "114"
-            endingLineNumber = "114"
+            startingLineNumber = "107"
+            endingLineNumber = "107"
             landmarkName = "selectLevel()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "2B08E101-3C6D-483E-940B-9BC0F09EE643"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "testGame/Scenes/LevelSelectScene.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "42"
-            endingLineNumber = "42"
-            landmarkName = "touchesBegan(_:with:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -183,8 +167,8 @@
             filePath = "testGame/Application/GameViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "128"
-            endingLineNumber = "128"
+            startingLineNumber = "121"
+            endingLineNumber = "121"
             landmarkName = "startGame(level:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -215,10 +199,10 @@
             filePath = "testGame/Scenes/GameScene.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "58"
-            endingLineNumber = "58"
-            landmarkName = "touchesBegan(_:with:)"
-            landmarkType = "7">
+            startingLineNumber = "57"
+            endingLineNumber = "57"
+            landmarkName = "GameScene"
+            landmarkType = "3">
             <Locations>
                <Location
                   uuid = "B246F493-1926-41E8-AEFC-82A40997DA7B - 5eb723eac79cdd9b"
@@ -263,10 +247,10 @@
             filePath = "testGame/Scenes/GameScene.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "53"
-            endingLineNumber = "53"
-            landmarkName = "didMove(to:)"
-            landmarkType = "7">
+            startingLineNumber = "51"
+            endingLineNumber = "51"
+            landmarkName = "GameScene"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -279,9 +263,9 @@
             filePath = "testGame/Scenes/GameScene.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "246"
-            endingLineNumber = "246"
-            landmarkName = "setupTiles()"
+            startingLineNumber = "265"
+            endingLineNumber = "265"
+            landmarkName = "isSameImageRepeatedHorizontally(row:col:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -295,8 +279,8 @@
             filePath = "testGame/Scenes/InfoScene.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "36"
-            endingLineNumber = "36"
+            startingLineNumber = "33"
+            endingLineNumber = "33"
             landmarkName = "setupUI()"
             landmarkType = "7">
          </BreakpointContent>
@@ -311,8 +295,8 @@
             filePath = "testGame/Scenes/InfoScene.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "37"
-            endingLineNumber = "37"
+            startingLineNumber = "34"
+            endingLineNumber = "34"
             landmarkName = "setupUI()"
             landmarkType = "7">
          </BreakpointContent>
@@ -327,8 +311,8 @@
             filePath = "testGame/Application/GameViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "66"
-            endingLineNumber = "66"
+            startingLineNumber = "65"
+            endingLineNumber = "65"
             landmarkName = "checkDailyBonus()"
             landmarkType = "7">
          </BreakpointContent>
@@ -343,8 +327,8 @@
             filePath = "testGame/Scenes/LevelSelectScene.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "41"
-            endingLineNumber = "41"
+            startingLineNumber = "42"
+            endingLineNumber = "42"
             landmarkName = "touchesBegan(_:with:)"
             landmarkType = "7">
             <Locations>
@@ -391,9 +375,229 @@
             filePath = "testGame/Scenes/LevelSelectScene.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "74"
-            endingLineNumber = "74"
+            startingLineNumber = "86"
+            endingLineNumber = "86"
             landmarkName = "setupUI()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "AF47918D-A97A-4D1E-8AD2-804669B7D66E"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "testGame/Application/GameViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "14"
+            endingLineNumber = "14"
+            landmarkName = "availableLevel"
+            landmarkType = "24">
+            <Locations>
+               <Location
+                  uuid = "AF47918D-A97A-4D1E-8AD2-804669B7D66E - a95a8895ee2bb854"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "testGame.GameViewController.availableLevel.getter : Swift.Int"
+                  moduleName = "testGame"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/novex/Documents/Code/GitHub/testGame/testGame/Application/GameViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "14"
+                  endingLineNumber = "14"
+                  offsetFromSymbolStart = "84">
+               </Location>
+               <Location
+                  uuid = "AF47918D-A97A-4D1E-8AD2-804669B7D66E - 7cceb79440c4ec20"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "testGame.GameViewController.availableLevel.setter : Swift.Int"
+                  moduleName = "testGame"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/novex/Documents/Code/GitHub/testGame/testGame/Application/GameViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "14"
+                  endingLineNumber = "14"
+                  offsetFromSymbolStart = "96">
+               </Location>
+               <Location
+                  uuid = "AF47918D-A97A-4D1E-8AD2-804669B7D66E - 4dabc61a6ba6df51"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "testGame.GameViewController.availableLevel.modify : Swift.Int"
+                  moduleName = "testGame"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/novex/Documents/Code/GitHub/testGame/testGame/Application/GameViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "14"
+                  endingLineNumber = "14"
+                  offsetFromSymbolStart = "0">
+               </Location>
+               <Location
+                  uuid = "AF47918D-A97A-4D1E-8AD2-804669B7D66E - 35b621ba8f9bdb20"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "testGame.GameViewController.availableLevel.modify : Swift.Int with unmangled suffix &quot;.resume.0&quot;"
+                  moduleName = "testGame"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/novex/Documents/Code/GitHub/testGame/testGame/Application/GameViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "14"
+                  endingLineNumber = "14"
+                  offsetFromSymbolStart = "20">
+               </Location>
+               <Location
+                  uuid = "AF47918D-A97A-4D1E-8AD2-804669B7D66E - 412f8e3ae18217b2"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "testGame.GameViewController.init(nibName: Swift.Optional&lt;Swift.String&gt;, bundle: Swift.Optional&lt;__C.NSBundle&gt;) -&gt; testGame.GameViewController"
+                  moduleName = "testGame"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/novex/Documents/Code/GitHub/testGame/testGame/Application/GameViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "14"
+                  endingLineNumber = "14"
+                  offsetFromSymbolStart = "220">
+               </Location>
+               <Location
+                  uuid = "AF47918D-A97A-4D1E-8AD2-804669B7D66E - c787f436cf566fd8"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "testGame.GameViewController.init(coder: __C.NSCoder) -&gt; Swift.Optional&lt;testGame.GameViewController&gt;"
+                  moduleName = "testGame"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/novex/Documents/Code/GitHub/testGame/testGame/Application/GameViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "14"
+                  endingLineNumber = "14"
+                  offsetFromSymbolStart = "196">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "E911F2A0-EBE2-49E1-9FB1-0114ECCC2E2C"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "testGame/Application/GameViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "15"
+            endingLineNumber = "15"
+            landmarkName = "availableLevel"
+            landmarkType = "24">
+            <Locations>
+               <Location
+                  uuid = "E911F2A0-EBE2-49E1-9FB1-0114ECCC2E2C - 5a02bcf2c84b9118"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "testGame.GameViewController.availableLevel.didset : Swift.Int"
+                  moduleName = "testGame"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/novex/Documents/Code/GitHub/testGame/testGame/Application/GameViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "16"
+                  endingLineNumber = "16"
+                  offsetFromSymbolStart = "32">
+               </Location>
+               <Location
+                  uuid = "E911F2A0-EBE2-49E1-9FB1-0114ECCC2E2C - 5a02bcf2c84b9118"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "testGame.GameViewController.availableLevel.didset : Swift.Int"
+                  moduleName = "testGame"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/novex/Documents/Code/GitHub/testGame/testGame/Application/GameViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "16"
+                  endingLineNumber = "16"
+                  offsetFromSymbolStart = "36">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "FE065F32-0CCF-485C-B85F-792E8362F8A8"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "testGame/Application/GameViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "130"
+            endingLineNumber = "130"
+            landmarkName = "gameOver(with:level:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "FE065F32-0CCF-485C-B85F-792E8362F8A8 - a773b992258e3c86"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "testGame.GameViewController.gameOver(with: Swift.Int, level: Swift.Int) -&gt; ()"
+                  moduleName = "testGame"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/novex/Documents/Code/GitHub/testGame/testGame/Application/GameViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "129"
+                  endingLineNumber = "129"
+                  offsetFromSymbolStart = "92">
+               </Location>
+               <Location
+                  uuid = "FE065F32-0CCF-485C-B85F-792E8362F8A8 - a773b992258e3f61"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "testGame.GameViewController.gameOver(with: Swift.Int, level: Swift.Int) -&gt; ()"
+                  moduleName = "testGame"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/novex/Documents/Code/GitHub/testGame/testGame/Application/GameViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "130"
+                  endingLineNumber = "130"
+                  offsetFromSymbolStart = "92">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "69A5ECF9-C3A4-40B9-8671-90495A57F60E"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "testGame/Scenes/MenuScene.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "38"
+            endingLineNumber = "38"
+            landmarkName = "touchesBegan(_:with:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

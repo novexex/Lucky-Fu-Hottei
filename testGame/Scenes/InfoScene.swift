@@ -10,27 +10,24 @@ import SpriteKit
 class InfoScene: Scene {
     override func didMove(to view: SKView) {
         setupUI()
+        setupMusic()
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        let gameController = getGameController()
         for touch in touches {
             let location = touch.location(in: self)
             if let node = atPoint(location) as? SKSpriteNode {
                 switch node.name {
-                    case "backButton": gameController.back()
-                    case "homeButton": gameController.home()
+                    case "backButton":
+                        let sequence = SKAction.sequence([gameController.clickButtonSoundAction, SKAction.run { self.gameController.back() }])
+                        self.run(sequence)
+                    case "homeButton":
+                        let sequence = SKAction.sequence([gameController.clickButtonSoundAction, SKAction.run { self.gameController.home() }])
+                        self.run(sequence)
                     default: break
                 }
             }
         }
-    }
-    
-    override func getGameController() -> GameViewController {
-        guard let gameController = self.view?.window?.rootViewController as? GameViewController else {
-            fatalError("GameController not found")
-        }
-        return gameController
     }
     
     private func setupUI() {

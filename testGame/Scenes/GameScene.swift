@@ -7,8 +7,7 @@
 
 import SpriteKit
 
-class GameScene: Scene {
-    
+class GameScene: Scene {    
     let level: Int
     private var tiles = Array(repeating: Array(repeating: SKSpriteNode(), count: 5), count: 5)
     private var images = [String]()
@@ -18,7 +17,6 @@ class GameScene: Scene {
     private var moves = 20 {
         didSet {
             if moves == 0 {
-                let gameController = getGameController()
                 gameController.gameOver(with: scorePoints, level: level)
             } else {
                 movesLabel.attributedString = getAttrubutedString(with: String(moves), size: 58)
@@ -53,12 +51,12 @@ class GameScene: Scene {
     override func didMove(to view: SKView) {
         setupLevel()
         setupUI()
+        setupMusic()
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let touch = touches.first else { return }
         let location = touch.location(in: self)
-        let gameController = getGameController()
         
         // here is handling of matrix tiles
         // Looking for the node that was clicked on
@@ -68,27 +66,15 @@ class GameScene: Scene {
                     if !isHorizonalSelected {
                         guard let first = row.element.first else { return }
                         rowSelected = row.offset
-                        
                         horizonalRectangle = SKShapeNode(rect: CGRect(x: first.frame.minX, y: first.frame.minY, width: first.size.width * 5, height: first.size.height))
-                        horizonalRectangle.fillColor = UIColor(red: 255, green: 199, blue: 0, alpha: 0.9)
-                        horizonalRectangle.strokeColor = .clear
-                        horizonalRectangle.blendMode = .screen
-                        horizonalRectangle.zPosition = 1
-                        addChild(horizonalRectangle)
+                        setupLine(line: horizonalRectangle)
                         isHorizonalSelected = true
-                        horizonalRectangle.isHidden = false
                     } else if !isVerticalSelected {
                         let column = tiles[0][node.offset]
                         colSelected = node.offset
-                        
                         verticalRectangle = SKShapeNode(rect: CGRect(x: column.frame.minX, y: column.frame.minY, width: column.size.width, height: column.size.height * 5))
-                        verticalRectangle.fillColor = UIColor(red: 255, green: 199, blue: 0, alpha: 0.9)
-                        verticalRectangle.strokeColor = .clear
-                        verticalRectangle.blendMode = .screen
-                        verticalRectangle.zPosition = 1
-                        addChild(verticalRectangle)
+                        setupLine(line: verticalRectangle)
                         isVerticalSelected = true
-                        horizonalRectangle.isHidden = false
                     }
                 }
             }
@@ -99,31 +85,64 @@ class GameScene: Scene {
             let location = touch.location(in: self)
             if let node = atPoint(location) as? SKSpriteNode {
                 if node.name == "swapButton" {
-                    if self.isHorizonalSelected && self.isVerticalSelected {
-                        guard let colSelected = self.colSelected, let rowSelected = self.rowSelected else { return }
-                        
-                        self.horizonalRectangle.isHidden = true
-                        self.verticalRectangle.isHidden = true
-                        
-                        self.isHorizonalSelected = false
-                        self.isVerticalSelected = false
-                        
-                        self.moves -= 1
-                        
-                        self.swap(row: rowSelected, col: colSelected)
-                        
-                        self.checkMatches()
-                        self.checkMatches()
+                    
+                    let action = SKAction.run {
+                        if self.isHorizonalSelected && self.isVerticalSelected {
+                            guard let colSelected = self.colSelected, let rowSelected = self.rowSelected else { return }
+                            
+                            self.horizonalRectangle.isHidden = true
+                            self.verticalRectangle.isHidden = true
+                            
+                            self.isHorizonalSelected = false
+                            self.isVerticalSelected = false
+                            
+                            self.moves -= 1
+                            
+                            for i in self.tiles {
+                                for j in i {
+                                    print(j.name!, terminator: "\t")
+                                }
+                                print("\n")
+                            }
+                            
+                            print("\n")
+                            self.swap(row: rowSelected, col: colSelected)
+                            
+                            
+                            for i in self.tiles {
+                                for j in i {
+                                    print(j.name!, terminator: "\t")
+                                }
+                                print("\n")
+                            }
+                            
+                            self.checkMatches()
+                            self.checkMatches()
+                        }
                     }
+                    let sequence = SKAction.sequence([gameController.clickButtonSoundAction, action])
+                    self.run(sequence)
                 } else if node.name == "homeButton" {
-                    gameController.home()
+                    let sequence = SKAction.sequence([gameController.clickButtonSoundAction, SKAction.run { self.gameController.home() }])
+                    self.run(sequence)
                 } else if node.name == "refreshButton" {
-                    gameController.startGame(level: level)
+                    let sequence = SKAction.sequence([gameController.clickButtonSoundAction, SKAction.run { self.gameController.startGame(level: self.level) }])
+                    self.run(sequence)
                 } else if node.name == "infoButton" {
-                    gameController.showInfo()
+                    let sequence = SKAction.sequence([gameController.clickButtonSoundAction, SKAction.run { self.gameController.showInfo() }])
+                    self.run(sequence)
                 }
             }
         }
+    }
+    
+    private func setupLine(line: SKShapeNode) {
+        line.fillColor = UIColor(red: 255, green: 199, blue: 0, alpha: 0.9)
+        line.strokeColor = .clear
+        line.blendMode = .screen
+        line.zPosition = 1
+        addChild(line)
+        line.isHidden = false
     }
     
     private func setupLevel() {

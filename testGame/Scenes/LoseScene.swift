@@ -8,7 +8,6 @@
 import SpriteKit
 
 class LoseScene: Scene {
-    
     let level: Int
     
     init(size: CGSize, level: Int) {
@@ -22,18 +21,23 @@ class LoseScene: Scene {
     
     override func didMove(to view: SKView) {
         setupUI()
+        setupMusic()
     }
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        let gameController = getGameController()
-        
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {        
         for touch in touches {
             let location = touch.location(in: self)
             if let node = atPoint(location) as? SKSpriteNode {
                 switch node.name {
-                    case "homeButton": gameController.home()
-                    case "refreshButton": gameController.startGame(level: level)
-                    case "infoButton": gameController.showInfo()
+                    case "homeButton":
+                        let sequence = SKAction.sequence([gameController.clickButtonSoundAction, SKAction.run { self.gameController.home() }])
+                        self.run(sequence)
+                    case "refreshButton":
+                        let sequence = SKAction.sequence([gameController.clickButtonSoundAction, SKAction.run { self.gameController.startGame(level: self.level) }])
+                        self.run(sequence)
+                    case "infoButton":
+                        let sequence = SKAction.sequence([gameController.clickButtonSoundAction, SKAction.run { self.gameController.showInfo() }])
+                        self.run(sequence)
                     default: break
                 }
             }

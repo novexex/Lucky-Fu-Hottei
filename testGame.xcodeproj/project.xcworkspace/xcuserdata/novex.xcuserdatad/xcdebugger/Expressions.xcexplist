@@ -3,6 +3,22 @@
    version = "1.0">
    <ContextStates>
       <ContextState
+         contextName = "GameScene.didMove(to:):GameScene.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "tiles.count">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "GameScene.setupTiles():GameScene.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "tiles.count">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "GameScene.touchesBegan(_:with:):GameScene.swift">
          <PersistentStrings>
             <PersistentString
@@ -14,7 +30,26 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "GameViewController.selectLevel():GameViewController.swift">
+         contextName = "GameViewController.gameOver(with:level:):GameViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "availableLevel">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "GameViewController.showInfo():GameViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "currentScene.name">
+            </PersistentString>
+            <PersistentString
+               value = "prevScene?.name">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "GameViewController.back():GameViewController.swift">
          <PersistentStrings>
             <PersistentString
                value = "currentScene?.name">
@@ -25,18 +60,31 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "LevelScene.touchesBegan(_:with:):LevelScene.swift">
+         contextName = "GameViewController.checkDailyBonus():GameViewController.swift">
          <PersistentStrings>
             <PersistentString
-               value = "isHorizonalSelected">
-            </PersistentString>
-            <PersistentString
-               value = "isVerticaleSelected">
+               value = "didReceiveDailyBonus">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "GameViewController.back():GameViewController.swift">
+         contextName = "GameViewController.viewDidLoad():GameViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "availableLevel">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "GameViewController.availableLevel.didset:GameViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "availableLevel">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "GameViewController.selectLevel():GameViewController.swift">
          <PersistentStrings>
             <PersistentString
                value = "prevScene?.name">
@@ -61,25 +109,6 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "GameViewController.showInfo():GameViewController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "currentScene.name">
-            </PersistentString>
-            <PersistentString
-               value = "prevScene?.name">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "GameScene.setupTiles():GameScene.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "tiles.count">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
          contextName = "LevelScene.setupTiles():LevelScene.swift">
          <PersistentStrings>
             <PersistentString
@@ -88,18 +117,13 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "GameScene.didMove(to:):GameScene.swift">
+         contextName = "LevelScene.touchesBegan(_:with:):LevelScene.swift">
          <PersistentStrings>
             <PersistentString
-               value = "tiles.count">
+               value = "isHorizonalSelected">
             </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "GameViewController.checkDailyBonus():GameViewController.swift">
-         <PersistentStrings>
             <PersistentString
-               value = "didReceiveDailyBonus">
+               value = "isVerticaleSelected">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

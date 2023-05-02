@@ -8,6 +8,7 @@
 import SpriteKit
 
 class Scene: SKScene {
+    weak var gameController: GameViewController!
     
     func setBackground(with imageNamed: String) {
         let background = SKSpriteNode(imageNamed: imageNamed)
@@ -17,11 +18,10 @@ class Scene: SKScene {
         addChild(background)
     }
     
-    func getGameController() -> GameViewController {
-        guard let gameController = self.view?.window?.rootViewController as? GameViewController else {
-            fatalError("GameController not found")
-        }
-        return gameController
+    
+    func setupMusic() {
+        addChild(gameController.backgroundMusic)
+        gameController.backgroundMusic.run(SKAction.play())
     }
     
     func getAttrubutedString(with text: String, size: CGFloat) -> NSMutableAttributedString {

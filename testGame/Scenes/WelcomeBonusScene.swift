@@ -8,7 +8,6 @@
 import SpriteKit
 
 class WelcomeBonusScene: Scene {
-    
     private var tiles = Array(repeating: Array(repeating: SKSpriteNode(), count: 3), count: 3)
     private var pointAmounts = ["100", "0", "0", "0", "500", "1000", "5000", "2000", "0"]
     private var isBonusGet = false
@@ -23,6 +22,7 @@ class WelcomeBonusScene: Scene {
     
     override func didMove(to view: SKView) {
         setupUI()
+        setupMusic()
     }
     
     func getAttrubutedString(with text: String, size: CGFloat, alignment: NSTextAlignment) -> NSMutableAttributedString {
@@ -77,15 +77,18 @@ class WelcomeBonusScene: Scene {
         for touch in touches {
             let location = touch.location(in: self)
             if let node = atPoint(location) as? SKSpriteNode {
-                if node.name == "takeOutButton" {
-                    score += addingPoints
-                    let gameController = getGameController()
-                    gameController.score = score
-                    gameController.presentMenu()
-                }
+                var action = SKAction()
+                    if node.name == "takeOutButton" {
+                        action = SKAction.run {
+                            self.score += self.addingPoints
+                            self.gameController.score = self.score
+                            self.gameController.presentMenu()
+                        }
+                    }
+                let sequence = SKAction.sequence([gameController.clickButtonSoundAction, action])
+                self.run(sequence)
             }
         }
-        
     }
     
     private func showAllTilesExcept(i: Int, j: Int) {

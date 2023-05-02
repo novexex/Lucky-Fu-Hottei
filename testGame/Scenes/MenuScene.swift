@@ -10,10 +10,6 @@ import SpriteKit
 class MenuScene: Scene {
     private var musicButton = SKSpriteNode()
     private var soundButton = SKSpriteNode()
-    
-    private var isSoundMuted = false
-    private var isMusicMuted = false
-    
     private var scoreLabel = ASAttributedLabelNode(size: CGSize())
     
     var score = 0 {
@@ -24,33 +20,53 @@ class MenuScene: Scene {
     
     override func didMove(to view: SKView) {
         setupUI()
+        setupMusic()
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        let gameController = getGameController()
         for touch in touches {
             let location = touch.location(in: self)
             if let node = atPoint(location) as? SKSpriteNode {
+                
                 switch node.name {
-                    case "startButton": gameController.selectLevel()
-                    case "treasuryButton": gameController.showTreasury()
+                    case "startButton":
+                        let sequence = SKAction.sequence([gameController.clickButtonSoundAction, SKAction.run { self.gameController.selectLevel() }])
+                        self.run(sequence)
+                    case "treasuryButton":
+                        let sequence = SKAction.sequence([gameController.clickButtonSoundAction, SKAction.run { self.gameController.showTreasury() }])
+                        self.run(sequence)
                     case "soundButton":
-                        if !self.isSoundMuted {
-                            self.soundButton.texture = SKTexture(imageNamed: "soundUnmuteButton")
-                            self.isSoundMuted = true
-                        } else {
-                            self.soundButton.texture = SKTexture(imageNamed: "soundButton")
-                            self.isSoundMuted = false
+                        let action = SKAction.run {
+                            if !self.gameController.isSoundMuted {
+                                self.soundButton.texture = SKTexture(imageNamed: "soundUnmuteButton")
+                                self.gameController.isSoundMuted = true
+                                self.gameController.clickButtonSoundAction = SKAction()
+                            } else {
+                                self.soundButton.texture = SKTexture(imageNamed: "soundButton")
+                                self.gameController.isSoundMuted = false
+                                self.gameController.clickButtonSoundAction = SKAction.playSoundFileNamed("clickSound.mp3", waitForCompletion: false)
+                            }
                         }
+                        let sequence = SKAction.sequence([gameController.clickButtonSoundAction, action])
+                        self.run(sequence)
                     case "musicButton":
-                        if !self.isMusicMuted {
-                            self.musicButton.texture = SKTexture(imageNamed: "musicUnmuteButton")
-                            self.isMusicMuted = true
-                        } else {
-                            self.musicButton.texture = SKTexture(imageNamed: "musicButton")
-                            self.isMusicMuted = false
+                        let action = SKAction.run {
+                            if !self.gameController.isMusicMuted {
+                                self.gameController.removeMusic()
+                                self.musicButton.texture = SKTexture(imageNamed: "musicUnmuteButton")
+                                self.gameController.isMusicMuted = true
+                            } else {
+                                self.gameController.setupMusic()
+                                self.setupMusic()
+                                self.musicButton.texture = SKTexture(imageNamed: "musicButton")
+                                self.gameController.isMusicMuted = false
+                            }
                         }
-                    case "infoButton": gameController.showInfo()
+                        let sequence = SKAction.sequence([gameController.clickButtonSoundAction, action])
+                        self.run(sequence)
+                    case "infoButton":
+                        let sequence = SKAction.sequence([gameController.clickButtonSoundAction, SKAction.run { self.gameController.showInfo() }])
+                        self.run(sequence)
                     default: break
                 }
             }
@@ -79,13 +95,15 @@ class MenuScene: Scene {
         addChild(treasuryButton)
         
         //music button
-        musicButton = SKSpriteNode(imageNamed: "musicButton")
+        let musicImage = gameController.isMusicMuted ? "musicUnmuteButton" : "musicButton"
+        musicButton = SKSpriteNode(imageNamed: musicImage)
         musicButton.name = "musicButton"
         musicButton.position = CGPoint(x: treasuryButton.position.x - 50, y: treasuryButton.position.y - 100)
         addChild(musicButton)
         
         //sound button
-        soundButton = SKSpriteNode(imageNamed: "soundButton")
+        let soundImage = gameController.isSoundMuted ? "soundUnmuteButton" : "soundButton"
+        soundButton = SKSpriteNode(imageNamed: soundImage)
         soundButton.name = "soundButton"
         soundButton.position = CGPoint(x: musicButton.position.x + 50, y: musicButton.position.y)
         addChild(soundButton)
