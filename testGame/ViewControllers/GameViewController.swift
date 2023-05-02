@@ -38,11 +38,7 @@ class GameViewController: UIViewController, SKViewDelegate {
             welcomeBonusScene.gameController = self
         }
     }
-    private var menuScene = MenuScene(size: UIScreen.main.bounds.size) {
-        didSet {
-            menuScene.gameController = self
-        }
-    }
+    private var menuScene = MenuScene(size: UIScreen.main.bounds.size)
     private var levelSelectScene = LevelSelectScene(size: UIScreen.main.bounds.size, availableLevel: 1) {
         didSet {
             levelSelectScene.gameController = self
@@ -53,11 +49,7 @@ class GameViewController: UIViewController, SKViewDelegate {
             treasuryScene.gameController = self
         }
     }
-    private var infoScene = InfoScene(size: UIScreen.main.bounds.size) {
-        didSet {
-            infoScene.gameController = self
-        }
-    }
+    private var infoScene = InfoScene(size: UIScreen.main.bounds.size)
     private var gameScene = GameScene(size: UIScreen.main.bounds.size, level: 1) {
         didSet {
             gameScene.gameController = self
@@ -242,5 +234,4 @@ class GameViewController: UIViewController, SKViewDelegate {
     private func saveScore() {
         UserDefaults.standard.set(score, forKey: "score")
     }
-    
 }

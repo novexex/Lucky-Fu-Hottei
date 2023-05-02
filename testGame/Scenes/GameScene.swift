@@ -59,7 +59,6 @@ class GameScene: Scene {
         let location = touch.location(in: self)
         
         // here is handling of matrix tiles
-        // Looking for the node that was clicked on
         for row in tiles.enumerated() {
             for node in row.element.enumerated() {
                 if node.element.contains(location) {
@@ -84,38 +83,41 @@ class GameScene: Scene {
         for touch in touches {
             let location = touch.location(in: self)
             if let node = atPoint(location) as? SKSpriteNode {
-                if node.name == "swapButton" {
-                    
-                    let action = SKAction.run {
-                        if self.isHorizonalSelected && self.isVerticalSelected {
-                            guard let colSelected = self.colSelected, let rowSelected = self.rowSelected else { return }
-                            
-                            self.horizonalRectangle.isHidden = true
-                            self.verticalRectangle.isHidden = true
-                            
-                            self.isHorizonalSelected = false
-                            self.isVerticalSelected = false
-                            
-                            self.moves -= 1
-                            
-                            self.swap(row: rowSelected, col: colSelected)
-                            
-                            self.checkMatches()
-                            self.checkMatches()
+                switch node.name {
+                    case "swapButton":
+                        let action = SKAction.run {
+                            if self.isHorizonalSelected && self.isVerticalSelected {
+                                guard let colSelected = self.colSelected, let rowSelected = self.rowSelected else { return }
+                                
+                                // hiding lines
+                                self.horizonalRectangle.isHidden = true
+                                self.verticalRectangle.isHidden = true
+                                self.isHorizonalSelected = false
+                                self.isVerticalSelected = false
+                                
+                                // reducing moves
+                                self.moves -= 1
+                                
+                                // swap tiles and check matches
+                                self.swap(row: rowSelected, col: colSelected)
+                                self.checkMatches()
+                                self.checkMatches()
+                            }
                         }
-                    }
-                    let sequence = SKAction.sequence([gameController.clickButtonSoundAction, action])
-                    self.run(sequence)
-                } else if node.name == "homeButton" {
-                    let sequence = SKAction.sequence([gameController.clickButtonSoundAction, SKAction.run { self.gameController.home() }])
-                    self.run(sequence)
-                } else if node.name == "refreshButton" {
-                    let sequence = SKAction.sequence([gameController.clickButtonSoundAction, SKAction.run { self.gameController.startGame(level: self.level) }])
-                    self.run(sequence)
-                } else if node.name == "infoButton" {
-                    let sequence = SKAction.sequence([gameController.clickButtonSoundAction, SKAction.run { self.gameController.showInfo() }])
-                    self.run(sequence)
+                        let sequence = SKAction.sequence([gameController.clickButtonSoundAction, action])
+                        self.run(sequence)
+                    case "homeButton":
+                        let sequence = SKAction.sequence([gameController.clickButtonSoundAction, SKAction.run { self.gameController.home() }])
+                        self.run(sequence)
+                    case "refreshButton":
+                        let sequence = SKAction.sequence([gameController.clickButtonSoundAction, SKAction.run { self.gameController.startGame(level: self.level) }])
+                        self.run(sequence)
+                    case "infoButton":
+                        let sequence = SKAction.sequence([gameController.clickButtonSoundAction, SKAction.run { self.gameController.showInfo() }])
+                        self.run(sequence)
+                    default: break
                 }
+
             }
         }
     }
@@ -133,22 +135,22 @@ class GameScene: Scene {
     private func setupLevel() {
         images = ["coinTile", "craneTile", "lampTile"]
         switch level {
-        case 2:
-            images += ["redPandaTile"]
-        case 3:
-            images += ["redPandaTile", "pandaTile"]
-        case 4:
-            images += ["redPandaTile", "pandaTile"]
-            moves = 15
-        case 5:
-            images += ["redPandaTile", "pandaTile"]
-            moves = 10
-        default: break
+            case 2:
+                images += ["redPandaTile"]
+            case 3:
+                images += ["redPandaTile", "pandaTile"]
+            case 4:
+                images += ["redPandaTile", "pandaTile"]
+                moves = 15
+            case 5:
+                images += ["redPandaTile", "pandaTile"]
+                moves = 10
+            default: break
         }
     }
     
     private func checkMatches() {
-        // Check for 3 consecutive items of the same type in rows
+        // сheck for 3 consecutive items of the same type in rows
         for i in 0..<tiles.count {
             for j in 0..<tiles.count-2 {
                 if tiles[i][j].name == tiles[i][j+1].name && tiles[i][j+1].name == tiles[i][j+2].name {
@@ -160,7 +162,7 @@ class GameScene: Scene {
             }
         }
         
-        // Check for 3 consecutive items of the same type in columns
+        // сheck for 3 consecutive items of the same type in columns
         for i in 0..<tiles.count {
             for j in 0..<tiles.count-2 {
                 if tiles[j][i].name == tiles[j+1][i].name && tiles[j+1][i].name == tiles[j+2][i].name {
@@ -175,12 +177,12 @@ class GameScene: Scene {
     
     private func appendPoints() {
         switch level {
-        case 1: scorePoints += 10
-        case 2: scorePoints += 50
-        case 3: scorePoints += 100
-        case 4: scorePoints += 250
-        case 5: scorePoints += 500
-        default: break
+            case 1: scorePoints += 10
+            case 2: scorePoints += 50
+            case 3: scorePoints += 100
+            case 4: scorePoints += 250
+            case 5: scorePoints += 500
+            default: break
         }
     }
     
@@ -191,7 +193,7 @@ class GameScene: Scene {
         tiles[row][col].texture = sprite.texture
         tiles[row][col].name = sprite.name
         
-        while isSameImageRepeatedVertically(row: row, col: col) || isSameImageRepeatedHorizontally(row: row, col: col) {
+        while isSameTileRepeatedVertically(row: row, col: col) || isSameTileRepeatedHorizontally(row: row, col: col) {
             randomImage = images.randomElement() ?? ""
             sprite = SKSpriteNode(imageNamed: randomImage)
             sprite.name = randomImage
@@ -201,19 +203,20 @@ class GameScene: Scene {
     }
     
     private func swap(row: Int, col: Int) {
+        // copy row from selected row in tiles
         var tempRow = Array(repeating: SKSpriteNode(), count: 5)
-        
-        for i in tiles.enumerated() {
-            for j in i.element.enumerated() {
-                if i.offset == row {
+        for i in tiles.indices {
+            for j in tiles[i].indices {
+                if i == row {
                     let tempSprite = SKSpriteNode()
-                    tempSprite.name = tiles[i.offset][j.offset].name
-                    tempSprite.texture = tiles[i.offset][j.offset].texture
-                    tempRow[j.offset] = tempSprite
+                    tempSprite.name = tiles[i][j].name
+                    tempSprite.texture = tiles[i][j].texture
+                    tempRow[j] = tempSprite
                 }
             }
         }
         
+        // setup column in row
         for i in tiles.indices {
             let tempSprite = SKSpriteNode()
             tempSprite.name = tiles[i][col].name
@@ -222,6 +225,7 @@ class GameScene: Scene {
             tiles[row][i].texture = tempSprite.texture
         }
         
+        // setup a copyed row in column
         for i in tiles.indices {
             tiles[i][col].name = tempRow[i].name
             tiles[i][col].texture = tempRow[i].texture
@@ -232,7 +236,6 @@ class GameScene: Scene {
         let tileSize = CGSize(width: 66, height: 52)
         let startPoint = CGPoint(x: arch.frame.minX + 50, y: arch.frame.minY - 25)
         
-        
         for row in 0..<tiles.count {
             for col in 0..<tiles[row].count {
                 guard var randomImage = images.randomElement() else { return }
@@ -240,13 +243,13 @@ class GameScene: Scene {
                 tile.name = randomImage
                 tiles[row][col] = tile
                 
-                while isSameImageRepeatedVertically(row: row, col: col) || isSameImageRepeatedHorizontally(row: row, col: col) {
+                while isSameTileRepeatedVertically(row: row, col: col) || isSameTileRepeatedHorizontally(row: row, col: col) {
                     randomImage = images.randomElement() ?? ""
                     tile = SKSpriteNode(imageNamed: randomImage)
                     tile.name = randomImage
                     tiles[row][col] = tile
                 }
-                
+                // hardcoded position, should change it someday
                 tile.position = CGPoint(x: startPoint.x + CGFloat(67 * col+1), y: startPoint.y - CGFloat(51 * row+1))
                 tile.size = tileSize
                 addChild(tile)
@@ -254,7 +257,7 @@ class GameScene: Scene {
         }
     }
     
-    private func isSameImageRepeatedHorizontally(row: Int, col: Int) -> Bool {
+    private func isSameTileRepeatedHorizontally(row: Int, col: Int) -> Bool {
         if row >= 2 {
             if tiles[row][col].name == tiles[row-1][col].name &&
                 tiles[row][col].name == tiles[row-2][col].name {
@@ -264,7 +267,7 @@ class GameScene: Scene {
         return false
     }
     
-    private func isSameImageRepeatedVertically(row: Int, col: Int) -> Bool {
+    private func isSameTileRepeatedVertically(row: Int, col: Int) -> Bool {
         if col >= 2 {
             if tiles[row][col].name == tiles[row][col-1].name &&
                 tiles[row][col].name == tiles[row][col-2].name {
@@ -285,28 +288,28 @@ class GameScene: Scene {
             default: break
         }
         
-        //moves section
+        // moves section
         movesSection = SKSpriteNode(imageNamed: "scoreSection")
         movesSection.position = CGPoint(x: size.width/2, y: size.height/2 + 270)
         movesSection.zPosition = -1
         addChild(movesSection)
         
-        //moves
+        // moves count
         movesLabel = ASAttributedLabelNode(size: movesSection.size)
         movesLabel.attributedString = getAttrubutedString(with: String(moves))
         movesLabel.position = CGPoint(x: movesSection.frame.midX + 68, y: movesSection.frame.midY + 3)
         addChild(movesLabel)
         
-        //arch
+        // arch
         arch = SKSpriteNode(imageNamed: "arch")
         arch.position = CGPoint(x: movesSection.position.x, y: movesSection.position.y - 50)
         arch.zPosition = -1
         addChild(arch)
         
-        //matrix of tiles
+        // matrix of tiles
         setupTiles()
         
-        //swap button
+        // swap button
         let swapButton = SKSpriteNode(imageNamed: "swapButton")
         swapButton.name = "swapButton"
         guard let lastXpos = tiles.last?.last?.position.x else { return }
