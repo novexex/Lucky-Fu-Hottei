@@ -5,7 +5,6 @@
 //  Created by Artour Ilyasov on 25.04.2023.
 //
 
-import UIKit
 import SpriteKit
 
 class GameViewController: UIViewController, SKViewDelegate {

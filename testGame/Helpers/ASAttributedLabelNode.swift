@@ -5,7 +5,6 @@
 //  Copyright © 2016 Alex Studnicka. MIT License.
 //
 
-import UIKit
 import SpriteKit
 
 class ASAttributedLabelNode: SKSpriteNode {
