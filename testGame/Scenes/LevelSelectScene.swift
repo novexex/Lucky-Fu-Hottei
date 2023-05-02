@@ -43,40 +43,31 @@ class LevelSelectScene: Scene, UIScrollViewDelegate {
             let location = touch.location(in: self)
             if let node = atPoint(location) as? SKSpriteNode {
                 switch node.name {
-                    case "level1Button":
-                        let sequence = SKAction.sequence([gameController.clickButtonSoundAction, SKAction.run { self.gameController.startGame(level: 1) }])
+                case "level1Button":
+                    let sequence = SKAction.sequence([gameController.clickButtonSoundAction, SKAction.run { self.gameController.startGame(level: 1) }])
+                    self.run(sequence)
+                case "level2Button":
+                    if self.availableLevel >= 2 {
+                        let sequence = SKAction.sequence([gameController.clickButtonSoundAction, SKAction.run { self.gameController.startGame(level: 2) } ])
                         self.run(sequence)
-                    case "level2Button":
-                        let action = SKAction.run {
-                            if self.availableLevel >= 2 {
-                                self.gameController.startGame(level: 2)
-                            }
-                        }
-                        let sequence = SKAction.sequence([gameController.clickButtonSoundAction, action])
+                    }
+                case "level3Button":
+                    if self.availableLevel >= 3 {
+                        let sequence = SKAction.sequence([gameController.clickButtonSoundAction, SKAction.run { self.gameController.startGame(level: 3) } ])
                         self.run(sequence)
-                    case "level3Button":
-                        let action = SKAction.run {
-                            if self.availableLevel >= 3 {
-                                self.gameController.startGame(level: 3)
-                            }
-                        }
-                        let sequence = SKAction.sequence([gameController.clickButtonSoundAction, action])
+                    }
+                case "level4Button":
+                    if self.availableLevel >= 4 {
+                        let sequence = SKAction.sequence([gameController.clickButtonSoundAction, SKAction.run { self.gameController.startGame(level: 4) } ])
                         self.run(sequence)
-                    case "level4Button":
-                        let action = SKAction.run {
-                            if self.availableLevel >= 4 {
-                                self.gameController.startGame(level: 4)
-                            }
-                        }
-                        let sequence = SKAction.sequence([gameController.clickButtonSoundAction, action])
-                        self.run(sequence)
-                    case "homeButton":
-                        let sequence = SKAction.sequence([gameController.clickButtonSoundAction, SKAction.run { self.gameController.home() }])
-                        self.run(sequence)
-                    case "infoButton":
-                        let sequence = SKAction.sequence([gameController.clickButtonSoundAction, SKAction.run { self.gameController.showInfo() }])
-                        self.run(sequence)
-                    default: break
+                    }
+                case "homeButton":
+                    let sequence = SKAction.sequence([gameController.clickButtonSoundAction, SKAction.run { self.gameController.home() }])
+                    self.run(sequence)
+                case "infoButton":
+                    let sequence = SKAction.sequence([gameController.clickButtonSoundAction, SKAction.run { self.gameController.showInfo() }])
+                    self.run(sequence)
+                default: break
                 }
             }
         }
@@ -128,18 +119,18 @@ class LevelSelectScene: Scene, UIScrollViewDelegate {
         level4Button.position = CGPoint(x: frame.midX, y: level3Button.frame.midY - 135)
         container.addChild(level4Button)
         
-//        //level5
-//        let levelNode5 = SKSpriteNode(imageNamed: "level5Button")
-//        levelNode5.name = "level5Button"
-//        levelNode5.position = CGPoint(x: frame.midX, y: levelNode4.frame.midY - 135)
-//        container.addChild(levelNode5)
-//
-//        //levelSoon
-//        let levelNodeSoon = SKSpriteNode(imageNamed: "levelSoonButton")
-//        levelNodeSoon.name = "levelSoonButton"
-//        levelNodeSoon.position = CGPoint(x: frame.midX, y: levelNode5.frame.midY - 135)
-//        container.addChild(levelNodeSoon)
-                    
+        //        //level5
+        //        let levelNode5 = SKSpriteNode(imageNamed: "level5Button")
+        //        levelNode5.name = "level5Button"
+        //        levelNode5.position = CGPoint(x: frame.midX, y: levelNode4.frame.midY - 135)
+        //        container.addChild(levelNode5)
+        //
+        //        //levelSoon
+        //        let levelNodeSoon = SKSpriteNode(imageNamed: "levelSoonButton")
+        //        levelNodeSoon.name = "levelSoonButton"
+        //        levelNodeSoon.position = CGPoint(x: frame.midX, y: levelNode5.frame.midY - 135)
+        //        container.addChild(levelNodeSoon)
+        
         // home button
         let homeButton = SKSpriteNode(imageNamed: "homeButton")
         homeButton.name = "homeButton"

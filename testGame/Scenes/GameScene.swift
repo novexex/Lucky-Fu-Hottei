@@ -74,7 +74,15 @@ class GameScene: Scene {
                         verticalRectangle = SKShapeNode(rect: CGRect(x: column.frame.minX, y: column.frame.maxY, width: column.size.width, height: -column.size.height * 5 + 4))
                         setupLine(line: verticalRectangle)
                         isVerticalSelected = true
+                    } else if isVerticalSelected && isHorizonalSelected {
+                        rowSelected = nil
+                        colSelected = nil
+                        isHorizonalSelected = false
+                        isVerticalSelected = false
+                        horizonalRectangle.isHidden = true
+                        verticalRectangle.isHidden = true
                     }
+                    
                 }
             }
         }
