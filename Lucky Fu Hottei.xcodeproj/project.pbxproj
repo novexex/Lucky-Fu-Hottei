@@ -39,7 +39,7 @@
 		EB2D830029FABFCA008A86B6 /* LevelSelectScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelSelectScene.swift; sourceTree = "<group>"; };
 		EB2D830229FBEA69008A86B6 /* WinScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WinScene.swift; sourceTree = "<group>"; };
 		EB2D830429FBEA71008A86B6 /* LoseScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoseScene.swift; sourceTree = "<group>"; };
-		EB91804429F7E75800B8398D /* testGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = testGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		EB91804429F7E75800B8398D /* Lucky Fu Hottei.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Lucky Fu Hottei.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB91804729F7E75800B8398D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EB91804929F7E75800B8398D /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
 		EB91804B29F7E75800B8398D /* Actions.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Actions.sks; sourceTree = "<group>"; };
@@ -103,7 +103,7 @@
 		EB91804529F7E75800B8398D /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				EB91804429F7E75800B8398D /* testGame.app */,
+				EB91804429F7E75800B8398D /* Lucky Fu Hottei.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -198,9 +198,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		EB91804329F7E75800B8398D /* testGame */ = {
+		EB91804329F7E75800B8398D /* Lucky Fu Hottei */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = EB91805B29F7E75900B8398D /* Build configuration list for PBXNativeTarget "testGame" */;
+			buildConfigurationList = EB91805B29F7E75900B8398D /* Build configuration list for PBXNativeTarget "Lucky Fu Hottei" */;
 			buildPhases = (
 				EB91804029F7E75800B8398D /* Sources */,
 				EB91804129F7E75800B8398D /* Frameworks */,
@@ -210,9 +210,9 @@
 			);
 			dependencies = (
 			);
-			name = testGame;
+			name = "Lucky Fu Hottei";
 			productName = testGame;
-			productReference = EB91804429F7E75800B8398D /* testGame.app */;
+			productReference = EB91804429F7E75800B8398D /* Lucky Fu Hottei.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -230,7 +230,7 @@
 					};
 				};
 			};
-			buildConfigurationList = EB91803F29F7E75700B8398D /* Build configuration list for PBXProject "testGame" */;
+			buildConfigurationList = EB91803F29F7E75700B8398D /* Build configuration list for PBXProject "Lucky Fu Hottei" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -243,7 +243,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				EB91804329F7E75800B8398D /* testGame */,
+				EB91804329F7E75800B8398D /* Lucky Fu Hottei */,
 			);
 		};
 /* End PBXProject section */
@@ -493,7 +493,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		EB91803F29F7E75700B8398D /* Build configuration list for PBXProject "testGame" */ = {
+		EB91803F29F7E75700B8398D /* Build configuration list for PBXProject "Lucky Fu Hottei" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				EB91805929F7E75900B8398D /* Debug */,
@@ -502,7 +502,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		EB91805B29F7E75900B8398D /* Build configuration list for PBXNativeTarget "testGame" */ = {
+		EB91805B29F7E75900B8398D /* Build configuration list for PBXNativeTarget "Lucky Fu Hottei" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				EB91805C29F7E75900B8398D /* Debug */,
