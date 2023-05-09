@@ -6,11 +6,10 @@
 //
 
 import SpriteKit
+import AVFoundation
 
 class GameViewController: UIViewController, SKViewDelegate {
     // MARK: Public properties
-    var backgroundMusic = SKAudioNode()
-    var clickButtonSoundAction = SKAction.playSoundFileNamed("clickSound.mp3", waitForCompletion: false)
     var isMusicMuted = false
     var isSoundMuted = false
     var score = 0 {
@@ -62,6 +61,8 @@ class GameViewController: UIViewController, SKViewDelegate {
     }
     private var currentScene: SKScene!
     private var prevScene: SKScene?
+    private var backgroundMusic: AVAudioPlayer?
+    private var clickSound: AVAudioPlayer?
     
     // MARK: Override methods
     override func viewDidLoad() {
@@ -70,7 +71,7 @@ class GameViewController: UIViewController, SKViewDelegate {
         getAvailableLevel()
         getScoreFromLastGames()
         checkDailyBonus()
-        setupMusic()
+        setupAudio()
         setupScenes()
         setupSKView()
     }
@@ -80,24 +81,8 @@ class GameViewController: UIViewController, SKViewDelegate {
     }
     
     // MARK: Public methods
-    func setupMusic() {
-        if let musicURL = Bundle.main.url(forResource: "backgroundMusic", withExtension: "mp3") {
-            isMusicMuted = false
-            backgroundMusic = SKAudioNode(url: musicURL)
-            // change volume of background music here
-            backgroundMusic.run(SKAction.changeVolume(to: 0.1, duration: 0))
-            backgroundMusic.autoplayLooped = true
-        }
-    }
-    
-    func removeMusic() {
-        isMusicMuted = true
-        backgroundMusic.removeFromParent()
-        backgroundMusic = SKAudioNode()
-    }
-    
     func presentMenu() {
-        backgroundMusic.removeFromParent()
+        clickSound?.play()
         prevScene = currentScene
         currentScene = menuScene
         skView.presentScene(menuScene, transition: SKTransition.crossFade(withDuration: 0.3))
@@ -106,7 +91,7 @@ class GameViewController: UIViewController, SKViewDelegate {
     }
     
     func selectLevel() {
-        backgroundMusic.removeFromParent()
+        clickSound?.play()
         prevScene = currentScene
         currentScene = levelSelectScene
         skView.presentScene(levelSelectScene, transition: SKTransition.crossFade(withDuration: 0.3))
@@ -114,7 +99,7 @@ class GameViewController: UIViewController, SKViewDelegate {
     }
     
     func showTreasury() {
-        backgroundMusic.removeFromParent()
+        clickSound?.play()
         prevScene = currentScene
         currentScene = treasuryScene
         skView.presentScene(treasuryScene, transition: SKTransition.crossFade(withDuration: 0.3))
@@ -122,7 +107,7 @@ class GameViewController: UIViewController, SKViewDelegate {
     }
     
     func startGame(level: Int) {
-        backgroundMusic.removeFromParent()
+        clickSound?.play()
         gameScene = GameScene(size: UIScreen.main.bounds.size, level: level)
         prevScene = currentScene
         currentScene = gameScene
@@ -132,7 +117,6 @@ class GameViewController: UIViewController, SKViewDelegate {
     }
     
     func gameOver(with score: Int, level: Int) {
-        backgroundMusic.removeFromParent()
         self.score += score
         if score == 0 {
             loseScene = LoseScene(size: UIScreen.main.bounds.size, level: level)
@@ -156,7 +140,7 @@ class GameViewController: UIViewController, SKViewDelegate {
     }
     
     func showInfo() {
-        backgroundMusic.removeFromParent()
+        clickSound?.play()
         prevScene = currentScene
         currentScene = infoScene
         skView.presentScene(infoScene, transition: SKTransition.crossFade(withDuration: 0.3))
@@ -164,7 +148,7 @@ class GameViewController: UIViewController, SKViewDelegate {
     }
     
     func home() {
-        backgroundMusic.removeFromParent()
+        clickSound?.play()
         currentScene.removeAllChildren()
         currentScene = menuScene
         prevScene = nil
@@ -172,14 +156,38 @@ class GameViewController: UIViewController, SKViewDelegate {
     }
     
     func back() {
-        backgroundMusic.removeFromParent()
+        clickSound?.play()
         currentScene.removeAllChildren()
         currentScene = prevScene
         prevScene = nil
         skView.presentScene(currentScene, transition: SKTransition.crossFade(withDuration: 0.3))
     }
     
+    func makeClickSound() {
+        clickSound?.play()
+    }
+    
     // MARK: Private methods
+    private func setupAudio() {
+        if let musicURL = Bundle.main.url(forResource: "backgroundMusic", withExtension: "mp3") {
+            do {
+                backgroundMusic = try AVAudioPlayer(contentsOf: musicURL)
+                backgroundMusic?.numberOfLoops = -1
+                backgroundMusic?.play()
+            } catch {
+                print(error.localizedDescription)
+            }
+        }
+        
+        if let soundURL = Bundle.main.url(forResource: "clickSound", withExtension: "mp3") {
+            do {
+                clickSound = try AVAudioPlayer(contentsOf: soundURL)
+            } catch {
+                print(error.localizedDescription)
+            }
+        }
+    }
+    
     private func setupSKView() {
         let skView = SKView()
         self.view = skView

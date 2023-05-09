@@ -51,7 +51,6 @@ class GameScene: Scene {
     override func didMove(to view: SKView) {
         setupLevel()
         setupUI()
-        setupMusic()
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -62,6 +61,7 @@ class GameScene: Scene {
         for row in tiles.enumerated() {
             for node in row.element.enumerated() {
                 if node.element.contains(location) {
+                    gameController.makeClickSound()
                     if !isHorizonalSelected {
                         guard let first = tiles[row.offset].first else { return }
                         rowSelected = row.offset
@@ -92,40 +92,34 @@ class GameScene: Scene {
             let location = touch.location(in: self)
             if let node = atPoint(location) as? SKSpriteNode {
                 switch node.name {
-                    case "swapButton":
-                        let action = SKAction.run {
-                            if self.isHorizonalSelected && self.isVerticalSelected {
-                                guard let colSelected = self.colSelected, let rowSelected = self.rowSelected else { return }
-                                
-                                // hiding lines
-                                self.horizonalRectangle.isHidden = true
-                                self.verticalRectangle.isHidden = true
-                                self.isHorizonalSelected = false
-                                self.isVerticalSelected = false
-                                
-                                // reducing moves
-                                self.moves -= 1
-                                
-                                // swap tiles and check matches
-                                self.swap(row: rowSelected, col: colSelected)
-                                self.checkMatches()
-                                self.checkMatches()
-                            }
-                        }
-                        let sequence = SKAction.sequence([gameController.clickButtonSoundAction, action])
-                        self.run(sequence)
-                    case "homeButton":
-                        let sequence = SKAction.sequence([gameController.clickButtonSoundAction, SKAction.run { self.gameController.home() }])
-                        self.run(sequence)
-                    case "refreshButton":
-                        let sequence = SKAction.sequence([gameController.clickButtonSoundAction, SKAction.run { self.gameController.startGame(level: self.level) }])
-                        self.run(sequence)
-                    case "infoButton":
-                        let sequence = SKAction.sequence([gameController.clickButtonSoundAction, SKAction.run { self.gameController.showInfo() }])
-                        self.run(sequence)
-                    default: break
+                case "swapButton":
+                    gameController.makeClickSound()
+                    if self.isHorizonalSelected && self.isVerticalSelected {
+                        guard let colSelected = self.colSelected, let rowSelected = self.rowSelected else { return }
+                        
+                        // hiding lines
+                        self.horizonalRectangle.isHidden = true
+                        self.verticalRectangle.isHidden = true
+                        self.isHorizonalSelected = false
+                        self.isVerticalSelected = false
+                        
+                        // reducing moves
+                        self.moves -= 1
+                        
+                        // swap tiles and check matches
+                        self.swap(row: rowSelected, col: colSelected)
+                        self.checkMatches()
+                        self.checkMatches()
+                    }
+                case "homeButton":
+                    gameController.home()
+                case "refreshButton":
+                    gameController.startGame(level: level)
+                case "infoButton":
+                    gameController.showInfo()
+                default: break
                 }
-
+                
             }
         }
     }
@@ -143,17 +137,17 @@ class GameScene: Scene {
     private func setupLevel() {
         images = ["coinTile", "craneTile", "lampTile"]
         switch level {
-            case 2:
-                images += ["redPandaTile"]
-            case 3:
-                images += ["redPandaTile", "pandaTile"]
-            case 4:
-                images += ["redPandaTile", "pandaTile"]
-                moves = 15
-            case 5:
-                images += ["redPandaTile", "pandaTile"]
-                moves = 10
-            default: break
+        case 2:
+            images += ["redPandaTile"]
+        case 3:
+            images += ["redPandaTile", "pandaTile"]
+        case 4:
+            images += ["redPandaTile", "pandaTile"]
+            moves = 15
+        case 5:
+            images += ["redPandaTile", "pandaTile"]
+            moves = 10
+        default: break
         }
     }
     
@@ -185,12 +179,12 @@ class GameScene: Scene {
     
     private func appendScorePoints() {
         switch level {
-            case 1: scorePoints += 10
-            case 2: scorePoints += 50
-            case 3: scorePoints += 100
-            case 4: scorePoints += 250
-            case 5: scorePoints += 500
-            default: break
+        case 1: scorePoints += 10
+        case 2: scorePoints += 50
+        case 3: scorePoints += 100
+        case 4: scorePoints += 250
+        case 5: scorePoints += 500
+        default: break
         }
     }
     
@@ -288,12 +282,12 @@ class GameScene: Scene {
     private func setupUI() {
         // dynamic background depending on the level
         switch level {
-            case 1: setBackground(with: "level1Background")
-            case 2: setBackground(with: "level2Background")
-            case 3: setBackground(with: "level3Background")
-            case 4: setBackground(with: "level4Background")
-            case 5: setBackground(with: "level5Background")
-            default: break
+        case 1: setBackground(with: "level1Background")
+        case 2: setBackground(with: "level2Background")
+        case 3: setBackground(with: "level3Background")
+        case 4: setBackground(with: "level4Background")
+        case 5: setBackground(with: "level5Background")
+        default: break
         }
         
         // moves section

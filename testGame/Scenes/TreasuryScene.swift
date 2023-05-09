@@ -35,7 +35,6 @@ class TreasuryScene: Scene {
     override func didMove(to view: SKView) {
         checkUnlockTreasurys()
         setupUI()
-        setupMusic()
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -53,11 +52,9 @@ class TreasuryScene: Scene {
                     case "treasuryItem8": unlockTreasure(numberOfTreaure: 8)
                     case "treasuryItem9": unlockTreasure(numberOfTreaure: 9)
                     case "infoButton":
-                        let sequence = SKAction.sequence([gameController.clickButtonSoundAction, SKAction.run { self.gameController.showInfo() } ])
-                        self.run(sequence)
+                    gameController.showInfo()
                     case "homeButton":
-                        let sequence = SKAction.sequence([gameController.clickButtonSoundAction, SKAction.run { self.gameController.home() } ])
-                        self.run(sequence)
+                    gameController.home()
                     default: break
                 }
             }

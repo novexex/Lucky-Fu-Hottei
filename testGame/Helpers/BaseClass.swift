@@ -18,12 +18,6 @@ class Scene: SKScene {
         addChild(background)
     }
     
-    
-    func setupMusic() {
-        addChild(gameController.backgroundMusic)
-        gameController.backgroundMusic.run(SKAction.play())
-    }
-    
     func getAttrubutedString(with text: String, font: String = "gangOfThree", size: CGFloat = 58, alignment: NSTextAlignment? = nil) -> NSMutableAttributedString {
         let shadow = NSShadow()
         shadow.shadowOffset = CGSize(width: 0, height: 3.9520199298858643)

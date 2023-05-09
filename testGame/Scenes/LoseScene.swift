@@ -24,7 +24,6 @@ class LoseScene: Scene {
     // MARK: Overrided methods
     override func didMove(to view: SKView) {
         setupUI()
-        setupMusic()
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {        
@@ -33,14 +32,11 @@ class LoseScene: Scene {
             if let node = atPoint(location) as? SKSpriteNode {
                 switch node.name {
                     case "homeButton":
-                        let sequence = SKAction.sequence([gameController.clickButtonSoundAction, SKAction.run { self.gameController.home() }])
-                        self.run(sequence)
+                    gameController.home()
                     case "refreshButton":
-                        let sequence = SKAction.sequence([gameController.clickButtonSoundAction, SKAction.run { self.gameController.startGame(level: self.level) }])
-                        self.run(sequence)
+                    gameController.startGame(level: level)
                     case "infoButton":
-                        let sequence = SKAction.sequence([gameController.clickButtonSoundAction, SKAction.run { self.gameController.showInfo() }])
-                        self.run(sequence)
+                    gameController.showInfo()
                     default: break
                 }
             }

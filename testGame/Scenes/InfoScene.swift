@@ -11,7 +11,6 @@ class InfoScene: Scene {
     // MARK: Overrided methods
     override func didMove(to view: SKView) {
         setupUI()
-        setupMusic()
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -20,11 +19,9 @@ class InfoScene: Scene {
             if let node = atPoint(location) as? SKSpriteNode {
                 switch node.name {
                     case "backButton":
-                        let sequence = SKAction.sequence([gameController.clickButtonSoundAction, SKAction.run { self.gameController.back() }])
-                        self.run(sequence)
+                    gameController.back()
                     case "homeButton":
-                        let sequence = SKAction.sequence([gameController.clickButtonSoundAction, SKAction.run { self.gameController.home() }])
-                        self.run(sequence)
+                    gameController.home()
                     default: break
                 }
             }

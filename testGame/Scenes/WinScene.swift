@@ -26,7 +26,6 @@ class WinScene: Scene {
     // MARK: Overrided methods
     override func didMove(to view: SKView) {
         setupUI()
-        setupMusic()
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -35,20 +34,13 @@ class WinScene: Scene {
             if let node = atPoint(location) as? SKSpriteNode {
                 switch node.name {
                     case "nextLevelButton":
-                        let action = SKAction.run {
-                            self.level <= 4 ? self.gameController.startGame(level: self.level+1) : self.gameController.startGame(level: self.level)
-                        }
-                        let sequence = SKAction.sequence([gameController.clickButtonSoundAction, action])
-                        self.run(sequence)
+                    level <= 4 ? gameController.startGame(level: level+1) : gameController.startGame(level: level)
                     case "infoButton":
-                        let sequence = SKAction.sequence([gameController.clickButtonSoundAction, SKAction.run { self.gameController.showInfo() }])
-                        self.run(sequence)
+                    gameController.showInfo()
                     case "refreshButton":
-                        let sequence = SKAction.sequence([gameController.clickButtonSoundAction, SKAction.run { self.gameController.startGame(level: self.level) }])
-                        self.run(sequence)
+                    gameController.startGame(level: level)
                     case "homeButton":
-                    	let sequence = SKAction.sequence([gameController.clickButtonSoundAction, SKAction.run { self.gameController.home() }])
-                    	self.run(sequence)
+                    gameController.home()
                     default: break
                 }
             }

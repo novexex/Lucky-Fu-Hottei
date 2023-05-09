@@ -25,7 +25,6 @@ class WelcomeBonusScene: Scene {
     // MARK: Overrided methods
     override func didMove(to view: SKView) {
         setupUI()
-        setupMusic()
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -59,16 +58,11 @@ class WelcomeBonusScene: Scene {
         for touch in touches {
             let location = touch.location(in: self)
             if let node = atPoint(location) as? SKSpriteNode {
-                var action = SKAction()
-                    if node.name == "takeOutButton" {
-                        action = SKAction.run {
-                            self.score += self.addingPoints
-                            self.gameController.score = self.score
-                            self.gameController.presentMenu()
-                        }
-                    }
-                let sequence = SKAction.sequence([gameController.clickButtonSoundAction, action])
-                self.run(sequence)
+                if node.name == "takeOutButton" {
+                    score += addingPoints
+                    gameController.score = score
+                    gameController.presentMenu()
+                }
             }
         }
     }
