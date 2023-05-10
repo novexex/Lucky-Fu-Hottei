@@ -7,6 +7,7 @@
 
 import SpriteKit
 import AVFoundation
+import SafariServices
 
 class GameViewController: UIViewController, SKViewDelegate {
     // MARK: Public properties
@@ -68,8 +69,7 @@ class GameViewController: UIViewController, SKViewDelegate {
     private let backgroundImageView = UIImageView()
     private let titleImageView = UIImageView()
     private let hotteiImageView = UIImageView()
-    
-    
+        
     // MARK: Override methods
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -184,9 +184,9 @@ class GameViewController: UIViewController, SKViewDelegate {
     }
     
     func openURL() {
-        if let url = URL(string: "https://playtown.pro/pp.html") {
-            UIApplication.shared.open(url, options: [:], completionHandler: nil)
-        }
+        let url = URL(string: "https://playtown.pro/pp.html")!
+        let vc = SFSafariViewController(url: url)
+        present(vc, animated: true)
     }
     
     // MARK: Private methods
@@ -218,7 +218,7 @@ class GameViewController: UIViewController, SKViewDelegate {
         
         hotteiImageView.layer.add(animation, forKey: "rotationAnimation")
     }
-    
+
     private func setupAudio() {
         if let musicURL = Bundle.main.url(forResource: "backgroundMusic", withExtension: "mp3") {
             do {
