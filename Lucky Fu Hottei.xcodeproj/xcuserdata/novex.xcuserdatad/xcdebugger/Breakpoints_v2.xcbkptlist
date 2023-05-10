@@ -800,8 +800,8 @@
             filePath = "testGame/ViewControllers/GameViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "215"
-            endingLineNumber = "215"
+            startingLineNumber = "222"
+            endingLineNumber = "222"
             landmarkName = "setupAudio()"
             landmarkType = "7">
             <Locations>

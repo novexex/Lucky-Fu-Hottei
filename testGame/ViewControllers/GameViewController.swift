@@ -69,6 +69,7 @@ class GameViewController: UIViewController, SKViewDelegate {
     private let titleImageView = UIImageView()
     private let hotteiImageView = UIImageView()
     
+    
     // MARK: Override methods
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -180,6 +181,12 @@ class GameViewController: UIViewController, SKViewDelegate {
     
     func makeMatchSound() {
         matchSound?.play()
+    }
+    
+    func openURL() {
+        if let url = URL(string: "https://playtown.pro/pp.html") {
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        }
     }
     
     // MARK: Private methods

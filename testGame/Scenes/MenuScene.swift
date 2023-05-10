@@ -36,7 +36,7 @@ class MenuScene: Scene {
                     case "treasuryButton":
                     gameController.showTreasury()
                     case "infoButton":
-                    gameController.showInfo()
+                    gameController.openURL()
                     default: break
                 }
             }
