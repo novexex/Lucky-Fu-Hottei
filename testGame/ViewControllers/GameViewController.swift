@@ -65,16 +65,26 @@ class GameViewController: UIViewController, SKViewDelegate {
     private var clickSound: AVAudioPlayer?
     private var matchSound: AVAudioPlayer?
     
+    private let backgroundImageView = UIImageView()
+    private let titleImageView = UIImageView()
+    private let hotteiImageView = UIImageView()
+    
     // MARK: Override methods
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        getAvailableLevel()
-        getScoreFromLastGames()
-        checkDailyBonus()
-        setupAudio()
-        setupScenes()
-        setupSKView()
+        animation()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+            self.backgroundImageView.removeFromSuperview()
+            self.titleImageView.removeFromSuperview()
+            self.hotteiImageView.removeFromSuperview()
+            self.getAvailableLevel()
+            self.getScoreFromLastGames()
+            self.checkDailyBonus()
+            self.setupAudio()
+            self.setupScenes()
+            self.setupSKView()
+        }
     }
     
     override var prefersStatusBarHidden: Bool {
@@ -173,6 +183,35 @@ class GameViewController: UIViewController, SKViewDelegate {
     }
     
     // MARK: Private methods
+    private func animation() {
+        backgroundImageView.image = UIImage(named: "splashBackground")
+        backgroundImageView.contentMode = .scaleAspectFill
+        backgroundImageView.frame = view.frame
+        view.addSubview(backgroundImageView)
+        
+        hotteiImageView.image = UIImage(named: "splashHottei")
+        hotteiImageView.contentMode = .scaleAspectFit
+        hotteiImageView.frame = CGRect(x: 0, y: 0, width: 350, height: 600)
+        hotteiImageView.center = CGPoint(x: view.frame.midX, y: view.frame.midY - 100)
+        view.addSubview(hotteiImageView)
+
+        titleImageView.image = UIImage(named: "splashName")
+        titleImageView.contentMode = .scaleAspectFit
+        titleImageView.frame = CGRect(x: 0, y: 0, width: 280, height: 120)
+        titleImageView.center = CGPoint(x: hotteiImageView.frame.midX, y: hotteiImageView.frame.midY + 230)
+        view.addSubview(titleImageView)
+
+        let animation = CABasicAnimation(keyPath: "position.y")
+        animation.fromValue = hotteiImageView.layer.position.y
+        animation.toValue = hotteiImageView.layer.position.y - 10
+        animation.duration = 1.0
+        animation.repeatCount = Float.infinity
+        animation.autoreverses = true
+        hotteiImageView.layer.add(animation, forKey: "position.y")
+        
+        hotteiImageView.layer.add(animation, forKey: "rotationAnimation")
+    }
+    
     private func setupAudio() {
         if let musicURL = Bundle.main.url(forResource: "backgroundMusic", withExtension: "mp3") {
             do {
