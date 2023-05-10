@@ -94,22 +94,25 @@ class GameScene: Scene {
                 switch node.name {
                 case "swapButton":
                     gameController.makeClickSound()
-                    if self.isHorizonalSelected && self.isVerticalSelected {
-                        guard let colSelected = self.colSelected, let rowSelected = self.rowSelected else { return }
-                        
-                        // hiding lines
-                        self.horizonalRectangle.isHidden = true
-                        self.verticalRectangle.isHidden = true
-                        self.isHorizonalSelected = false
-                        self.isVerticalSelected = false
-                        
-                        // reducing moves
-                        self.moves -= 1
-                        
-                        // swap tiles and check matches
-                        self.swap(row: rowSelected, col: colSelected)
-                        self.checkMatches()
-                        self.checkMatches()
+                    
+                    let run = SKAction.run {
+                        if self.isHorizonalSelected && self.isVerticalSelected {
+                            guard let colSelected = self.colSelected, let rowSelected = self.rowSelected else { return }
+                            
+                            // hiding lines
+                            self.horizonalRectangle.isHidden = true
+                            self.verticalRectangle.isHidden = true
+                            self.isHorizonalSelected = false
+                            self.isVerticalSelected = false
+                            
+                            // reducing moves
+                            self.moves -= 1
+                            
+                            // swap tiles and check matches
+                            self.swap(row: rowSelected, col: colSelected)
+                            self.checkMatches()
+                            self.checkMatches()
+                        }
                     }
                 case "homeButton":
                     gameController.home()
@@ -156,6 +159,10 @@ class GameScene: Scene {
         for i in 0..<tiles.count {
             for j in 0..<tiles.count-2 {
                 if tiles[i][j].name == tiles[i][j+1].name && tiles[i][j+1].name == tiles[i][j+2].name {
+                    gameController.makeMatchSound()
+                    animateRemovingTiles(array: [tiles[i][j], tiles[i][j+1], tiles[i][j+2]])
+                    scoringAnimation(middleTile: tiles[i][j+1])
+                    
                     appendScorePoints()
                     getNewTile(row: i, col: j)
                     getNewTile(row: i, col: j+1)
@@ -168,12 +175,53 @@ class GameScene: Scene {
         for i in 0..<tiles.count {
             for j in 0..<tiles.count-2 {
                 if tiles[j][i].name == tiles[j+1][i].name && tiles[j+1][i].name == tiles[j+2][i].name {
+                    gameController.makeMatchSound()
+                    animateRemovingTiles(array: [tiles[j][i], tiles[j+1][i], tiles[j+2][i]])
+                    scoringAnimation(middleTile: tiles[j+1][i])
+                    
                     appendScorePoints()
                     getNewTile(row: j, col: i)
                     getNewTile(row: j+1, col: i)
                     getNewTile(row: j+2, col: i)
                 }
             }
+        }
+    }
+    
+    private func scoringAnimation(middleTile: SKSpriteNode) {
+        var score = 0
+        switch level {
+        case 1:
+            score = 10
+        case 2:
+            score = 50
+        case 3:
+            score = 100
+        case 4:
+            score = 250
+        case 5:
+            score = 500
+        default: break
+        }
+        
+        let scoringLabel = ASAttributedLabelNode(size: tiles.randomElement()!.randomElement()!.size)
+        scoringLabel.attributedString = getAttrubutedString(with: String(score), size: 30, alignment: .center)
+        scoringLabel.position = CGPoint(x: middleTile.frame.midX, y: middleTile.frame.midY)
+        scoringLabel.alpha = 0
+        addChild(scoringLabel)
+        let fadeInAction = SKAction.fadeIn(withDuration: 0.15)
+        fadeInAction.timingMode = .easeIn
+        let waitAction = SKAction.wait(forDuration: 0.7)
+        let fadeOutAction = SKAction.fadeOut(withDuration: 0.15)
+        fadeOutAction.timingMode = .easeOut
+        scoringLabel.run(SKAction.sequence([fadeInAction, waitAction, fadeOutAction, SKAction.removeFromParent()]))
+    }
+    
+    private func animateRemovingTiles(array: [SKSpriteNode]) {
+        for i in array {
+            let outAction = SKAction.fadeOut(withDuration: 1)
+            outAction.timingMode = .easeIn
+            i.run(outAction)
         }
     }
     
@@ -189,19 +237,25 @@ class GameScene: Scene {
     }
     
     private func getNewTile(row: Int, col: Int) {
-        guard var randomImage = images.randomElement() else { return }
-        var sprite = SKSpriteNode(imageNamed: randomImage)
-        sprite.name = randomImage
-        tiles[row][col].texture = sprite.texture
-        tiles[row][col].name = sprite.name
-        
-        while isSameTileRepeatedVertically(row: row, col: col) || isSameTileRepeatedHorizontally(row: row, col: col) {
-            randomImage = images.randomElement() ?? ""
-            sprite = SKSpriteNode(imageNamed: randomImage)
+        let run = SKAction.run {
+            guard var randomImage = self.images.randomElement() else { return }
+            var sprite = SKSpriteNode(imageNamed: randomImage)
             sprite.name = randomImage
-            tiles[row][col].texture = sprite.texture
-            tiles[row][col].name = sprite.name
+            self.tiles[row][col].texture = sprite.texture
+            self.tiles[row][col].name = sprite.name
+            
+            while self.isSameTileRepeatedVertically(row: row, col: col) || self.isSameTileRepeatedHorizontally(row: row, col: col) {
+                randomImage = self.images.randomElement() ?? ""
+                sprite = SKSpriteNode(imageNamed: randomImage)
+                sprite.name = randomImage
+                self.tiles[row][col].texture = sprite.texture
+                self.tiles[row][col].name = sprite.name
+            }
         }
+        
+        let inAction = SKAction.fadeIn(withDuration: 0.3)
+        inAction.timingMode = .easeOut
+        tiles[row][col].run(SKAction.sequence([SKAction.wait(forDuration: 1), run, inAction]))
     }
     
     private func swap(row: Int, col: Int) {

@@ -63,6 +63,7 @@ class GameViewController: UIViewController, SKViewDelegate {
     private var prevScene: SKScene?
     private var backgroundMusic: AVAudioPlayer?
     private var clickSound: AVAudioPlayer?
+    private var matchSound: AVAudioPlayer?
     
     // MARK: Override methods
     override func viewDidLoad() {
@@ -167,6 +168,10 @@ class GameViewController: UIViewController, SKViewDelegate {
         clickSound?.play()
     }
     
+    func makeMatchSound() {
+        matchSound?.play()
+    }
+    
     // MARK: Private methods
     private func setupAudio() {
         if let musicURL = Bundle.main.url(forResource: "backgroundMusic", withExtension: "mp3") {
@@ -182,6 +187,14 @@ class GameViewController: UIViewController, SKViewDelegate {
         if let soundURL = Bundle.main.url(forResource: "clickSound", withExtension: "mp3") {
             do {
                 clickSound = try AVAudioPlayer(contentsOf: soundURL)
+            } catch {
+                print(error.localizedDescription)
+            }
+        }
+        
+        if let soundURL = Bundle.main.url(forResource: "matchSound", withExtension: "mp3") {
+            do {
+                matchSound = try AVAudioPlayer(contentsOf: soundURL)
             } catch {
                 print(error.localizedDescription)
             }

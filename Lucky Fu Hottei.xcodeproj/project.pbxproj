@@ -14,6 +14,7 @@
 		EB2D830129FABFCA008A86B6 /* LevelSelectScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB2D830029FABFCA008A86B6 /* LevelSelectScene.swift */; };
 		EB2D830329FBEA69008A86B6 /* WinScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB2D830229FBEA69008A86B6 /* WinScene.swift */; };
 		EB2D830529FBEA71008A86B6 /* LoseScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB2D830429FBEA71008A86B6 /* LoseScene.swift */; };
+		EB7003752A0B3AFB001A5DA1 /* matchSound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EB7003742A0B3AFB001A5DA1 /* matchSound.mp3 */; };
 		EB91804829F7E75800B8398D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB91804729F7E75800B8398D /* AppDelegate.swift */; };
 		EB91804E29F7E75800B8398D /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB91804D29F7E75800B8398D /* GameScene.swift */; };
 		EB91805029F7E75800B8398D /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB91804F29F7E75800B8398D /* GameViewController.swift */; };
@@ -36,6 +37,7 @@
 		EB2D830029FABFCA008A86B6 /* LevelSelectScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelSelectScene.swift; sourceTree = "<group>"; };
 		EB2D830229FBEA69008A86B6 /* WinScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WinScene.swift; sourceTree = "<group>"; };
 		EB2D830429FBEA71008A86B6 /* LoseScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoseScene.swift; sourceTree = "<group>"; };
+		EB7003742A0B3AFB001A5DA1 /* matchSound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = matchSound.mp3; sourceTree = "<group>"; };
 		EB91804429F7E75800B8398D /* Lucky Fu Hottei.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Lucky Fu Hottei.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB91804729F7E75800B8398D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EB91804D29F7E75800B8398D /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
@@ -174,6 +176,7 @@
 			isa = PBXGroup;
 			children = (
 				EBB1E9082A008DFA00B341AA /* clickSound.mp3 */,
+				EB7003742A0B3AFB001A5DA1 /* matchSound.mp3 */,
 			);
 			path = Sounds;
 			sourceTree = "<group>";
@@ -239,6 +242,7 @@
 				EBB1E9092A008DFA00B341AA /* clickSound.mp3 in Resources */,
 				EB91806529F93D1F00B8398D /* gangOfThree.ttf in Resources */,
 				EBB1E9002A006A5F00B341AA /* backgroundMusic.mp3 in Resources */,
+				EB7003752A0B3AFB001A5DA1 /* matchSound.mp3 in Resources */,
 				EB91805529F7E75900B8398D /* Assets.xcassets in Resources */,
 				EB91805829F7E75900B8398D /* LaunchScreen.storyboard in Resources */,
 				EBB1E8FA29FD470800B341AA /* Montserrat-ExtraBold.ttf in Resources */,
