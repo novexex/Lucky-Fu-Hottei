@@ -95,7 +95,6 @@ class GameScene: Scene {
                 case "swapButton":
                     gameController.makeClickSound()
                     
-                    let run = SKAction.run {
                         if self.isHorizonalSelected && self.isVerticalSelected {
                             guard let colSelected = self.colSelected, let rowSelected = self.rowSelected else { return }
                             
@@ -113,7 +112,6 @@ class GameScene: Scene {
                             self.checkMatches()
                             self.checkMatches()
                         }
-                    }
                 case "homeButton":
                     gameController.home()
                 case "refreshButton":
