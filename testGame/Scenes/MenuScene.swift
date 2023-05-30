@@ -73,7 +73,7 @@ class MenuScene: Scene {
         
         //cup label
         let cupLabel = SKSpriteNode(imageNamed: "cupLabel")
-        cupLabel.position = CGPoint(x: frame.midX - 50, y: frame.midY + 300)
+        cupLabel.position = CGPoint(x: frame.midX - 50, y: frame.midY + 280)
         addChild(cupLabel)
         
         // score label

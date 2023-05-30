@@ -42,25 +42,25 @@ class LevelSelectScene: Scene, UIScrollViewDelegate {
             let location = touch.location(in: self)
             if let node = atPoint(location) as? SKSpriteNode {
                 switch node.name {
-                case "level1Button":
-                    gameController.startGame(level: 1)
-                case "level2Button":
-                    if availableLevel >= 2 {
-                        gameController.startGame(level: 2)
-                    }
-                case "level3Button":
-                    if availableLevel >= 3 {
-                        gameController.startGame(level: 3)
-                    }
-                case "level4Button":
-                    if availableLevel >= 4 {
-                        gameController.startGame(level: 4)
-                    }
-                case "homeButton":
-                    gameController.home()
-                case "infoButton":
-                    gameController.showInfo()
-                default: break
+                    case "level1Button":
+                        gameController.startGame(level: 1)
+                    case "level2Button":
+                        if availableLevel >= 2 {
+                            gameController.startGame(level: 2)
+                        }
+                    case "level3Button":
+                        if availableLevel >= 3 {
+                            gameController.startGame(level: 3)
+                        }
+                    case "level4Button":
+                        if availableLevel >= 4 {
+                            gameController.startGame(level: 4)
+                        }
+                    case "homeButton":
+                        gameController.home()
+                    case "infoButton":
+                        gameController.showInfo()
+                    default: break
                 }
             }
         }
@@ -72,7 +72,7 @@ class LevelSelectScene: Scene, UIScrollViewDelegate {
         
         //cup label
         let cupLabel = SKSpriteNode(imageNamed: "cupLabel")
-        cupLabel.position = CGPoint(x: frame.midX - 50, y: frame.maxY - 110)
+        cupLabel.position = CGPoint(x: frame.midX - 50, y: frame.maxY - 40)
         addChild(cupLabel)
         
         //score label
@@ -88,7 +88,7 @@ class LevelSelectScene: Scene, UIScrollViewDelegate {
         // level 1 button
         let level1Button = SKSpriteNode(imageNamed: "level1Button")
         level1Button.name = "level1Button"
-        level1Button.position = CGPoint(x: frame.midX, y: scoreLabel.frame.midY - 120)
+        level1Button.position = CGPoint(x: frame.midX, y: scoreLabel.frame.midY - 100)
         container.addChild(level1Button)
         
         // level 2 button
@@ -112,28 +112,23 @@ class LevelSelectScene: Scene, UIScrollViewDelegate {
         level4Button.position = CGPoint(x: frame.midX, y: level3Button.frame.midY - 135)
         container.addChild(level4Button)
         
-        //        //level5
-        //        let levelNode5 = SKSpriteNode(imageNamed: "level5Button")
-        //        levelNode5.name = "level5Button"
-        //        levelNode5.position = CGPoint(x: frame.midX, y: levelNode4.frame.midY - 135)
-        //        container.addChild(levelNode5)
-        //
-        //        //levelSoon
-        //        let levelNodeSoon = SKSpriteNode(imageNamed: "levelSoonButton")
-        //        levelNodeSoon.name = "levelSoonButton"
-        //        levelNodeSoon.position = CGPoint(x: frame.midX, y: levelNode5.frame.midY - 135)
-        //        container.addChild(levelNodeSoon)
+        // level 5 button
+        let level5Image = availableLevel >= 5 ? "level5Button" : "level5BWButton"
+        let level5Button = SKSpriteNode(imageNamed: level5Image)
+        level5Button.name = "level5Button"
+        level5Button.position = CGPoint(x: frame.midX, y: level4Button.frame.midY - 135)
+        container.addChild(level5Button)
         
         // home button
         let homeButton = SKSpriteNode(imageNamed: "homeButton")
         homeButton.name = "homeButton"
-        homeButton.position = CGPoint(x: frame.midX - 27, y: frame.minY + 120)
+        homeButton.position = CGPoint(x: frame.midX - 27, y: frame.minY + 35)
         addChild(homeButton)
         
         // info button
         let infoButton = SKSpriteNode(imageNamed: "infoButton")
         infoButton.name = "infoButton"
-        infoButton.position = CGPoint(x: frame.midX + 27, y: frame.minY + 120)
+        infoButton.position = CGPoint(x: frame.midX + 27, y: frame.minY + 35)
         addChild(infoButton)
     }
 }

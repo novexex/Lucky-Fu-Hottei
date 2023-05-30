@@ -35,13 +35,13 @@ class InfoScene: Scene {
         // back button
         let backButton = SKSpriteNode(imageNamed: "backButton")
         backButton.name = "backButton"
-        backButton.position = CGPoint(x: frame.midX - 27, y: frame.minY + 170)
+        backButton.position = CGPoint(x: frame.midX - 27, y: frame.minY + 100)
         addChild(backButton)
         
         // home button
         let homeButton = SKSpriteNode(imageNamed: "homeButton")
         homeButton.name = "homeButton"
-        homeButton.position = CGPoint(x: frame.midX + 27, y: frame.minY + 170)
+        homeButton.position = CGPoint(x: frame.midX + 27, y: frame.minY + 100)
         addChild(homeButton)
     }
 }
