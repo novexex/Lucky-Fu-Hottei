@@ -11,6 +11,12 @@ class LevelSelectScene: Scene, UIScrollViewDelegate {
     // MARK: Initializing propertys
     let availableLevel: Int
     
+    var safeArea: UIEdgeInsets {
+        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+              let safeArea = windowScene.windows.first?.safeAreaInsets else { return UIEdgeInsets() }
+        return safeArea
+    }
+    
     // MARK: Public propertys
     var score = 0 {
         didSet {
@@ -72,7 +78,7 @@ class LevelSelectScene: Scene, UIScrollViewDelegate {
         
         //cup label
         let cupLabel = SKSpriteNode(imageNamed: "cupLabel")
-        cupLabel.position = CGPoint(x: frame.midX - 50, y: frame.maxY - 40)
+        cupLabel.position = CGPoint(x: frame.midX - 50, y: size.height - safeArea.top - cupLabel.size.height / 2)
         addChild(cupLabel)
         
         //score label
@@ -122,13 +128,13 @@ class LevelSelectScene: Scene, UIScrollViewDelegate {
         // home button
         let homeButton = SKSpriteNode(imageNamed: "homeButton")
         homeButton.name = "homeButton"
-        homeButton.position = CGPoint(x: frame.midX - 27, y: frame.minY + 35)
+        homeButton.position = CGPoint(x: frame.midX - 27, y: safeArea.bottom + homeButton.size.height)
         addChild(homeButton)
         
         // info button
         let infoButton = SKSpriteNode(imageNamed: "infoButton")
         infoButton.name = "infoButton"
-        infoButton.position = CGPoint(x: frame.midX + 27, y: frame.minY + 35)
+        infoButton.position = CGPoint(x: frame.midX + 27, y: homeButton.position.y)
         addChild(infoButton)
     }
 }
