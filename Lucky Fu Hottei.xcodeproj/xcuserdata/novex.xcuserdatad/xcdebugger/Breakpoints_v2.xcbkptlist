@@ -624,8 +624,8 @@
             filePath = "testGame/Scenes/TreasuryScene.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "92"
-            endingLineNumber = "92"
+            startingLineNumber = "96"
+            endingLineNumber = "96"
             landmarkName = "checkUnlockTreasurys()"
             landmarkType = "7">
          </BreakpointContent>
@@ -640,9 +640,9 @@
             filePath = "testGame/Scenes/TreasuryScene.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "88"
-            endingLineNumber = "88"
-            landmarkName = "saveIsTreasureUnlock()"
+            startingLineNumber = "92"
+            endingLineNumber = "92"
+            landmarkName = "checkUnlockTreasurys()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

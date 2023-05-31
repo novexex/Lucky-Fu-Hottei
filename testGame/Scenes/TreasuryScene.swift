@@ -14,7 +14,11 @@ class TreasuryScene: Scene {
             scoreLabel.attributedString = getAttrubutedString(with: String(score))
         }
     }
-    
+    var safeArea: UIEdgeInsets {
+        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+              let safeArea = windowScene.windows.first?.safeAreaInsets else { return UIEdgeInsets() }
+        return safeArea
+    }
     // MARK: Private propertys
     private var isTreasureUnlock = Array(repeating: false, count: 9)
     private var treasuryItems = [SKSpriteNode]()
@@ -184,13 +188,13 @@ class TreasuryScene: Scene {
         // home button
         let homeButton = SKSpriteNode(imageNamed: "homeButton")
         homeButton.name = "homeButton"
-        homeButton.position = CGPoint(x: frame.midX - 27, y: frame.minY + 50)
+        homeButton.position = CGPoint(x: frame.midX - 27, y: safeArea.bottom + homeButton.size.height)
         addChild(homeButton)
         
         // info button
         let infoButton = SKSpriteNode(imageNamed: "infoButton")
         infoButton.name = "infoButton"
-        infoButton.position = CGPoint(x: frame.midX + 27, y: frame.minY + 50)
+        infoButton.position = CGPoint(x: frame.midX + 27, y: homeButton.position.y)
         addChild(infoButton)
     }
 }
