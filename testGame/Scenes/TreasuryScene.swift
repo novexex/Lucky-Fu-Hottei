@@ -184,13 +184,13 @@ class TreasuryScene: Scene {
         // home button
         let homeButton = SKSpriteNode(imageNamed: "homeButton")
         homeButton.name = "homeButton"
-        homeButton.position = CGPoint(x: frame.midX - 27, y: frame.minY + 120)
+        homeButton.position = CGPoint(x: frame.midX - 27, y: frame.minY + 50)
         addChild(homeButton)
         
         // info button
         let infoButton = SKSpriteNode(imageNamed: "infoButton")
         infoButton.name = "infoButton"
-        infoButton.position = CGPoint(x: frame.midX + 27, y: frame.minY + 120)
+        infoButton.position = CGPoint(x: frame.midX + 27, y: frame.minY + 50)
         addChild(infoButton)
     }
 }

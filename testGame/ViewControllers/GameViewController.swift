@@ -22,6 +22,11 @@ class GameViewController: UIViewController, SKViewDelegate {
             treasuryScene = TreasuryScene(size: UIScreen.main.bounds.size, score: score)
         }
     }
+    var bestTime: [Int:TimeInterval] = [1:0,
+                                        2:0,
+                                        3:0,
+                                        4:0,
+                                        5:0]
     
     // MARK: Private properties
     private var didReceiveDailyBonus = false
@@ -69,7 +74,7 @@ class GameViewController: UIViewController, SKViewDelegate {
     private let backgroundImageView = UIImageView()
     private let titleImageView = UIImageView()
     private let hotteiImageView = UIImageView()
-        
+    
     // MARK: Override methods
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -81,6 +86,7 @@ class GameViewController: UIViewController, SKViewDelegate {
             self.hotteiImageView.removeFromSuperview()
             self.getAvailableLevel()
             self.getScoreFromLastGames()
+            self.getBestTime()
             self.checkDailyBonus()
             self.setupAudio()
             self.setupScenes()
@@ -128,8 +134,7 @@ class GameViewController: UIViewController, SKViewDelegate {
         prevScene = nil
     }
     
-    func gameOver(with score: Int, level: Int) {
-        self.score += score
+    func gameOver(with score: Int, level: Int, time: TimeInterval) {
         if score == 0 {
             loseScene = LoseScene(size: UIScreen.main.bounds.size, level: level)
             prevScene = currentScene
@@ -138,9 +143,18 @@ class GameViewController: UIViewController, SKViewDelegate {
             prevScene?.removeAllChildren()
             prevScene = nil
         } else {
+            self.score += score
             if availableLevel < 5 {
-                availableLevel += 1
+                if availableLevel < level+1 {
+                    availableLevel = level+1
+                }
                 saveLevel()
+            }
+            if bestTime[level]! == 0 {
+                bestTime[level] = time
+            } else if time < bestTime[level]! {
+                bestTime[level] = time
+                saveBestTime()
             }
             winScene = WinScene(size: UIScreen.main.bounds.size, score: score, level: level)
             prevScene = currentScene
@@ -157,6 +171,31 @@ class GameViewController: UIViewController, SKViewDelegate {
         currentScene = infoScene
         skView.presentScene(infoScene, transition: SKTransition.crossFade(withDuration: 0.3))
         prevScene?.removeAllChildren()
+    }
+    
+    func getBestTime() {
+        if let data = UserDefaults.standard.data(forKey: "dictionaryKey") {
+            // Unarchiving the Data into a [Int: TimeInterval] dictionary
+            do {
+                if let dictionary = try NSKeyedUnarchiver.unarchivedObject(ofClass: NSDictionary.self, from: data) as? [Int: TimeInterval] {
+                    // Use the dictionary
+                    self.bestTime = dictionary
+                }
+            } catch {
+                print("Error while unarchiving the dictionary: \(error)")
+            }
+        }
+    }
+    
+    func saveBestTime() {
+        do {
+            let data = try NSKeyedArchiver.archivedData(withRootObject: bestTime, requiringSecureCoding: false)
+            
+            // Сохраняем объект Data в UserDefaults
+            UserDefaults.standard.set(data, forKey: "dictionaryKey")
+        } catch {
+            print("Ошибка при архивации словаря: \(error)")
+        }
     }
     
     func home() {
@@ -201,13 +240,13 @@ class GameViewController: UIViewController, SKViewDelegate {
         hotteiImageView.frame = CGRect(x: 0, y: 0, width: 350, height: 600)
         hotteiImageView.center = CGPoint(x: view.frame.midX, y: view.frame.midY - 100)
         view.addSubview(hotteiImageView)
-
+        
         titleImageView.image = UIImage(named: "splashName")
         titleImageView.contentMode = .scaleAspectFit
         titleImageView.frame = CGRect(x: 0, y: 0, width: 280, height: 120)
         titleImageView.center = CGPoint(x: hotteiImageView.frame.midX, y: hotteiImageView.frame.midY + 230)
         view.addSubview(titleImageView)
-
+        
         let animation = CABasicAnimation(keyPath: "position.y")
         animation.fromValue = hotteiImageView.layer.position.y
         animation.toValue = hotteiImageView.layer.position.y - 10
@@ -218,7 +257,7 @@ class GameViewController: UIViewController, SKViewDelegate {
         
         hotteiImageView.layer.add(animation, forKey: "rotationAnimation")
     }
-
+    
     private func setupAudio() {
         if let musicURL = Bundle.main.url(forResource: "backgroundMusic", withExtension: "mp3") {
             do {

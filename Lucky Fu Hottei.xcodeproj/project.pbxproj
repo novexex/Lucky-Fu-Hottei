@@ -27,6 +27,9 @@
 		EBB1E8FA29FD470800B341AA /* Montserrat-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EBB1E8F929FD46FD00B341AA /* Montserrat-ExtraBold.ttf */; };
 		EBB1E9002A006A5F00B341AA /* backgroundMusic.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EBB1E8FF2A006A5F00B341AA /* backgroundMusic.mp3 */; };
 		EBB1E9092A008DFA00B341AA /* clickSound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EBB1E9082A008DFA00B341AA /* clickSound.mp3 */; };
+		EBECCBD52A26A0AB00077ABD /* Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBECCBD42A26A0AB00077ABD /* Functions.swift */; };
+		EBECCBD72A26A9B000077ABD /* GameTimerClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBECCBD62A26A9B000077ABD /* GameTimerClass.swift */; };
+		EBECCBD92A27A78B00077ABD /* Block.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBECCBD82A27A78B00077ABD /* Block.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,6 +55,9 @@
 		EBB1E8F929FD46FD00B341AA /* Montserrat-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-ExtraBold.ttf"; sourceTree = "<group>"; };
 		EBB1E8FF2A006A5F00B341AA /* backgroundMusic.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = backgroundMusic.mp3; sourceTree = "<group>"; };
 		EBB1E9082A008DFA00B341AA /* clickSound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = clickSound.mp3; sourceTree = "<group>"; };
+		EBECCBD42A26A0AB00077ABD /* Functions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Functions.swift; sourceTree = "<group>"; };
+		EBECCBD62A26A9B000077ABD /* GameTimerClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameTimerClass.swift; sourceTree = "<group>"; };
+		EBECCBD82A27A78B00077ABD /* Block.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Block.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -152,6 +158,9 @@
 				EB91806729F93FDF00B8398D /* Extension.swift */,
 				EBB1E8F529FCAF6900B341AA /* BaseClass.swift */,
 				EBB1E8F729FCD22700B341AA /* ASAttributedLabelNode.swift */,
+				EBECCBD42A26A0AB00077ABD /* Functions.swift */,
+				EBECCBD62A26A9B000077ABD /* GameTimerClass.swift */,
+				EBECCBD82A27A78B00077ABD /* Block.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -257,8 +266,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				EB2D82FB29F9F64D008A86B6 /* InfoScene.swift in Sources */,
+				EBECCBD92A27A78B00077ABD /* Block.swift in Sources */,
 				EB2D830329FBEA69008A86B6 /* WinScene.swift in Sources */,
+				EBECCBD72A26A9B000077ABD /* GameTimerClass.swift in Sources */,
 				EB91806829F93FDF00B8398D /* Extension.swift in Sources */,
+				EBECCBD52A26A0AB00077ABD /* Functions.swift in Sources */,
 				EB91804E29F7E75800B8398D /* GameScene.swift in Sources */,
 				EB2D82FD29FABF7A008A86B6 /* WelcomeBonusScene.swift in Sources */,
 				EB91805029F7E75800B8398D /* GameViewController.swift in Sources */,

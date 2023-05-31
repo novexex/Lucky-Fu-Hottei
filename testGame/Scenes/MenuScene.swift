@@ -48,7 +48,7 @@ class MenuScene: Scene {
         setBackground(with: "menuBackground")
         
         //hottei
-        let buda = SKSpriteNode(imageNamed: "hottei")
+        let buda = SKSpriteNode(imageNamed: "splashHottei")
         buda.position = CGPoint(x: frame.midX, y: frame.midY + 120)
         buda.zPosition = -1
         addChild(buda)

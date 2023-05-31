@@ -59,6 +59,9 @@ class WelcomeBonusScene: Scene {
             let location = touch.location(in: self)
             if let node = atPoint(location) as? SKSpriteNode {
                 if node.name == "takeOutButton" {
+                    if !isBonusGet {
+                        return
+                    }
                     score += addingPoints
                     gameController.score = score
                     gameController.presentMenu()
