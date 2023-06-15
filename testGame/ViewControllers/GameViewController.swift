@@ -154,8 +154,8 @@ class GameViewController: UIViewController, SKViewDelegate {
                 bestTime[level] = time
             } else if time < bestTime[level]! {
                 bestTime[level] = time
-                saveBestTime()
             }
+            saveBestTime()
             winScene = WinScene(size: UIScreen.main.bounds.size, score: score, level: level)
             prevScene = currentScene
             currentScene = winScene

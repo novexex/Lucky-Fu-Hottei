@@ -67,6 +67,9 @@ class TreasuryScene: Scene {
     
     // MARK: Private methods
     private func unlockTreasure(numberOfTreaure: Int) {
+        if isTreasureUnlock[numberOfTreaure-1] {
+            return
+        }
         var requiredScore = 0
         switch numberOfTreaure {
             case 1: requiredScore = 100
@@ -86,6 +89,7 @@ class TreasuryScene: Scene {
             isTreasureUnlock[numberOfTreaure-1] = true
             saveIsTreasureUnlock()
             gameController.score = score
+            setupUI()
         }
     }
     
@@ -100,6 +104,7 @@ class TreasuryScene: Scene {
     }
     
     private func setupUI() {
+        removeAllChildren()
         setBackground(with: "treasuryBackground")
         
         // cup label

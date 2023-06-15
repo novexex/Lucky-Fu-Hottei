@@ -11,18 +11,21 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "GameScene.didMove(to:):GameScene.swift">
+         contextName = "TreasuryScene.saveIsTreasureUnlock():TreasuryScene.swift">
          <PersistentStrings>
             <PersistentString
-               value = "tiles.count">
+               value = "isTreasureUnlock">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "LevelScene.setupTiles():LevelScene.swift">
+         contextName = "LevelScene.touchesBegan(_:with:):LevelScene.swift">
          <PersistentStrings>
             <PersistentString
-               value = "lastRow[col-2]">
+               value = "isHorizonalSelected">
+            </PersistentString>
+            <PersistentString
+               value = "isVerticaleSelected">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -31,6 +34,14 @@
          <PersistentStrings>
             <PersistentString
                value = "tiles.count">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "LevelSelectScene.getTexture(named:):LevelSelectScene.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "availableLevel">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -76,10 +87,10 @@
          contextName = "GameViewController.back():GameViewController.swift">
          <PersistentStrings>
             <PersistentString
-               value = "currentScene?.name">
+               value = "prevScene?.name">
             </PersistentString>
             <PersistentString
-               value = "prevScene?.name">
+               value = "currentScene?.name">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -111,13 +122,29 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "GameScene.didMove(to:):GameScene.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "tiles.count">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "GameViewController.selectLevel():GameViewController.swift">
          <PersistentStrings>
             <PersistentString
-               value = "prevScene?.name">
+               value = "currentScene?.name">
             </PersistentString>
             <PersistentString
-               value = "currentScene?.name">
+               value = "prevScene?.name">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "LevelScene.setupTiles():LevelScene.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "lastRow[col-2]">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -132,25 +159,6 @@
             </PersistentString>
             <PersistentString
                value = "tiles.count">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "TreasuryScene.saveIsTreasureUnlock():TreasuryScene.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "isTreasureUnlock">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "LevelScene.touchesBegan(_:with:):LevelScene.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "isHorizonalSelected">
-            </PersistentString>
-            <PersistentString
-               value = "isVerticaleSelected">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
